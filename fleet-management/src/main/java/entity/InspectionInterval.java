@@ -3,7 +3,6 @@ package entity;
 import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by MBalicky on 23/10/2016.
