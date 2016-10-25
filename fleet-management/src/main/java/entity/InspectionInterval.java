@@ -9,7 +9,6 @@ import javax.persistence.*;
  */
 
 @Entity
-@TypeDef(name="interval", typeClass = Interval.Class)
 public class InspectionInterval {
 
     @Id
@@ -20,7 +19,6 @@ public class InspectionInterval {
     private String name;
 
     @Column(nullable = false)
-    @Type(type = "interval")
     private int interval;
 
     public InspectionInterval(){}
