@@ -1,5 +1,7 @@
 package dao;
 
+import dao.interfaces.Dao;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
@@ -10,7 +12,7 @@ import java.util.List;
  * Created by JozeFe on 10/20/2016.
  * @author Jozef Krcho
  */
-public abstract class JpaDao<T, ID extends Serializable> implements Dao<T, ID>{
+public abstract class JpaDao<T, ID extends Serializable> implements Dao<T, ID> {
     private Class<T> entityClass;
 
     @PersistenceContext
