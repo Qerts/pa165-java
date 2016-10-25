@@ -1,26 +1,27 @@
 package entity;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by MBalicky on 23/10/2016.
+ * @Author Michal Balický
  */
 
 @Entity
-@TypeDef(name="interval", typeClass = Interval.Class)
+
 public class InspectionInterval {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
     @Column(nullable = false)
     private String name;
 
+    @NotNull
     @Column(nullable = false)
-    @Type(type = "interval")
     private int interval;
 
     public InspectionInterval(){}

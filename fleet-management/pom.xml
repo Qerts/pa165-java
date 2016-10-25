@@ -41,5 +41,10 @@
             <artifactId>spring-context</artifactId>
             <version>4.2.7.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+        </dependency>
     </dependencies>
 </project>

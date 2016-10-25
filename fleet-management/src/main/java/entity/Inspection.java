@@ -1,10 +1,12 @@
 package entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
  * Created by MBalicky on 23/10/2016.
+ * @Author Michal Balický
  */
 
 @Entity
@@ -14,6 +16,7 @@ public class Inspection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
     @Column(nullable = false)
     private Date performedAt;
 
