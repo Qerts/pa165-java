@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by Martin on 23.10.2016.
@@ -15,32 +14,26 @@ public class Vehicle {
     private Long id;
 
     /**
-     * Vehicle registration plate number (SPZ)
+     * Vehicle registration plate number (SPZ).
      */
-    @NotNull
     @Column(nullable=false, unique=true)
     private String vrp;
 
     /**
-     * car producer and model
+     * Car producer and model.
      */
-    @NotNull
     @Column(nullable=false)
     private String type;
 
-    @NotNull
     @Column(nullable=false)
     private String productionYear;
 
-    @NotNull
     @Column(nullable=false)
     private String engineType;
 
-    @NotNull
     @Column(nullable=false, unique=true)
     private String vin;
 
-    @NotNull
     @Column(nullable=false)
     private Long initialDrivenDistance;
 

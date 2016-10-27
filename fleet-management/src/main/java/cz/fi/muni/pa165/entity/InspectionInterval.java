@@ -1,7 +1,5 @@
 package cz.fi.muni.pa165.entity;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
 
 /**
@@ -16,11 +14,9 @@ public class InspectionInterval {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
     @Column(nullable = false)
     private String name;
 
-    @NotNull
     @Column(nullable = false)
     private int interval;
 
