@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * Created by MBalicky on 23/10/2016.
- * @Author Michal Balický
+ * @author Michal Balický
  */
 
 @Entity
@@ -19,8 +19,6 @@ public class Inspection {
     @NotNull
     @Column(nullable = false)
     private Date performedAt;
-
-    public Inspection(){};
 
     public Inspection(Date performedAt){
         this.performedAt = performedAt;

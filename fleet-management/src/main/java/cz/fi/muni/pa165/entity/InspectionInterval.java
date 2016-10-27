@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 /**
  * Created by MBalicky on 23/10/2016.
- * @Author Michal Balický
+ * @author Michal Balický
  */
 
 @Entity
@@ -23,8 +23,6 @@ public class InspectionInterval {
     @NotNull
     @Column(nullable = false)
     private int interval;
-
-    public InspectionInterval(){}
 
     public InspectionInterval(String name, int interval){
         this.name = name;

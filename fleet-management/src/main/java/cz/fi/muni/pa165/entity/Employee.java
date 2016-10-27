@@ -20,9 +20,6 @@ public class Employee {
     @Column(nullable=false)
     private String surname;
 
-    public Employee() {
-    }
-
     public Employee(String name, String surname) {
         this.name = name;
         this.surname = surname;
