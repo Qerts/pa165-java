@@ -1,31 +1,28 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.IntegrationTestContext;
+import cz.fi.muni.pa165.InMemoryDatabaseTestContext;
 import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
 import cz.fi.muni.pa165.entity.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-@Test
-@ContextConfiguration(classes = IntegrationTestContext.class)
-public class EmployeeDaoImplTest extends AbstractTestNGSpringContextTests {
+@ContextConfiguration(classes = InMemoryDatabaseTestContext.class)
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
+public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
-    private EmployeeDao uut;
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @BeforeMethod
-    public void setUp()
-    {
-        uut = new EmployeeDaoImpl();
-    }
-
-    @Test
-    public void testTest() {
-        Employee entity = new Employee();
-        entity.setName("John Doe");
-        uut.persist(entity);
+    public void setUp() {
     }
 
     @Test
@@ -42,8 +39,8 @@ public class EmployeeDaoImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testPersist() {
-        // TODO
-        throw new NotImplementedException();
+        Employee entity = new Employee("John", "Doe");
+        employeeDao.persist(entity);
     }
 
     @Test
