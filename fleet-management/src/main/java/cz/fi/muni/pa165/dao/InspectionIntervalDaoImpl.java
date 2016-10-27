@@ -1,6 +1,6 @@
-package dao;
+package cz.fi.muni.pa165.dao;
 
-import entity.InspectionInterval;
+import cz.fi.muni.pa165.entity.InspectionInterval;
 import org.springframework.stereotype.Repository;
 
 /**

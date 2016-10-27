@@ -1,7 +1,5 @@
-package entity;
+package cz.fi.muni.pa165.entity;
 
-
-import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
 

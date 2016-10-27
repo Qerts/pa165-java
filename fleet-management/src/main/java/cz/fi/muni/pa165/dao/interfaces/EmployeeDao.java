@@ -1,6 +1,6 @@
-package dao.interfaces;
+package cz.fi.muni.pa165.dao.interfaces;
 
-import entity.Employee;
+import cz.fi.muni.pa165.entity.Employee;
 
 /**
  * Created by JozeFe on 10/25/2016.

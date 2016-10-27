@@ -1,8 +1,6 @@
-package dao.interfaces;
+package cz.fi.muni.pa165.dao.interfaces;
 
-import entity.VehicleCategory;
-
-import java.util.List;
+import cz.fi.muni.pa165.entity.VehicleCategory;
 
 /**
  * Created by Martin on 23.10.2016.

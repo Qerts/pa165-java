@@ -1,6 +1,6 @@
-package dao;
+package cz.fi.muni.pa165.dao;
 
-import dao.interfaces.Dao;
+import cz.fi.muni.pa165.dao.interfaces.Dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

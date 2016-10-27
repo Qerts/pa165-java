@@ -1,4 +1,4 @@
-package dao.interfaces;
+package cz.fi.muni.pa165.dao.interfaces;
 
 import java.util.List;
 

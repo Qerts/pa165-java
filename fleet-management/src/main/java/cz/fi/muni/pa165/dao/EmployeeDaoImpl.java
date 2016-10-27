@@ -1,7 +1,7 @@
-package dao;
+package cz.fi.muni.pa165.dao;
 
-import dao.interfaces.EmployeeDao;
-import entity.Employee;
+import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
+import cz.fi.muni.pa165.entity.Employee;
 import org.springframework.stereotype.Repository;
 
 /**

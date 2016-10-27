@@ -1,6 +1,6 @@
-package dao.interfaces;
+package cz.fi.muni.pa165.dao.interfaces;
 
-import entity.InspectionInterval;
+import cz.fi.muni.pa165.entity.InspectionInterval;
 
 /**
  * Created by MBalicky on 23/10/2016.

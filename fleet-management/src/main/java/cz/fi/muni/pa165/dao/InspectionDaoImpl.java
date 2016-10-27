@@ -1,7 +1,7 @@
-package dao;
+package cz.fi.muni.pa165.dao;
 
-import dao.interfaces.InspectionDao;
-import entity.Inspection;
+import cz.fi.muni.pa165.dao.interfaces.InspectionDao;
+import cz.fi.muni.pa165.entity.Inspection;
 import org.springframework.stereotype.Repository;
 
 /**
