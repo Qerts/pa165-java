@@ -44,8 +44,9 @@ public class InMemoryDatabaseTestContext {
     /**
      * Starts up a container that emulates behavior prescribed in JPA spec for container-managed EntityManager
      */
+    @SuppressWarnings("WeakerAccess")
     @Bean
-    private LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean jpaFactoryBean = new LocalContainerEntityManagerFactoryBean();
         jpaFactoryBean.setDataSource(db());
         jpaFactoryBean.setLoadTimeWeaver(instrumentationLoadTimeWeaver());
@@ -58,13 +59,15 @@ public class InMemoryDatabaseTestContext {
         return new LocalValidatorFactoryBean();
     }
 
+    @SuppressWarnings("WeakerAccess")
     @Bean
-    private LoadTimeWeaver instrumentationLoadTimeWeaver() {
+    public LoadTimeWeaver instrumentationLoadTimeWeaver() {
         return new InstrumentationLoadTimeWeaver();
     }
 
+    @SuppressWarnings("WeakerAccess")
     @Bean
-    private DataSource db() {
+    public DataSource db() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         return builder.setType(EmbeddedDatabaseType.DERBY).build();
     }
