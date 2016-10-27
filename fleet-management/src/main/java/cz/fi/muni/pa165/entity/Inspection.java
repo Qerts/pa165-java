@@ -13,7 +13,7 @@ public class Inspection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private Date performedAt;
@@ -22,7 +22,7 @@ public class Inspection {
         this.performedAt = performedAt;
     }
 
-    public int getId(){
+    public Long getId(){
         return this.id;
     }
 
