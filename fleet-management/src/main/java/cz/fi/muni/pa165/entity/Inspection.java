@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -16,7 +15,6 @@ public class Inspection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
     @Column(nullable = false)
     private Date performedAt;
 
