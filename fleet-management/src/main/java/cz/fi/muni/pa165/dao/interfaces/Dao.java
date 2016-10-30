@@ -3,7 +3,6 @@ package cz.fi.muni.pa165.dao.interfaces;
 import java.util.List;
 
 /**
- * Created by JozeFe on 10/20/2016.
  * @author Jozef Krcho
  */
 public interface Dao<T,ID> {

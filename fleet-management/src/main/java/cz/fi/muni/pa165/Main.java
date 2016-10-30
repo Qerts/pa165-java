@@ -1,7 +1,7 @@
 package cz.fi.muni.pa165;
 
 /**
- * Created by JozeFe on 10/20/2016.
+ * @author Jozef Krcho
  */
 public class Main {
     public static void main(String[] args) {

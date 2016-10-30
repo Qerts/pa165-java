@@ -13,6 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.time.Year;
 import java.util.List;
 
 /**
@@ -35,8 +36,8 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
     public void setUp() {
         vehicle1 = new Vehicle();
         vehicle1.setEngineType("Diesel engine");
-        vehicle1.setInitialDrivenDistance(new Long(105792));
-        vehicle1.setProductionYear("2012");
+        vehicle1.setInitialKilometrage(105792L);
+        vehicle1.setProductionYear(Year.of(2012));
         vehicle1.setType("Skoda Superb Greenline 1.6 TDI");
         vehicle1.setVin("2GNFLEEK1D6142368");
         vehicle1.setVrp("3A28888");
@@ -44,8 +45,8 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
 
         vehicle2 = new Vehicle();
         vehicle2.setEngineType("Petrol engine");
-        vehicle2.setInitialDrivenDistance(new Long(234889));
-        vehicle2.setProductionYear("2000");
+        vehicle2.setInitialKilometrage(234889L);
+        vehicle2.setProductionYear(Year.of(2000));
         vehicle2.setType("Skoda Octavia 1.6");
         vehicle2.setVin("1NXBR32E07Z887915");
         vehicle2.setVrp("3B33333");
@@ -79,8 +80,8 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
         // Act
         Vehicle vehicle = new Vehicle();
         vehicle.setEngineType("Petrol engine");
-        vehicle.setInitialDrivenDistance(new Long(493256));
-        vehicle.setProductionYear("2000");
+        vehicle.setInitialKilometrage(493256L);
+        vehicle.setProductionYear(Year.of(2000));
         vehicle.setType("Skoda Octavia 1.6");
         vehicle.setVin("JH4DC54835S007069");
         vehicle.setVrp("0FIMUNI");
@@ -94,14 +95,14 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
     public void testMerge() {
         // Arrange
         Vehicle foundVehicle = vehicleDao.findById(vehicle1.getId());
-        foundVehicle.setProductionYear("1994");
+        foundVehicle.setProductionYear(Year.of(1994));
 
         // Act
         vehicleDao.merge(foundVehicle);
 
         // Assert
         Vehicle foundAfterMergeEmployee = vehicleDao.findById(vehicle1.getId());
-        Assert.assertEquals(foundAfterMergeEmployee.getProductionYear(), "1994");
+        Assert.assertEquals(foundAfterMergeEmployee.getProductionYear(), Year.of(1994));
         Assert.assertEquals(foundAfterMergeEmployee, foundVehicle);
     }
 
