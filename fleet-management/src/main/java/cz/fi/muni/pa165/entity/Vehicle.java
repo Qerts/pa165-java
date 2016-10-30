@@ -43,6 +43,23 @@ public class Vehicle {
     @ManyToOne
     private VehicleCategory vehicleCategory;
 
+    /**
+     * @param vrp Vehicle VRP.
+     * @param type Mane of the manufacturer name.
+     * @param productionYear Year when vehicle was manufactured.
+     * @param engineType Type of the engine.
+     * @param vin Vehicle VIN.
+     * @param initialKilometrage The driven distance when vehicle was added to the catalogue. In kilometres.
+     */
+    public Vehicle(String vrp, String type, Year productionYear, String engineType, String vin, Long initialKilometrage) {
+        this.vrp = vrp;
+        this.type = type;
+        this.productionYear = productionYear;
+        this.engineType = engineType;
+        this.vin = vin;
+        this.initialKilometrage = initialKilometrage;
+    }
+
     public VehicleCategory getVehicleCategory() {
         return vehicleCategory;
     }

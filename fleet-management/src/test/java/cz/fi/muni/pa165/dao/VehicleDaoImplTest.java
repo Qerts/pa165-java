@@ -34,7 +34,7 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
 
     @BeforeMethod
     public void setUp() {
-        vehicle1 = new Vehicle();
+        vehicle1 = new Vehicle("VRP", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
         vehicle1.setEngineType("Diesel engine");
         vehicle1.setInitialKilometrage(105792L);
         vehicle1.setProductionYear(Year.of(2012));
@@ -43,7 +43,7 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
         vehicle1.setVrp("3A28888");
         vehicleDao.persist(vehicle1);
 
-        vehicle2 = new Vehicle();
+        vehicle2 = new Vehicle("VRP", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
         vehicle2.setEngineType("Petrol engine");
         vehicle2.setInitialKilometrage(234889L);
         vehicle2.setProductionYear(Year.of(2000));
@@ -78,7 +78,7 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
         int itemCountBefore = vehicleDao.findAll().size();
 
         // Act
-        Vehicle vehicle = new Vehicle();
+        Vehicle vehicle = new Vehicle("VRP", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
         vehicle.setEngineType("Petrol engine");
         vehicle.setInitialKilometrage(493256L);
         vehicle.setProductionYear(Year.of(2000));
