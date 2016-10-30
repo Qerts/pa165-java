@@ -18,6 +18,10 @@ public class Inspection {
     @Column(nullable = false)
     private Date performedAt;
 
+    /**
+     * Initializes new Inspection object.
+     * @param performedAt date when Inspection was performed
+     */
     public Inspection(Date performedAt){
         this.performedAt = performedAt;
     }

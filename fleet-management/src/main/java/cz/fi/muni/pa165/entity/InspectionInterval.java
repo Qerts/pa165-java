@@ -20,6 +20,11 @@ public class InspectionInterval {
     @Column(nullable = false)
     private int interval;
 
+    /**
+     * Initializes new InspectionInterval object
+     * @param name      name of the inspection interval, i.e. "oil change"
+     * @param interval  days between inspections
+     */
     public InspectionInterval(String name, int interval){
         this.name = name;
         this.interval = interval;
