@@ -1,9 +1,9 @@
 package cz.fi.muni.pa165.entity;
 
 import javax.persistence.*;
+import java.time.Year;
 
 /**
- * Created by Martin on 23.10.2016.
  * @author Martin Schmidt
  */
 @Entity
@@ -26,7 +26,7 @@ public class Vehicle {
     private String type;
 
     @Column(nullable=false)
-    private String productionYear;
+    private Year productionYear;
 
     @Column(nullable=false)
     private String engineType;
@@ -34,8 +34,11 @@ public class Vehicle {
     @Column(nullable=false, unique=true)
     private String vin;
 
+    /**
+     * Number od driven kilometres when car was added to the catalogue.
+     */
     @Column(nullable=false)
-    private Long initialDrivenDistance;
+    private Long initialKilometrage;
 
     @ManyToOne
     private VehicleCategory vehicleCategory;
@@ -53,7 +56,6 @@ public class Vehicle {
 
     public Long getId() {
         return id;
-
     }
 
     public void setId(Long id) {
@@ -76,11 +78,11 @@ public class Vehicle {
         this.type = type;
     }
 
-    public String getProductionYear() {
+    public Year getProductionYear() {
         return productionYear;
     }
 
-    public void setProductionYear(String productionYear) {
+    public void setProductionYear(Year productionYear) {
         this.productionYear = productionYear;
     }
 
@@ -100,12 +102,12 @@ public class Vehicle {
         this.vin = vin;
     }
 
-    public Long getInitialDrivenDistance() {
-        return initialDrivenDistance;
+    public Long getInitialKilometrage() {
+        return initialKilometrage;
     }
 
-    public void setInitialDrivenDistance(Long initialDrivenDistance) {
-        this.initialDrivenDistance = initialDrivenDistance;
+    public void setInitialKilometrage(Long initialKilometrage) {
+        this.initialKilometrage = initialKilometrage;
     }
 
     @Override
@@ -136,7 +138,7 @@ public class Vehicle {
                 ", productionYear='" + productionYear + '\'' +
                 ", engineType='" + engineType + '\'' +
                 ", vin='" + vin + '\'' +
-                ", initialDrivenDistance=" + initialDrivenDistance +
+                ", initialKilometrage=" + initialKilometrage +
                 '}';
     }
 }

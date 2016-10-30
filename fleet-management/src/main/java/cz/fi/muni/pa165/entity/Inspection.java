@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by MBalicky on 23/10/2016.
  * @author Michal Balický
  */
 

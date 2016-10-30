@@ -12,10 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
+/**
+ * @author Richard Trebichavský
+ */
 @ContextConfiguration(classes = InMemoryDatabaseTestContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
