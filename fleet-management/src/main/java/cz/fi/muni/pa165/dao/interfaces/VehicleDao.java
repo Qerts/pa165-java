@@ -7,6 +7,6 @@ import cz.fi.muni.pa165.entity.VehicleCategory;
  * Created by Martin on 23.10.2016.
  * @author Martin Schmidt
  */
-public interface VehicleDao {
+public interface VehicleDao extends Dao<Vehicle, Long>{
 
 }
