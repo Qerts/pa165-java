@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Martin on 23.10.2016.
  * @author Martin Schmidt
  */
 @Entity

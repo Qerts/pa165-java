@@ -3,7 +3,6 @@ package cz.fi.muni.pa165.entity;
 import javax.persistence.*;
 
 /**
- * Created by MBalicky on 23/10/2016.
  * @author Michal Balický
  */
 

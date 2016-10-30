@@ -4,7 +4,6 @@ package cz.fi.muni.pa165.entity;
 import javax.persistence.*;
 
 /**
- * Created by JozeFe on 10/20/2016.
  * @author Jozef Krcho
  */
 @Entity

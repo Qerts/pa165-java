@@ -5,7 +5,6 @@ import cz.fi.muni.pa165.entity.Employee;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by JozeFe on 10/20/2016.
  * @author Jozef Krcho
  */
 @Repository

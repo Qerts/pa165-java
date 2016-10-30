@@ -9,7 +9,6 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
- * Created by JozeFe on 10/20/2016.
  * @author Jozef Krcho
  */
 public abstract class JpaDao<T, ID extends Serializable> implements Dao<T, ID> {
