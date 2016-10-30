@@ -19,6 +19,11 @@ public class Inspection {
     private Date performedAt;
 
     /**
+     * Initialize new Inspection object. For serialization uses.
+     */
+    public Inspection(){}
+
+    /**
      * Initializes new Inspection object.
      * @param performedAt date when Inspection was performed
      */
@@ -36,5 +41,24 @@ public class Inspection {
 
     public void setPerformedAt(Date performedAt){
         this.performedAt = performedAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        else return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return getPerformedAt().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Inspection{" +
+                "id=" + id +
+                ", date='" + this.getPerformedAt().toString() + '\'' +
+                '}';
     }
 }
