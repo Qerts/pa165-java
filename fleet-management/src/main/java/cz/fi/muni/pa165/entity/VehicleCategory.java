@@ -1,4 +1,4 @@
-package entity;
+package cz.fi.muni.pa165.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Martin on 23.10.2016.
  * @author Martin Schmidt
  */
 @Entity
