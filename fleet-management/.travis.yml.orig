@@ -1,6 +1,0 @@
-language: java
-<<<<<<< HEAD
-before_script: cd /fleet-management
-=======
->>>>>>> 6e83173... fix;
-script: mvn clean verify
