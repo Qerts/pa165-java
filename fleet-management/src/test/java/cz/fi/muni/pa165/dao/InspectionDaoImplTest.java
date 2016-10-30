@@ -116,7 +116,7 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
         int itemCountBefore = uut.findAll().size();
 
         // Act
-        uut.remove(Inspection1);
+        uut.removeById(Inspection1.getId());
 
         // Assert
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);

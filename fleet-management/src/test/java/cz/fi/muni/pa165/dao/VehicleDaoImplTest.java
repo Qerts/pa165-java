@@ -124,7 +124,7 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
         int itemCountBefore = vehicleDao.findAll().size();
 
         // Act
-        vehicleDao.remove(vehicle1);
+        vehicleDao.removeById(vehicle1.getId());
 
         // Assert
         Assert.assertEquals(vehicleDao.findAll().size(), itemCountBefore - 1);
