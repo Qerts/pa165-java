@@ -16,12 +16,15 @@ public class InspectionInterval {
     @Column(nullable = false)
     private String name;
 
+    /**
+     * Number of days, after which Inspection must be repeated.
+     */
     @Column(nullable = false)
-    private int interval;
+    private int days;
 
     public InspectionInterval(String name, int interval){
         this.name = name;
-        this.interval = interval;
+        this.days = interval;
     }
 
     public Long getId(){
@@ -32,16 +35,16 @@ public class InspectionInterval {
         return this.name;
     }
 
-    public int getInterval(){
-        return this.interval;
+    public int getDays(){
+        return this.days;
     }
 
     public void setName(String name){
         this.name = name;
     }
 
-    public void setInterval(int interval){
-        this.interval = interval;
+    public void setDays(int days){
+        this.days = days;
     }
 
 }
