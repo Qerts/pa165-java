@@ -16,11 +16,11 @@ public class VehicleCategory {
     private Long id;
 
     @NotNull
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy = "vehicleCategory")
-    private Set<Vehicle> vehicles = new HashSet<Vehicle>();
+    private Set<Vehicle> vehicles = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -50,20 +50,21 @@ public class VehicleCategory {
         vehicles.add(vehicle);
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || !(o instanceof VehicleCategory)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         VehicleCategory that = (VehicleCategory) o;
 
-        return getName().equals(that.getName());
+        return id != null ? id.equals(that.id) : that.id == null;
 
     }
 
     @Override
     public int hashCode() {
-        return getName().hashCode();
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
@@ -71,6 +72,7 @@ public class VehicleCategory {
         return "VehicleCategory{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", vehicles=" + vehicles +
                 '}';
     }
 }

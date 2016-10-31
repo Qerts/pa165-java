@@ -32,8 +32,8 @@ public class Journey {
      * Creates entity in initial phase where vehicle is borrowed.
      *
      * @param borrowedAt Date, when vehicle was borrowed.
-     * @param vehicle Vehicle which was borrowed.
-     * @param employee Employee who borrowed a vehicle.
+     * @param vehicle    Vehicle which was borrowed.
+     * @param employee   Employee who borrowed a vehicle.
      */
     public Journey(Date borrowedAt, Vehicle vehicle, Employee employee) {
         this.borrowedAt = borrowedAt;
@@ -45,7 +45,7 @@ public class Journey {
      * Updated entity to final phase where vehicle is returned.
      *
      * @param returnedAt Date, when vehicle was returned.
-     * @param distance Distance driven with this vehicle during the journey in kilometres.
+     * @param distance   Distance driven with this vehicle during the journey in kilometres.
      */
     public void returnVehicle(Date returnedAt, Float distance) {
         this.returnedAt = returnedAt;
@@ -105,24 +105,13 @@ public class Journey {
 
         Journey journey = (Journey) o;
 
-        if (!id.equals(journey.id)) return false;
-        if (!distance.equals(journey.distance)) return false;
-        if (!borrowedAt.equals(journey.borrowedAt)) return false;
-        if (!returnedAt.equals(journey.returnedAt)) return false;
-        if (!vehicle.equals(journey.vehicle)) return false;
-        return employee.equals(journey.employee);
+        return id != null ? id.equals(journey.id) : journey.id == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + distance.hashCode();
-        result = 31 * result + borrowedAt.hashCode();
-        result = 31 * result + returnedAt.hashCode();
-        result = 31 * result + vehicle.hashCode();
-        result = 31 * result + employee.hashCode();
-        return result;
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
