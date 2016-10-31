@@ -33,41 +33,14 @@ public class VehicleCategoryDaoImplTest extends AbstractTransactionalTestNGSprin
     private VehicleCategory vehicleCategory1;
     private VehicleCategory vehicleCategory2;
 
-    private Vehicle vehicle1;
-    private Vehicle vehicle2;
-
     @BeforeMethod
     public void setUp() {
-        vehicle1 = new Vehicle();
-        vehicle1.setEngineType("Diesel engine");
-        vehicle1.setInitialDrivenDistance(new Long(105792));
-        vehicle1.setProductionYear("2012");
-        vehicle1.setType("Skoda Superb Greenline 1.6 TDI");
-        vehicle1.setVin("2GNFLEEK1D6142368");
-        vehicle1.setVrp("3A28888");
-
-        vehicle2 = new Vehicle();
-        vehicle2.setEngineType("Petrol engine");
-        vehicle2.setInitialDrivenDistance(new Long(234889));
-        vehicle2.setProductionYear("2000");
-        vehicle2.setType("Skoda Octavia 1.6");
-        vehicle2.setVin("1NXBR32E07Z887915");
-        vehicle2.setVrp("3B33333");
-
-        Set<Vehicle> set = new HashSet<Vehicle>();
-        set.add(vehicle2);
-
         vehicleCategory1 = new VehicleCategory();
         vehicleCategory1.setName("Supply");
-        vehicleCategory1.setVehicles(set);
         vehicleCategoryDao.persist(vehicleCategory1);
-
-        set.clear();
-        set.add(vehicle1);
 
         vehicleCategory2 = new VehicleCategory();
         vehicleCategory2.setName("Representational");
-        vehicleCategory2.setVehicles(set);
         vehicleCategoryDao.persist(vehicleCategory2);
     }
 
