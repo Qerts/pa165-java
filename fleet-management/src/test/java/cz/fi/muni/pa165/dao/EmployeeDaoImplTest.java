@@ -102,7 +102,7 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
         int itemCountBefore = uut.findAll().size();
 
         // Act
-        uut.remove(employee1);
+        uut.removeById(employee1.getId());
 
         // Assert
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);
