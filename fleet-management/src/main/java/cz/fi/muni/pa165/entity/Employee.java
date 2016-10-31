@@ -1,12 +1,9 @@
-package entity;
+package cz.fi.muni.pa165.entity;
 
-
-import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
 
 /**
- * Created by JozeFe on 10/20/2016.
  * @author Jozef Krcho
  */
 @Entity
@@ -14,7 +11,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable=false)
     private String name;
@@ -22,15 +19,12 @@ public class Employee {
     @Column(nullable=false)
     private String surname;
 
-    public Employee() {
-    }
-
     public Employee(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -48,5 +42,30 @@ public class Employee {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        return id != null ? id.equals(employee.id) : employee.id == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
     }
 }
