@@ -105,7 +105,7 @@ public class InspectionIntervalDaoImplTest extends AbstractTransactionalTestNGSp
         int itemCountBefore = uut.findAll().size();
 
         // Act
-        uut.remove(InspectionInterval1);
+        uut.removeById(InspectionInterval1.getId());
 
         // Assert
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);

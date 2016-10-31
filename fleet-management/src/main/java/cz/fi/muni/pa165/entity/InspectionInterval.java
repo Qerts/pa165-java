@@ -32,54 +32,53 @@ public class InspectionInterval {
      * @param name      name of the inspection interval, i.e. "oil change"
      * @param interval  days between inspections
      */
-    public InspectionInterval(String name, int interval){
+    public InspectionInterval(String name, int interval) {
         this.name = name;
         this.days = interval;
     }
 
-    public Long getId(){
+    public Long getId() {
         return this.id;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public int getDays(){
+    public int getDays() {
         return this.days;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setDays(int days){
+    public void setDays(int days) {
         this.days = days;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)  return true;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        InspectionInterval inspectionInterval = (InspectionInterval)o;
+        InspectionInterval that = (InspectionInterval) o;
 
-        if(inspectionInterval.getName().equalsIgnoreCase(this.getName()) && inspectionInterval.getInterval() == this.getInterval()) return true;
+        return id != null ? id.equals(that.id) : that.id == null;
 
-        else return false;
     }
 
     @Override
     public int hashCode() {
-        return this.getName().hashCode();
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return "Inspection{" +
+        return "InspectionInterval{" +
                 "id=" + id +
-                ", name='" + this.getName() + '\'' +
-                ", interval='" + this.getInterval() + '\'' +
+                ", name='" + name + '\'' +
+                ", days=" + days +
                 '}';
     }
-
 }

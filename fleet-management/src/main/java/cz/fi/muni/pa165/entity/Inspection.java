@@ -45,19 +45,24 @@ public class Inspection {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        else return false;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Inspection that = (Inspection) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
+
     }
 
     @Override
     public int hashCode() {
-        return getPerformedAt().hashCode();
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "Inspection{" +
                 "id=" + id +
-                ", date='" + this.getPerformedAt().toString() + '\'' +
+                ", performedAt=" + performedAt +
                 '}';
     }
 }

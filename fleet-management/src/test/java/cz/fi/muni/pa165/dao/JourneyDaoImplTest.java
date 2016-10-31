@@ -1,8 +1,11 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.InMemoryDatabaseTestContext;
-import cz.fi.muni.pa165.dao.interfaces.InspectionDao;
-import cz.fi.muni.pa165.entity.Inspection;
+import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
+import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
+import cz.fi.muni.pa165.entity.Employee;
+import cz.fi.muni.pa165.entity.Journey;
+import cz.fi.muni.pa165.entity.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -12,56 +15,60 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.Calendar;
+import java.time.Year;
 import java.util.Date;
 import java.util.List;
 
+import static org.mockito.Mockito.mock;
+
 /**
- * @author Martin Schmidt
+ * @author Richard Trebichavský
  */
 @ContextConfiguration(classes = InMemoryDatabaseTestContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
+public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
-    private InspectionDao uut;
+    private JourneyDao uut;
 
-    private Inspection Inspection1;
-    private Inspection Inspection2;
+    private Employee employee;
+    private Vehicle vehicle;
+    private Journey journey;
 
     @BeforeMethod
     public void setUp() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2016, 1, 1);
-        Date date1 = calendar.getTime();
-        Inspection1 = new Inspection(date1);
-        uut.persist(Inspection1);
-        calendar.set(2016, 2, 2);
-        Date date2 = calendar.getTime();
-        Inspection2 = new Inspection(date2);
-        uut.persist(Inspection2);
+        employee = new Employee("John", "Doe");
+        vehicle = new Vehicle("VRP", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
+        journey = new Journey(new Date(), vehicle, employee);
+        uut.persist(journey);
     }
 
     @Test
     public void testFindById() {
         // Act
-        Inspection foundInspection = uut.findById(Inspection1.getId());
+        Journey foundJourney = uut.findById(journey.getId());
 
         // Assert
-        Assert.assertEquals(foundInspection, Inspection1);
+        Assert.assertEquals(foundJourney, journey);
     }
 
     @Test
     public void testFindAll() {
+        // Arrange
+        Journey journey2 = new Journey(new Date(), vehicle, employee);
+        Journey journey3 = new Journey(new Date(), vehicle, employee);
+        uut.persist(journey2);
+        uut.persist(journey3);
+
         // Act
-        List<Inspection> foundInspections = uut.findAll();
+        List<Journey> foundJourneys = uut.findAll();
 
         // Assert
-        Assert.assertEquals(foundInspections.get(0), Inspection1);
-        Assert.assertEquals(foundInspections.get(1), Inspection2);
+        Assert.assertEquals(foundJourneys.get(0), journey);
+        Assert.assertEquals(foundJourneys.get(1), journey2);
+        Assert.assertEquals(foundJourneys.get(2), journey3);
     }
 
     @Test
@@ -70,10 +77,7 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
         int itemCountBefore = uut.findAll().size();
 
         // Act
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2016, 3, 3);
-        Date date = calendar.getTime();
-        Inspection entity = new Inspection(date);
+        Journey entity = new Journey(new Date(), vehicle, employee);
         uut.persist(entity);
 
         // Assert
@@ -83,19 +87,15 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
     @Test
     public void testMerge() {
         // Arrange
-        Inspection foundInspection = uut.findById(Inspection1.getId());
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2016, 4, 4);
-        Date date = calendar.getTime();
-        foundInspection.setPerformedAt(date);
+        Journey foundJourney = uut.findById(journey.getId());
+        foundJourney.returnVehicle(new Date(), 67.5f);
 
         // Act
-        uut.merge(foundInspection);
+        uut.merge(foundJourney);
 
         // Assert
-        Inspection foundAfterMergeInspection = uut.findById(Inspection1.getId());
-        Assert.assertEquals(foundAfterMergeInspection.getPerformedAt(), date);
-        Assert.assertEquals(foundAfterMergeInspection, foundInspection);
+        Journey foundJourneyAfterMerge = uut.findById(journey.getId());
+        Assert.assertNotNull(foundJourneyAfterMerge.getReturnedAt());
     }
 
     @Test
@@ -104,7 +104,7 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
         int itemCountBefore = uut.findAll().size();
 
         // Act
-        uut.remove(Inspection1);
+        uut.remove(journey);
 
         // Assert
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);
@@ -116,7 +116,7 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
         int itemCountBefore = uut.findAll().size();
 
         // Act
-        uut.removeById(Inspection1.getId());
+        uut.removeById(journey.getId());
 
         // Assert
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);

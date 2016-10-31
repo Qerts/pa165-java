@@ -16,32 +16,49 @@ public class Vehicle {
     /**
      * Vehicle registration plate number (SPZ).
      */
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String vrp;
 
     /**
      * Car producer and model.
      */
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String type;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Year productionYear;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String engineType;
 
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String vin;
 
     /**
      * Number od driven kilometres when car was added to the catalogue.
      */
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Long initialKilometrage;
 
     @ManyToOne
     private VehicleCategory vehicleCategory;
+
+    /**
+     * @param vrp                Vehicle VRP.
+     * @param type               Mane of the manufacturer name.
+     * @param productionYear     Year when vehicle was manufactured.
+     * @param engineType         Type of the engine.
+     * @param vin                Vehicle VIN.
+     * @param initialKilometrage The driven distance when vehicle was added to the catalogue. In kilometres.
+     */
+    public Vehicle(String vrp, String type, Year productionYear, String engineType, String vin, Long initialKilometrage) {
+        this.vrp = vrp;
+        this.type = type;
+        this.productionYear = productionYear;
+        this.engineType = engineType;
+        this.vin = vin;
+        this.initialKilometrage = initialKilometrage;
+    }
 
     public VehicleCategory getVehicleCategory() {
         return vehicleCategory;
@@ -113,20 +130,17 @@ public class Vehicle {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || !(o instanceof Vehicle)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Vehicle vehicle = (Vehicle) o;
 
-        if (!getVrp().equals(vehicle.getVrp())) return false;
-        return getVin().equals(vehicle.getVin());
+        return id != null ? id.equals(vehicle.id) : vehicle.id == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = getVrp().hashCode();
-        result = 31 * result + getVin().hashCode();
-        return result;
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
@@ -135,10 +149,11 @@ public class Vehicle {
                 "id=" + id +
                 ", vrp='" + vrp + '\'' +
                 ", type='" + type + '\'' +
-                ", productionYear='" + productionYear + '\'' +
+                ", productionYear=" + productionYear +
                 ", engineType='" + engineType + '\'' +
                 ", vin='" + vin + '\'' +
                 ", initialKilometrage=" + initialKilometrage +
+                ", vehicleCategory=" + vehicleCategory +
                 '}';
     }
 }

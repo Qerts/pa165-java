@@ -24,9 +24,6 @@ public interface Dao<T,ID> {
     /**
      * Make an instance managed and persistent.
      *
-     * The entity itself is saved after invocation of {@see EntityManage::flush()} method.
-     * @todo Is this comment correct?
-     *
      * @param entity Entity instance.
      */
     void persist(T entity);
