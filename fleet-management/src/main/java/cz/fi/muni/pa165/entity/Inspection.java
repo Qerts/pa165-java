@@ -17,6 +17,15 @@ public class Inspection {
     @Column(nullable = false)
     private Date performedAt;
 
+    /**
+     * Initialize new Inspection object. For serialization uses.
+     */
+    public Inspection(){}
+
+    /**
+     * Initializes new Inspection object.
+     * @param performedAt date when Inspection was performed
+     */
     public Inspection(Date performedAt){
         this.performedAt = performedAt;
     }

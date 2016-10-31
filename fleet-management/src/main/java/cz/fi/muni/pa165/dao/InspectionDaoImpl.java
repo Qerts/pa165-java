@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.entity.Inspection;
 import org.springframework.stereotype.Repository;
 
 /**
+ * Created by MBalicky on 23/10/2016.
  * @author Michal Balický
  */
 @Repository
