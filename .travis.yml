@@ -3,4 +3,4 @@ jdk:
   - oraclejdk8
 sudo: false
 before_script: cd fleet-management
-script: mvn clean verify
+script: mvn clean install
