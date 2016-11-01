@@ -10,3 +10,5 @@ checkout the repository and run command `mvn pacakge` from command line to downl
 ## Development
 
 The Project is developed using a [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/). Use `Open Project` dialog to load project and develop comfortably.
+
+test line
