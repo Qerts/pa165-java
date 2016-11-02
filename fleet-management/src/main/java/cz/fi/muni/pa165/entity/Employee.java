@@ -25,6 +25,10 @@ public class Employee {
     public Employee() {
     }
 
+    /**
+     * @param name    name of the Employee
+     * @param surname surname of the Employee
+     */
     public Employee(String name, String surname) {
         this.name = name;
         this.surname = surname;
