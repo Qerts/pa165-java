@@ -45,17 +45,17 @@ public class Inspection {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || (!(o instanceof Inspection))) return false;
 
         Inspection that = (Inspection) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        return performedAt != null ? performedAt.equals(that.getPerformedAt()) : that.getPerformedAt() == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return performedAt != null ? performedAt.hashCode() : 0;
     }
 
     @Override

@@ -30,6 +30,22 @@ public class VehicleCategory {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || (!(o instanceof VehicleCategory))) return false;
+
+        VehicleCategory that = (VehicleCategory) o;
+
+        return name != null ? name.equals(that.getName()) : that.getName() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
+
     public String getName() {
         return name;
     }
@@ -50,22 +66,6 @@ public class VehicleCategory {
         vehicles.add(vehicle);
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        VehicleCategory that = (VehicleCategory) o;
-
-        return id != null ? id.equals(that.id) : that.id == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
 
     @Override
     public String toString() {

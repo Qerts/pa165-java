@@ -34,6 +34,34 @@ public class Vehicle {
     @Column(nullable = false, unique = true)
     private String vin;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || (!(o instanceof Vehicle))) return false;
+
+        Vehicle vehicle = (Vehicle) o;
+
+        if (vrp != null ? !vrp.equals(vehicle.getVrp()) : vehicle.getVrp()!= null) return false;
+        if (type != null ? !type.equals(vehicle.getType()) : vehicle.getType() != null) return false;
+        if (productionYear != null ? !productionYear.equals(vehicle.getProductionYear()) : vehicle.getProductionYear()!= null)
+            return false;
+        if (engineType != null ? !engineType.equals(vehicle.getEngineType()) : vehicle.getEngineType()!= null) return false;
+        if (vin != null ? !vin.equals(vehicle.getVin()) : vehicle.getVin()!= null) return false;
+        return initialKilometrage != null ? initialKilometrage.equals(vehicle.getInitialKilometrage()) : vehicle.getInitialKilometrage()== null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = vrp != null ? vrp.hashCode() : 0;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (productionYear != null ? productionYear.hashCode() : 0);
+        result = 31 * result + (engineType != null ? engineType.hashCode() : 0);
+        result = 31 * result + (vin != null ? vin.hashCode() : 0);
+        result = 31 * result + (initialKilometrage != null ? initialKilometrage.hashCode() : 0);
+        return result;
+    }
+
     /**
      * Number od driven kilometres when car was added to the catalogue.
      */
@@ -125,22 +153,6 @@ public class Vehicle {
 
     public void setInitialKilometrage(Long initialKilometrage) {
         this.initialKilometrage = initialKilometrage;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Vehicle vehicle = (Vehicle) o;
-
-        return id != null ? id.equals(vehicle.id) : vehicle.id == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
     }
 
     @Override
