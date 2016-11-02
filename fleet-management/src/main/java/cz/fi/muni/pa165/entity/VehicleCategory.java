@@ -22,28 +22,25 @@ public class VehicleCategory {
     @OneToMany(mappedBy = "vehicleCategory")
     private Set<Vehicle> vehicles = new HashSet<>();
 
+    /**
+     * Initialize new VehicleCategory object. For serialization uses.
+     */
+    public VehicleCategory() {
+    }
+
+    /**
+     * @param name name of the VehicleCategory
+     */
+    public VehicleCategory(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || (!(o instanceof VehicleCategory))) return false;
-
-        VehicleCategory that = (VehicleCategory) o;
-
-        return name != null ? name.equals(that.getName()) : that.getName() == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return name != null ? name.hashCode() : 0;
     }
 
     public String getName() {
@@ -66,6 +63,21 @@ public class VehicleCategory {
         vehicles.add(vehicle);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || (!(o instanceof VehicleCategory))) return false;
+
+        VehicleCategory that = (VehicleCategory) o;
+
+        return name != null ? name.equals(that.getName()) : that.getName() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
 
     @Override
     public String toString() {

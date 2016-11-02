@@ -19,6 +19,12 @@ public class Employee {
     @Column(nullable=false)
     private String surname;
 
+    /**
+     * Initialize new Employee object. For serialization uses.
+     */
+    public Employee() {
+    }
+
     public Employee(String name, String surname) {
         this.name = name;
         this.surname = surname;

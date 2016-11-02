@@ -25,7 +25,8 @@ public class InspectionInterval {
     /**
      * Initialize new Inspection object. For serialization uses.
      */
-    public InspectionInterval(){}
+    public InspectionInterval(){
+    }
 
     /**
      * Initializes new InspectionInterval object

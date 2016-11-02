@@ -29,6 +29,12 @@ public class Journey {
     private Employee employee;
 
     /**
+     * Initialize new Journey object. For serialization uses.
+     */
+    public Journey() {
+    }
+
+    /**
      * Creates entity in initial phase where vehicle is borrowed.
      *
      * @param borrowedAt Date, when vehicle was borrowed.
