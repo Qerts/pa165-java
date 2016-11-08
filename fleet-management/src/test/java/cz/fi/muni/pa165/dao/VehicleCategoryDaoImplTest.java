@@ -35,12 +35,10 @@ public class VehicleCategoryDaoImplTest extends AbstractTransactionalTestNGSprin
 
     @BeforeMethod
     public void setUp() {
-        vehicleCategory1 = new VehicleCategory();
-        vehicleCategory1.setName("Supply");
+        vehicleCategory1 = new VehicleCategory("Supply");
         vehicleCategoryDao.persist(vehicleCategory1);
 
-        vehicleCategory2 = new VehicleCategory();
-        vehicleCategory2.setName("Representational");
+        vehicleCategory2 = new VehicleCategory("Representational");
         vehicleCategoryDao.persist(vehicleCategory2);
     }
 
@@ -69,8 +67,7 @@ public class VehicleCategoryDaoImplTest extends AbstractTransactionalTestNGSprin
         int itemCountBefore = vehicleCategoryDao.findAll().size();
 
         // Act
-        VehicleCategory vehicleCategory = new VehicleCategory();
-        vehicleCategory.setName("Facility Department");
+        VehicleCategory vehicleCategory = new VehicleCategory("Facility Department");
         vehicleCategoryDao.persist(vehicleCategory);
 
         // Assert
