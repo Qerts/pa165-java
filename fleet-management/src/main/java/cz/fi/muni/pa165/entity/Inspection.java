@@ -18,9 +18,10 @@ public class Inspection {
     private Date performedAt;
 
     /**
-     * Initialize new Inspection object. For serialization uses.
+     * All persistent classes must have a default constructor (which can be non-public)
+     * so that Hibernate can instantiate them using Constructor.newInstance().
      */
-    public Inspection(){}
+    protected Inspection(){}
 
     /**
      * Initializes new Inspection object.
@@ -45,17 +46,17 @@ public class Inspection {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || (!(o instanceof Inspection))) return false;
 
         Inspection that = (Inspection) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        return performedAt != null ? performedAt.equals(that.getPerformedAt()) : that.getPerformedAt() == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return performedAt != null ? performedAt.hashCode() : 0;
     }
 
     @Override

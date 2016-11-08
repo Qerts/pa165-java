@@ -23,9 +23,11 @@ public class InspectionInterval {
     private int days;
 
     /**
-     * Initialize new Inspection object. For serialization uses.
+     * All persistent classes must have a default constructor (which can be non-public)
+     * so that Hibernate can instantiate them using Constructor.newInstance().
      */
-    public InspectionInterval(){}
+    protected InspectionInterval(){
+    }
 
     /**
      * Initializes new InspectionInterval object
@@ -60,17 +62,20 @@ public class InspectionInterval {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || (!(o instanceof InspectionInterval))) return false;
 
         InspectionInterval that = (InspectionInterval) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        if (days != that.getDays()) return false;
+        return name != null ? name.equals(that.getName()) : that.getName() == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + days;
+        return result;
     }
 
     @Override

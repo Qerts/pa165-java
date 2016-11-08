@@ -19,6 +19,17 @@ public class Employee {
     @Column(nullable=false)
     private String surname;
 
+    /**
+     * All persistent classes must have a default constructor (which can be non-public)
+     * so that Hibernate can instantiate them using Constructor.newInstance().
+     */
+    protected Employee() {
+    }
+
+    /**
+     * @param name    name of the Employee
+     * @param surname surname of the Employee
+     */
     public Employee(String name, String surname) {
         this.name = name;
         this.surname = surname;
@@ -47,17 +58,20 @@ public class Employee {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || (!(o instanceof Employee))) return false;
 
         Employee employee = (Employee) o;
 
-        return id != null ? id.equals(employee.id) : employee.id == null;
+        if (name != null ? !name.equals(employee.getName()) : employee.getName() != null) return false;
+        return surname != null ? surname.equals(employee.getSurname()) : employee.getSurname() == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        return result;
     }
 
     @Override

@@ -29,6 +29,13 @@ public class Journey {
     private Employee employee;
 
     /**
+     * All persistent classes must have a default constructor (which can be non-public)
+     * so that Hibernate can instantiate them using Constructor.newInstance().
+     */
+    protected Journey() {
+    }
+
+    /**
      * Creates entity in initial phase where vehicle is borrowed.
      *
      * @param borrowedAt Date, when vehicle was borrowed.
@@ -101,17 +108,22 @@ public class Journey {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || (!(o instanceof Journey))) return false;
 
         Journey journey = (Journey) o;
 
-        return id != null ? id.equals(journey.id) : journey.id == null;
+        if (distance != null ? !distance.equals(journey.getDistance()) : journey.getDistance() != null) return false;
+        if (borrowedAt != null ? !borrowedAt.equals(journey.getBorrowedAt()) : journey.getBorrowedAt() != null) return false;
+        return returnedAt != null ? returnedAt.equals(journey.getReturnedAt()) : journey.getReturnedAt()== null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = distance != null ? distance.hashCode() : 0;
+        result = 31 * result + (borrowedAt != null ? borrowedAt.hashCode() : 0);
+        result = 31 * result + (returnedAt != null ? returnedAt.hashCode() : 0);
+        return result;
     }
 
     @Override

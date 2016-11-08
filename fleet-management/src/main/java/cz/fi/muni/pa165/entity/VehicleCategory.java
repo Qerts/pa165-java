@@ -22,6 +22,20 @@ public class VehicleCategory {
     @OneToMany(mappedBy = "vehicleCategory")
     private Set<Vehicle> vehicles = new HashSet<>();
 
+    /**
+     * All persistent classes must have a default constructor (which can be non-public)
+     * so that Hibernate can instantiate them using Constructor.newInstance().
+     */
+    protected VehicleCategory() {
+    }
+
+    /**
+     * @param name name of the VehicleCategory
+     */
+    public VehicleCategory(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
@@ -50,21 +64,20 @@ public class VehicleCategory {
         vehicles.add(vehicle);
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || (!(o instanceof VehicleCategory))) return false;
 
         VehicleCategory that = (VehicleCategory) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        return name != null ? name.equals(that.getName()) : that.getName() == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return name != null ? name.hashCode() : 0;
     }
 
     @Override
