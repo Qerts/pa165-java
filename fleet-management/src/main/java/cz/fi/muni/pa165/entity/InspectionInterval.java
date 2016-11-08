@@ -23,9 +23,10 @@ public class InspectionInterval {
     private int days;
 
     /**
-     * Initialize new Inspection object. For serialization uses.
+     * All persistent classes must have a default constructor (which can be non-public)
+     * so that Hibernate can instantiate them using Constructor.newInstance().
      */
-    public InspectionInterval(){
+    protected InspectionInterval(){
     }
 
     /**

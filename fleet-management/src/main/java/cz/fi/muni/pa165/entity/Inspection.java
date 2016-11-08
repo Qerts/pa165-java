@@ -18,9 +18,10 @@ public class Inspection {
     private Date performedAt;
 
     /**
-     * Initialize new Inspection object. For serialization uses.
+     * All persistent classes must have a default constructor (which can be non-public)
+     * so that Hibernate can instantiate them using Constructor.newInstance().
      */
-    public Inspection(){}
+    protected Inspection(){}
 
     /**
      * Initializes new Inspection object.

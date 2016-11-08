@@ -23,9 +23,10 @@ public class VehicleCategory {
     private Set<Vehicle> vehicles = new HashSet<>();
 
     /**
-     * Initialize new VehicleCategory object. For serialization uses.
+     * All persistent classes must have a default constructor (which can be non-public)
+     * so that Hibernate can instantiate them using Constructor.newInstance().
      */
-    public VehicleCategory() {
+    protected VehicleCategory() {
     }
 
     /**
