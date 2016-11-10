@@ -77,5 +77,35 @@ public class OddTest extends AbstractTransactionalTestNGSpringContextTests {
         Assert.assertFalse(true); // this test is not fine!
     }
 
+
+    @Test
+    public void endingOneJourneyEndsBothTest() {
+        // Arrange
+        Employee employee1 = new Employee("John", "Doe");
+        Employee employee2 = new Employee("Joushua", "Bloch");
+        employeeDao.persist(employee1);
+        employeeDao.persist(employee2);
+        Vehicle vehicle1 = new Vehicle("VRP1", "Type1", Year.of(1999), "EngineType1", "VIN1", (long) 7658.54);
+        Vehicle vehicle2 = new Vehicle("VRP2", "Type2", Year.of(1999), "EngineType2", "VIN2", (long) 7658.54);
+        vehicleDao.persist(vehicle1);
+        vehicleDao.persist(vehicle2);
+        Journey journey1 = new Journey(new Date(), vehicle1, employee1);
+        Journey journey2 = new Journey(new Date(), vehicle2, employee2);
+        journeyDao.persist(journey1);
+        journeyDao.persist(journey2);
+
+        // Act
+        Journey foundJourney = journeyDao.findById(journey1.getId());
+        foundJourney.returnVehicle(new Date(), (float) 150);
+        journeyDao.persist(foundJourney);
+
+        // Assert
+        Journey foundJourney1 = journeyDao.findById(journey1.getId());
+        Journey foundJourney2 = journeyDao.findById(journey1.getId());
+        Assert.assertNotNull(foundJourney1.getReturnedAt());
+        // Actually, this is NOT NULL! That's BIG FAIL!
+        Assert.assertNull(foundJourney2.getReturnedAt());
+    }
+
 }
 
