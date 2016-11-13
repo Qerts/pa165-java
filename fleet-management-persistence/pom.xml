@@ -5,14 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-    <groupId>fi.muni</groupId>
+    <groupId>cz.muni.fi.pa165</groupId>
     <artifactId>fleet-management-app</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-    <groupId>fi.muni</groupId>
+    <groupId>cz.muni.fi.pa165</groupId>
     <artifactId>fleet-management-persistence</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <build>
         <plugins>
             <plugin>

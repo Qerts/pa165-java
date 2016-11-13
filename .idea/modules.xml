@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/fleet-management-app.iml" filepath="$PROJECT_DIR$/fleet-management-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/fleet-management-persistence/fleet-management-persistence.iml" filepath="$PROJECT_DIR$/fleet-management-persistence/fleet-management-persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fleet-management-service/fleet-management-service.iml" filepath="$PROJECT_DIR$/fleet-management-service/fleet-management-service.iml" />
     </modules>
   </component>
 </project>
