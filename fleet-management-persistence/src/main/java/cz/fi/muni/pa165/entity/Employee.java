@@ -9,6 +9,9 @@ import java.util.Set;
  * @author Jozef Krcho
  */
 @Entity
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"name", "surname"})
+})
 public class Employee {
 
     @Id
@@ -87,15 +90,15 @@ public class Employee {
 
         Employee employee = (Employee) o;
 
-        if (name != null ? !name.equals(employee.getName()) : employee.getName() != null) return false;
-        return surname != null ? surname.equals(employee.getSurname()) : employee.getSurname() == null;
+        if (!name.equals(employee.name)) return false;
+        return surname.equals(employee.surname);
 
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        int result = name.hashCode();
+        result = 31 * result + surname.hashCode();
         return result;
     }
 

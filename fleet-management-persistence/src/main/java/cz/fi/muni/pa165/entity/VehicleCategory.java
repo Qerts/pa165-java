@@ -82,7 +82,7 @@ public class VehicleCategory {
 
         VehicleCategory that = (VehicleCategory) o;
 
-        return name != null ? name.equals(that.getName()) : that.getName() == null;
+        return name.equals(that.getName());
 
     }
 
