@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Michal Balický
@@ -21,6 +23,14 @@ public class InspectionInterval {
      */
     @Column(nullable = false)
     private int days;
+
+    @ManyToOne
+    private Vehicle vehicle;
+
+    @OneToMany(mappedBy = "inspectionInterval")
+    private Set<Inspection> inspections = new HashSet<>();
+
+
 
     /**
      * All persistent classes must have a default constructor (which can be non-public)
@@ -57,6 +67,23 @@ public class InspectionInterval {
 
     public void setDays(int days) {
         this.days = days;
+    }
+
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public Set<Inspection> getInspections() {
+        return inspections;
+    }
+
+    public void setInspections(Set<Inspection> inspections) {
+        this.inspections = inspections;
     }
 
     @Override

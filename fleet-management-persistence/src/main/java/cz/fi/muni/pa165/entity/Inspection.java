@@ -17,6 +17,9 @@ public class Inspection {
     @Column(nullable = false)
     private Date performedAt;
 
+    @ManyToOne
+    private InspectionInterval inspectionInterval;
+
     /**
      * All persistent classes must have a default constructor (which can be non-public)
      * so that Hibernate can instantiate them using Constructor.newInstance().
@@ -41,6 +44,14 @@ public class Inspection {
 
     public void setPerformedAt(Date performedAt){
         this.performedAt = performedAt;
+    }
+
+    public InspectionInterval getInspectionInterval() {
+        return inspectionInterval;
+    }
+
+    public void setInspectionInterval(InspectionInterval inspectionInterval) {
+        this.inspectionInterval = inspectionInterval;
     }
 
     @Override
