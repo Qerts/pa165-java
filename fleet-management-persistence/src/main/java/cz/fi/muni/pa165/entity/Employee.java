@@ -2,6 +2,8 @@ package cz.fi.muni.pa165.entity;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Jozef Krcho
@@ -18,6 +20,13 @@ public class Employee {
 
     @Column(nullable=false)
     private String surname;
+
+
+    @ManyToMany
+    Set<VehicleCategory> vehicleCategories = new HashSet<>();
+
+    @OneToMany(mappedBy = "employee")
+    private Set<Journey> journeys = new HashSet<>();
 
     /**
      * All persistent classes must have a default constructor (which can be non-public)
@@ -53,6 +62,22 @@ public class Employee {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public Set<VehicleCategory> getVehicleCategories() {
+        return vehicleCategories;
+    }
+
+    public void setVehicleCategories(Set<VehicleCategory> vehicleCategories) {
+        this.vehicleCategories = vehicleCategories;
+    }
+
+    public Set<Journey> getJourneys() {
+        return journeys;
+    }
+
+    public void setJourneys(Set<Journey> journeys) {
+        this.journeys = journeys;
     }
 
     @Override

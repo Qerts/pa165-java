@@ -22,6 +22,9 @@ public class VehicleCategory {
     @OneToMany(mappedBy = "vehicleCategory")
     private Set<Vehicle> vehicles = new HashSet<>();
 
+    @ManyToMany(mappedBy = "vehicleCategories")
+    Set<Employee> employees = new HashSet<>();
+
     /**
      * All persistent classes must have a default constructor (which can be non-public)
      * so that Hibernate can instantiate them using Constructor.newInstance().
@@ -62,6 +65,14 @@ public class VehicleCategory {
 
     public void addVehicle(Vehicle vehicle) {
         vehicles.add(vehicle);
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override

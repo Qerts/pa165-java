@@ -2,6 +2,8 @@ package cz.fi.muni.pa165.entity;
 
 import javax.persistence.*;
 import java.time.Year;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Martin Schmidt
@@ -42,6 +44,12 @@ public class Vehicle {
 
     @ManyToOne
     private VehicleCategory vehicleCategory;
+
+    @OneToMany(mappedBy = "vehicle")
+    private Set<Journey> journeys = new HashSet<>();
+
+    @OneToMany(mappedBy = "vehicle")
+    private Set<InspectionInterval> inspectionIntervals = new HashSet<>();
 
     /**
      * All persistent classes must have a default constructor (which can be non-public)
@@ -132,6 +140,22 @@ public class Vehicle {
 
     public void setInitialKilometrage(Long initialKilometrage) {
         this.initialKilometrage = initialKilometrage;
+    }
+
+    public Set<Journey> getJourneys() {
+        return journeys;
+    }
+
+    public void setJourneys(Set<Journey> journeys) {
+        this.journeys = journeys;
+    }
+
+    public Set<InspectionInterval> getInspectionIntervals() {
+        return inspectionIntervals;
+    }
+
+    public void setInspectionIntervals(Set<InspectionInterval> inspectionIntervals) {
+        this.inspectionIntervals = inspectionIntervals;
     }
 
     @Override
