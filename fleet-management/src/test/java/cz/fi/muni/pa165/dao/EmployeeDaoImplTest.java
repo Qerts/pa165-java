@@ -62,7 +62,7 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
         int itemCountBefore = uut.findAll().size();
 
         // Act
-        Employee entity = new Employee("John", "Doe");
+        Employee entity = new Employee("Jim", "Doe");
         uut.persist(entity);
 
         // Assert

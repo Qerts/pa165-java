@@ -13,7 +13,7 @@ public class InspectionInterval {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     /**
@@ -66,16 +66,13 @@ public class InspectionInterval {
 
         InspectionInterval that = (InspectionInterval) o;
 
-        if (days != that.getDays()) return false;
         return name != null ? name.equals(that.getName()) : that.getName() == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + days;
-        return result;
+        return name != null ? name.hashCode() : 0;
     }
 
     @Override

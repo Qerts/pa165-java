@@ -112,17 +112,17 @@ public class Journey {
 
         Journey journey = (Journey) o;
 
-        if (distance != null ? !distance.equals(journey.getDistance()) : journey.getDistance() != null) return false;
-        if (borrowedAt != null ? !borrowedAt.equals(journey.getBorrowedAt()) : journey.getBorrowedAt() != null) return false;
-        return returnedAt != null ? returnedAt.equals(journey.getReturnedAt()) : journey.getReturnedAt()== null;
+        if (!borrowedAt.equals(journey.getBorrowedAt())) return false;
+        if (!vehicle.equals(journey.getVehicle())) return false;
+        return employee.equals(journey.getEmployee());
 
     }
 
     @Override
     public int hashCode() {
-        int result = distance != null ? distance.hashCode() : 0;
-        result = 31 * result + (borrowedAt != null ? borrowedAt.hashCode() : 0);
-        result = 31 * result + (returnedAt != null ? returnedAt.hashCode() : 0);
+        int result = borrowedAt.hashCode();
+        result = 31 * result + vehicle.hashCode();
+        result = 31 * result + employee.hashCode();
         return result;
     }
 
