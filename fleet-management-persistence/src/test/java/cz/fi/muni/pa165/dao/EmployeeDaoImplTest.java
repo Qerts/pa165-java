@@ -1,6 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.InMemoryDatabaseTestContext;
+import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
 import cz.fi.muni.pa165.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author Richard Trebichavský
  */
-@ContextConfiguration(classes = InMemoryDatabaseTestContext.class)
+@ContextConfiguration(classes = InMemoryDatabaseContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {

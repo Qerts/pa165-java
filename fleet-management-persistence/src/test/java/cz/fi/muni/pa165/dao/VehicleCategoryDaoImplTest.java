@@ -1,9 +1,7 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.InMemoryDatabaseTestContext;
+import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dao.interfaces.VehicleCategoryDao;
-import cz.fi.muni.pa165.dao.interfaces.VehicleDao;
-import cz.fi.muni.pa165.entity.Vehicle;
 import cz.fi.muni.pa165.entity.VehicleCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,7 +20,7 @@ import java.util.*;
  * @author Michal Balický
  */
 
-@ContextConfiguration(classes = InMemoryDatabaseTestContext.class)
+@ContextConfiguration(classes = InMemoryDatabaseContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class VehicleCategoryDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {

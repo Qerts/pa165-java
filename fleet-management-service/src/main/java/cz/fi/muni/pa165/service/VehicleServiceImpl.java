@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.dao.interfaces.VehicleDao;
 import cz.fi.muni.pa165.entity.Vehicle;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by Martin on 13.11.2016.
  */
+@Service
 public class VehicleServiceImpl implements VehicleService {
 
     @Inject
@@ -24,11 +26,11 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicleDao.findAll();
     }
 
-    public void persist(Vehicle v) {
+    public void create(Vehicle v) {
         vehicleDao.persist(v);
     }
 
-    public void merge(Vehicle v) {
+    public void update(Vehicle v) {
         vehicleDao.merge(v);
     }
 
@@ -36,7 +38,4 @@ public class VehicleServiceImpl implements VehicleService {
         vehicleDao.remove(v);
     }
 
-    public void removeById(Long id) {
-        vehicleDao.removeById(id);
-    }
 }
