@@ -1,6 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.InMemoryDatabaseTestContext;
+import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dao.interfaces.InspectionDao;
 import cz.fi.muni.pa165.entity.Inspection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -21,7 +20,7 @@ import java.util.List;
 /**
  * @author Martin Schmidt
  */
-@ContextConfiguration(classes = InMemoryDatabaseTestContext.class)
+@ContextConfiguration(classes = InMemoryDatabaseContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {

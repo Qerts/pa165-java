@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/fleet-management-api/fleet-management-api.iml" filepath="$PROJECT_DIR$/fleet-management-api/fleet-management-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/fleet-management-app.iml" filepath="$PROJECT_DIR$/fleet-management-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/fleet-management-persistence/fleet-management-persistence.iml" filepath="$PROJECT_DIR$/fleet-management-persistence/fleet-management-persistence.iml" />
       <module fileurl="file://$PROJECT_DIR$/fleet-management-service/fleet-management-service.iml" filepath="$PROJECT_DIR$/fleet-management-service/fleet-management-service.iml" />

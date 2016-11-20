@@ -24,7 +24,7 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 @EnableJpaRepositories
 @ComponentScan(basePackageClasses = {JpaDao.class})
-public class InMemoryDatabaseTestContext {
+public class InMemoryDatabaseContext {
     /**
      * Enables automatic translation of exceptions to DataAccessExceptions.
      */

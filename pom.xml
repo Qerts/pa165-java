@@ -12,6 +12,7 @@
   <modules>
     <module>fleet-management-persistence</module>
     <module>fleet-management-service</module>
+      <module>fleet-management-api</module>
 
   </modules>
 </project>
