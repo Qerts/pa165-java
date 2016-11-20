@@ -36,34 +36,34 @@ public class JourneyServiceImpl implements JourneyService {
         }
     }
 
-    public void create(Journey j) {
-        if (j == null) {
+    public void create(Journey journey) {
+        if (journey == null) {
             throw new FleetManagementDAException("journey cannot be null");
         }
         try {
-            journeyDao.persist(j);
+            journeyDao.persist(journey);
         } catch(RuntimeException ex) {
             throw new FleetManagementDAException("journey create error", ex);
         }
     }
 
-    public void update(Journey j) {
-        if (j == null) {
+    public void update(Journey journey) {
+        if (journey == null) {
             throw new FleetManagementDAException("journey cannot be null");
         }
         try {
-            journeyDao.merge(j);
+            journeyDao.merge(journey);
         } catch(RuntimeException ex) {
             throw new FleetManagementDAException("journey update error", ex);
         }
     }
 
-    public void remove(Journey j) {
-        if (j == null) {
+    public void remove(Journey journey) {
+        if (journey == null) {
             throw new FleetManagementDAException("journey cannot be null");
         }
         try {
-            journeyDao.remove(j);
+            journeyDao.remove(journey);
         } catch(RuntimeException ex) {
             throw new FleetManagementDAException("journey delete error", ex);
         }

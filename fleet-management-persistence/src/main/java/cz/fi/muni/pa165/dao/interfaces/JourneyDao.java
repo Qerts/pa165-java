@@ -9,6 +9,12 @@ import java.util.List;
  * @author Richard Trebichavský + Martin Schmidt
  */
 public interface JourneyDao extends Dao<Journey, Long> {
+
+   /**
+    * find all journeys for given employee
+    * @param e employee
+    * @return list of journeys
+    */
    List<Journey> findByEmployee(Employee e);
 
 }

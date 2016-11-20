@@ -12,11 +12,44 @@ import java.util.List;
  */
 @Service
 public interface JourneyService {
+    /**
+     * find journey by id
+     * @param id id of journey
+     * @return  journey
+     */
     public Journey findById(Long id);
+
+    /**
+     * find all journeys
+     * @return list of journeys
+     */
     public List<Journey> findAll();
-    public void create(Journey j);
-    public void update(Journey j);
-    public void remove(Journey j);
+
+    /**
+     * save new journey
+     * @param journey journey
+     */
+    public void create(Journey journey);
+
+    /**
+     * update saved journey
+     * @param journey journey
+     */
+    public void update(Journey journey);
+
+    /**
+     * remove saved journey
+     * @param journey journey
+     */
+    public void remove(Journey journey);
+
+    /**
+     * get all journeys for given employee in the time interval (start of the journey)
+     * @param from start of time interval
+     * @param to end of time interval
+     * @param employee employee
+     * @return list of journeys
+     */
     public List<Journey> getAllJourneys(Date from, Date to, Employee employee);
 
 }

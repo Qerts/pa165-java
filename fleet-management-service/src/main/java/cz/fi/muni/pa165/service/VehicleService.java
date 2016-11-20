@@ -10,10 +10,36 @@ import java.util.List;
  */
 @Service
 public interface VehicleService {
+
+    /**
+     * find vehicle by id
+     * @param id id
+     * @return vehicle
+     */
     public Vehicle findById(Long id);
+
+    /**
+     * find all vehicles
+     * @return list of vehicles
+     */
     public List<Vehicle> findAll();
-    public void create(Vehicle v);
-    public void update(Vehicle v);
-    public void remove(Vehicle v);
+
+    /**
+     * save new vehicle
+     * @param vehicle vehicle
+     */
+    public void create(Vehicle vehicle);
+
+    /**
+     * update saved vehicle
+     * @param vehicle vehicle
+     */
+    public void update(Vehicle vehicle);
+
+    /**
+     * remove saved vehicle
+     * @param vehicle vehicle
+     */
+    public void remove(Vehicle vehicle);
 
 }
