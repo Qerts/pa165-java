@@ -110,4 +110,18 @@ public class VehicleCategoryDaoImplTest extends AbstractTransactionalTestNGSprin
         // Assert
         Assert.assertEquals(vehicleCategoryDao.findAll().size(), itemCountBefore - 1);
     }
+
+    @Test(expectedExceptions = Exception.class)
+    public void testNullName() {
+        VehicleCategory vehicleCategoryNullName = new VehicleCategory(null);
+        vehicleCategoryDao.persist(vehicleCategoryNullName);
+    }
+
+    @Test(expectedExceptions = Exception.class)
+    public void testUniqueName() {
+        VehicleCategory vehicleCategoryUniqueName1 = new VehicleCategory("Unique");
+        VehicleCategory vehicleCategoryUniqueName2 = new VehicleCategory("Unique");
+        vehicleCategoryDao.persist(vehicleCategoryUniqueName1);
+        vehicleCategoryDao.persist(vehicleCategoryUniqueName2);
+    }
 }

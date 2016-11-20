@@ -28,29 +28,29 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
     @Autowired
     private InspectionDao uut;
 
-    private Inspection Inspection1;
-    private Inspection Inspection2;
+    private Inspection inspection1;
+    private Inspection inspection2;
 
     @BeforeMethod
     public void setUp() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2016, 1, 1);
         Date date1 = calendar.getTime();
-        Inspection1 = new Inspection(date1);
-        uut.persist(Inspection1);
+        inspection1 = new Inspection(date1);
+        uut.persist(inspection1);
         calendar.set(2016, 2, 2);
         Date date2 = calendar.getTime();
-        Inspection2 = new Inspection(date2);
-        uut.persist(Inspection2);
+        inspection2 = new Inspection(date2);
+        uut.persist(inspection2);
     }
 
     @Test
     public void testFindById() {
         // Act
-        Inspection foundInspection = uut.findById(Inspection1.getId());
+        Inspection foundInspection = uut.findById(inspection1.getId());
 
         // Assert
-        Assert.assertEquals(foundInspection, Inspection1);
+        Assert.assertEquals(foundInspection, inspection1);
     }
 
     @Test
@@ -59,8 +59,8 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
         List<Inspection> foundInspections = uut.findAll();
 
         // Assert
-        Assert.assertEquals(foundInspections.get(0), Inspection1);
-        Assert.assertEquals(foundInspections.get(1), Inspection2);
+        Assert.assertEquals(foundInspections.get(0), inspection1);
+        Assert.assertEquals(foundInspections.get(1), inspection2);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
     @Test
     public void testMerge() {
         // Arrange
-        Inspection foundInspection = uut.findById(Inspection1.getId());
+        Inspection foundInspection = uut.findById(inspection1.getId());
         Calendar calendar = Calendar.getInstance();
         calendar.set(2016, 4, 4);
         Date date = calendar.getTime();
@@ -92,7 +92,7 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
         uut.merge(foundInspection);
 
         // Assert
-        Inspection foundAfterMergeInspection = uut.findById(Inspection1.getId());
+        Inspection foundAfterMergeInspection = uut.findById(inspection1.getId());
         Assert.assertEquals(foundAfterMergeInspection.getPerformedAt(), date);
         Assert.assertEquals(foundAfterMergeInspection, foundInspection);
     }
@@ -103,7 +103,7 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
         int itemCountBefore = uut.findAll().size();
 
         // Act
-        uut.remove(Inspection1);
+        uut.remove(inspection1);
 
         // Assert
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);
@@ -115,9 +115,15 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
         int itemCountBefore = uut.findAll().size();
 
         // Act
-        uut.removeById(Inspection1.getId());
+        uut.removeById(inspection1.getId());
 
         // Assert
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);
+    }
+
+    @Test(expectedExceptions = Exception.class)
+    public void testNullDate() {
+        Inspection inspectionNullDate = new Inspection(null);
+        uut.persist(inspectionNullDate);
     }
 }
