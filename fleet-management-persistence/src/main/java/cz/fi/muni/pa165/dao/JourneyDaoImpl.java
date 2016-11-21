@@ -27,14 +27,16 @@ public class JourneyDaoImpl extends JpaDao<Journey, Long> implements JourneyDao 
     private EntityManager em;
 
     @Override
-    public List<Journey> findAllByVehicleId(double vehicleId) {
-        Query query = this.entityManager.createQuery(String.format("select * " +
-                        "from {1} j " +
-                        "join {2} v on j.vehicleId = v.id " +
-                        "where v.id = {3}",
-                Journey.class.getName(),
-                Vehicle.class.getName(),
-                vehicleId));
+    public List<Journey> findAllByVehicleId(long vehicleId) {
+
+        Query query = this.em.createQuery(
+                "SELECT j " +
+                "FROM Journey j " +
+                "INNER JOIN j.vehicle v " +
+                "WHERE v.id = :vehicleId",
+                Journey.class);
+
+        query.setParameter("vehicleId", vehicleId);
 
         List<Journey> result = query.getResultList();
 

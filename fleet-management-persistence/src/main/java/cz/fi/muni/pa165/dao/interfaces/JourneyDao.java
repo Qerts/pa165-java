@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface JourneyDao extends Dao<Journey, Long> {
 
-    List<Journey> findAllByVehicleId(double vehicleId);
+    List<Journey> findAllByVehicleId(long vehicleId);
     
    /**
     * find all journeys for given employee
