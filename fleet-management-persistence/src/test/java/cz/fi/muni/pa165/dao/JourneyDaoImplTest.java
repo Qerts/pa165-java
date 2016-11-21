@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 
 import java.time.Year;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
@@ -36,13 +37,20 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
     private Employee employee;
     private Vehicle vehicle;
     private Journey journey;
+    private Journey journey1;
+    private Journey journey2;
 
     @BeforeMethod
     public void setUp() {
         employee = new Employee("John", "Doe");
         vehicle = new Vehicle("VRP", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
         journey = new Journey(new Date(), vehicle, employee);
+        journey1 = new Journey(new Date(), vehicle, employee);
+        journey2 = new Journey(new Date(), vehicle, employee);
+
         uut.persist(journey);
+        uut.persist(journey1);
+        uut.persist(journey2);
     }
 
     @Test
@@ -120,5 +128,27 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
 
         // Assert
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);
+    }
+
+    @Test
+    public void testFindAllByVehicleId(){
+        //Arrange
+        List<Journey> all = this.uut.findAll();
+        Iterator<Journey> iterator = all.iterator();
+
+        while (iterator.hasNext()){
+            Journey j = iterator.next();
+            if (j.getVehicle().getId() != this.vehicle.getId())
+            {
+                iterator.remove();
+            }
+        }
+
+        //Act
+        List<Journey> allByVehicleId = this.uut.findAllByVehicleId(this.vehicle.getId());
+
+        //Assert
+        Assert.assertEquals(allByVehicleId, all);
+
     }
 }

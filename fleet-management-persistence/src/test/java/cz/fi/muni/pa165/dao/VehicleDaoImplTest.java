@@ -169,7 +169,7 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
                         j3.getDistance() +
                         j4.getDistance();
 
-        double kilometrage = this.vehicleDao.getTotalKilometrage(1);
+        double kilometrage = this.vehicleDao.getTotalKilometrage(1, this.journeyDao);
 
         Assert.assertEquals(expectedKilometrage, kilometrage);
     }
