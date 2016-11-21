@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.dao.interfaces;
 
-import cz.fi.muni.pa165.dao.JourneyDaoImpl;
 import cz.fi.muni.pa165.entity.Vehicle;
 
 /**

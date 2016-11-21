@@ -20,8 +20,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
-
 /**
  * @author Richard Trebichavský
  */

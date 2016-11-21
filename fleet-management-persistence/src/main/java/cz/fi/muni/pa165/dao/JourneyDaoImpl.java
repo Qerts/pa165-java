@@ -3,22 +3,16 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
-import cz.fi.muni.pa165.entity.Vehicle;
 import org.springframework.stereotype.Repository;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-
-import java.util.List;
-
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * @author Richard Trebichavský + Martin Schmidt
+ * @author Richard Trebichavský + Martin Schmidt + Michal Balicky
  */
 @Repository
 public class JourneyDaoImpl extends JpaDao<Journey, Long> implements JourneyDao {
