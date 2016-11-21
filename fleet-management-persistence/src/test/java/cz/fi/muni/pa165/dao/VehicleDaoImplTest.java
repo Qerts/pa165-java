@@ -1,6 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.InMemoryDatabaseTestContext;
+import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
 import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.dao.interfaces.VehicleDao;
@@ -26,7 +26,7 @@ import java.util.List;
  * @author Jozef Krcho
  */
 
-@ContextConfiguration(classes = InMemoryDatabaseTestContext.class)
+@ContextConfiguration(classes = InMemoryDatabaseContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {

@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.InMemoryDatabaseTestContext;
-import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
+import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
@@ -18,7 +17,6 @@ import org.testng.annotations.Test;
 
 import java.time.Year;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
@@ -26,7 +24,7 @@ import static org.mockito.Mockito.mock;
 /**
  * @author Richard Trebichavský
  */
-@ContextConfiguration(classes = InMemoryDatabaseTestContext.class)
+@ContextConfiguration(classes = InMemoryDatabaseContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
@@ -151,4 +149,14 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
         Assert.assertEquals(allByVehicleId, all);
 
     }
+
+    @Test
+    public void testfindByEmployee() {
+        Journey journey1 = new Journey(new Date() , vehicle, employee);
+        uut.persist(journey1);
+
+        Assert.assertEquals(uut.findByEmployee(employee).size(),2);
+
+    }
+
 }

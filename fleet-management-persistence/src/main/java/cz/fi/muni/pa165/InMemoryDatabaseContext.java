@@ -1,8 +1,6 @@
 package cz.fi.muni.pa165;
 
-import cz.fi.muni.pa165.dao.JourneyDaoImpl;
 import cz.fi.muni.pa165.dao.JpaDao;
-import org.aspectj.lang.annotation.SuppressAjWarnings;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,8 +23,8 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses = {JpaDao.class, JourneyDaoImpl.class})
-public class InMemoryDatabaseTestContext {
+@ComponentScan(basePackageClasses = {JpaDao.class})
+public class InMemoryDatabaseContext {
     /**
      * Enables automatic translation of exceptions to DataAccessExceptions.
      */
@@ -72,11 +70,5 @@ public class InMemoryDatabaseTestContext {
     public DataSource db() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         return builder.setType(EmbeddedDatabaseType.DERBY).build();
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    @Bean
-    public JourneyDaoImpl journeyDao(){
-        return new JourneyDaoImpl();
     }
 }
