@@ -1,7 +1,7 @@
 package cz.fi.muni.pa165.entity;
 
 
-import cz.fi.muni.pa165.enums.Permission;
+import cz.fi.muni.pa165.enums.Role;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -32,7 +32,7 @@ public class Employee {
 
     @Column(nullable=false)
     @Enumerated(EnumType.STRING)
-    private Permission permission;
+    private Role role;
 
     @ManyToMany
     Set<VehicleCategory> vehicleCategories = new HashSet<>();
@@ -48,18 +48,18 @@ public class Employee {
     }
 
     /**
-     * @param email        email of the Employee
-     * @param name         name of the Employee
-     * @param surname      surname of the Employee
-     * @param passwordHash hashed password of the Employee
-     * @param permission   permission of the Employee
+     * @param email        email of the EMPLOYEE
+     * @param name         name of the EMPLOYEE
+     * @param surname      surname of the EMPLOYEE
+     * @param passwordHash hashed password of the EMPLOYEE
+     * @param role   role of the EMPLOYEE
      */
-    public Employee(String email, String name, String surname, String passwordHash, Permission permission) {
+    public Employee(String email, String name, String surname, String passwordHash, Role role) {
         this.email = email;
         this.name = name;
         this.surname = surname;
         this.passwordHash = passwordHash;
-        this.permission = permission;
+        this.role = role;
     }
 
     public Long getId() {
@@ -98,12 +98,12 @@ public class Employee {
         this.passwordHash = passwordHash;
     }
 
-    public Permission getPermission() {
-        return permission;
+    public Role getRole() {
+        return role;
     }
 
-    public void setPermission(Permission permission) {
-        this.permission = permission;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Set<VehicleCategory> getVehicleCategories() {
@@ -139,7 +139,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "EMPLOYEE{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

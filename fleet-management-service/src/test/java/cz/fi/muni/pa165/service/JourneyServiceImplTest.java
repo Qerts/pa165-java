@@ -5,7 +5,7 @@ import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
-import cz.fi.muni.pa165.enums.Permission;
+import cz.fi.muni.pa165.enums.Role;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -65,7 +65,7 @@ public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
         Date in = new GregorianCalendar(2016, 10, 10).getTime();
         Date out = new GregorianCalendar(2016, 9, 1).getTime();
 
-        Employee employee = new Employee("john.doe@muni.cz", "John", "Doe", "password", Permission.USER);
+        Employee employee = new Employee("john.doe@muni.cz", "John", "Doe", "password", Role.EMPLOYEE);
         Vehicle vehicle = mock(Vehicle.class);
 
         Journey journey1 = new Journey(in, vehicle, employee);

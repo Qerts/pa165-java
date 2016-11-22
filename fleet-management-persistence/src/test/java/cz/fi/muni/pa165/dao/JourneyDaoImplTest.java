@@ -5,13 +5,10 @@ import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
-import cz.fi.muni.pa165.enums.Permission;
+import cz.fi.muni.pa165.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -37,7 +34,7 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
 
     @BeforeMethod
     public void setUp() {
-        employee = new Employee("john.doe@muni.cz", "John", "Doe", "password", Permission.USER);
+        employee = new Employee("john.doe@muni.cz", "John", "Doe", "password", Role.EMPLOYEE);
         vehicle = new Vehicle("VRP", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
         journey = new Journey(new Date() , vehicle, employee);
         uut.persist(journey);
@@ -131,7 +128,7 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
 
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullBorrowedAt() {
-        Employee employee = new Employee("nullBorrowedAt@muni.cz", "Null", "BorrowedAt", "password", Permission.USER);
+        Employee employee = new Employee("nullBorrowedAt@muni.cz", "Null", "BorrowedAt", "password", Role.EMPLOYEE);
         Vehicle vehicle = new Vehicle("VRPNullBorrow", "Type", Year.of(1999), "EngineType", "NullBorrowedAt", (long) 9999);
         Journey journeyNullBorrowedAt = new Journey(null , vehicle, employee);
         uut.persist(journeyNullBorrowedAt);

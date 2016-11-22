@@ -1,6 +1,6 @@
 package cz.fi.muni.pa165.dto;
 
-import cz.fi.muni.pa165.enums.Permission;
+import cz.fi.muni.pa165.enums.Role;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,19 +20,19 @@ public class EmployeeDTO {
 
     private String passwordHash;
 
-    private Permission permission;
+    private Role role;
 
     Set<VehicleCategoryDTO> vehicleCategories = new HashSet<>();
 
     protected EmployeeDTO() {
     }
 
-    public EmployeeDTO(String email, String name, String surname, String passwordHash, Permission permission) {
+    public EmployeeDTO(String email, String name, String surname, String passwordHash, Role role) {
         this.email = email;
         this.name = name;
         this.surname = surname;
         this.passwordHash = passwordHash;
-        this.permission = permission;
+        this.role = role;
     }
 
     public Long getId() {
@@ -71,12 +71,12 @@ public class EmployeeDTO {
         this.passwordHash = passwordHash;
     }
 
-    public Permission getPermission() {
-        return permission;
+    public Role getRole() {
+        return role;
     }
 
-    public void setPermission(Permission permission) {
-        this.permission = permission;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Set<VehicleCategoryDTO> getVehicleCategories() {
@@ -109,7 +109,7 @@ public class EmployeeDTO {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "EMPLOYEE{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
