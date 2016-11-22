@@ -14,7 +14,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.*;
@@ -22,10 +21,9 @@ import java.util.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.testng.Assert.*;
 
 /**
- * Created by Martin on 19.11.2016.
+ * @author Martin Schmidt
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
@@ -34,18 +32,27 @@ public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     @InjectMocks
-    private JourneyService journeyService;
+    private JourneyServiceImpl journeyService;
 
-
-    @BeforeMethod
-    public void setUp() {
-    }
 
     @BeforeClass
-    public void setup() throws ServiceException {
+    public void setUp() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
 
+    @Test
+    public void testGetJourney() {
+        // Arrange
+        Date in = new GregorianCalendar(2016, 10, 10).getTime();
+        Journey expectedJourney = new Journey(in, mock(Vehicle.class), mock(Employee.class));
+        when(journeyDao.findById(any(Long.class))).thenReturn(expectedJourney);
+
+        // Act
+        Journey returnedJourney = journeyService.findById(expectedJourney.getId());
+
+        // Assert
+        Assert.assertEquals(returnedJourney, expectedJourney);
+    }
 
     @Test
     public void testGetAllJourneys() {

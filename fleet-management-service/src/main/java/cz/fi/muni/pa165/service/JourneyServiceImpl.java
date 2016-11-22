@@ -1,6 +1,6 @@
 package cz.fi.muni.pa165.service;
 
-import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
+import cz.fi.muni.pa165.dao.interfaces.Dao;
 import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
@@ -13,60 +13,16 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Martin on 19.11.2016.
+ * @author Martin Schmidt
  */
 @Service
-public class JourneyServiceImpl implements JourneyService {
+public class JourneyServiceImpl extends JpaService<Journey, Long> implements JourneyService {
     @Inject
     private JourneyDao journeyDao;
 
-    public Journey findById(Long id) {
-        try {
-            return journeyDao.findById(id);
-        } catch (RuntimeException ex) {
-            throw new FleetManagementDAException("find journey by id error", ex);
-        }
-    }
-
-    public List<Journey> findAll() {
-        try {
-            return journeyDao.findAll();
-        } catch(RuntimeException ex) {
-            throw new FleetManagementDAException("find all journey error", ex);
-        }
-    }
-
-    public void create(Journey journey) {
-        if (journey == null) {
-            throw new FleetManagementDAException("journey cannot be null");
-        }
-        try {
-            journeyDao.persist(journey);
-        } catch(RuntimeException ex) {
-            throw new FleetManagementDAException("journey create error", ex);
-        }
-    }
-
-    public void update(Journey journey) {
-        if (journey == null) {
-            throw new FleetManagementDAException("journey cannot be null");
-        }
-        try {
-            journeyDao.merge(journey);
-        } catch(RuntimeException ex) {
-            throw new FleetManagementDAException("journey update error", ex);
-        }
-    }
-
-    public void remove(Journey journey) {
-        if (journey == null) {
-            throw new FleetManagementDAException("journey cannot be null");
-        }
-        try {
-            journeyDao.remove(journey);
-        } catch(RuntimeException ex) {
-            throw new FleetManagementDAException("journey delete error", ex);
-        }
+    @Override
+    protected Dao<Journey, Long> getDao() {
+        return journeyDao;
     }
 
     public List<Journey> getAllJourneys(Date from, Date to, Employee employee) {
