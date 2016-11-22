@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 import java.time.Year;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -67,13 +68,23 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
         uut.persist(journey2);
         uut.persist(journey3);
 
+        List<Journey> allJourneys = new LinkedList<Journey>();
+
+        long counter = 1;
+        while(true) {
+            Journey j = uut.findById(counter);
+            if(j == null){
+                break;
+            }
+            allJourneys.add(j);
+            counter++;
+        }
+
         // Act
         List<Journey> foundJourneys = uut.findAll();
 
         // Assert
-        Assert.assertEquals(foundJourneys.get(0), journey);
-        Assert.assertEquals(foundJourneys.get(1), journey2);
-        Assert.assertEquals(foundJourneys.get(2), journey3);
+        Assert.assertEquals(foundJourneys, allJourneys);
     }
 
     @Test
@@ -151,11 +162,22 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
 
     @Test
     public void testfindByEmployee() {
+        //Arrange
         Journey journey1 = new Journey(new Date() , vehicle, employee);
         uut.persist(journey1);
 
-        Assert.assertEquals(uut.findByEmployee(employee).size(),2);
+        List<Journey> all = this.uut.findAll();
+        Iterator<Journey> iterator = all.iterator();
 
+        while (iterator.hasNext()){
+            Journey j = iterator.next();
+            if (j.getEmployee().getId() != this.employee.getId())
+            {
+                iterator.remove();
+            }
+        }
+
+        //Act Assert
+        Assert.assertEquals(uut.findByEmployee(employee).size(), all.size());
     }
-
 }
