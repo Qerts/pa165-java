@@ -19,8 +19,6 @@ import java.util.List;
  * @author Richard Trebichavský
  */
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
 public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
@@ -29,11 +27,15 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
     private Employee employee1;
     private Employee employee2;
 
+    private Employee employee1duplicate;
+
     @BeforeMethod
     public void setUp() {
         employee1 = new Employee("John", "Doe");
-        uut.persist(employee1);
+        employee1duplicate = new Employee("John", "Doe");
         employee2 = new Employee("Jane", "Doe");
+
+        uut.persist(employee1);
         uut.persist(employee2);
     }
 
@@ -106,5 +108,22 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
 
         // Assert
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testUniqueConstraint() {
+        uut.persist(employee1duplicate);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullName() {
+        Employee employeeNullName = new Employee(null, "NullName");
+        uut.persist(employeeNullName);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullSurname() {
+        Employee employeeNullSurame = new Employee("NullSurname", null);
+        uut.persist(employeeNullSurame);
     }
 }

@@ -21,12 +21,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.mockito.Mockito.mock;
+
 /**
  * @author Richard Trebichavský
  */
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
 public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
@@ -175,9 +175,18 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
             {
                 iterator.remove();
             }
-        }
-
+    	}
+    
         //Act Assert
         Assert.assertEquals(uut.findByEmployee(employee).size(), all.size());
     }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullBorrowedAt() {
+        Employee employee = new Employee("Null", "BorrowedAt");
+        Vehicle vehicle = new Vehicle("VRPNullBorrow", "Type", Year.of(1999), "EngineType", "NullBorrowedAt", (long) 9999);
+        Journey journeyNullBorrowedAt = new Journey(null , vehicle, employee);
+        uut.persist(journeyNullBorrowedAt);
+        }
+
 }

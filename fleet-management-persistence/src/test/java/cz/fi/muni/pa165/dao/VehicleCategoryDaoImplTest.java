@@ -21,8 +21,6 @@ import java.util.*;
  */
 
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
 public class VehicleCategoryDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
@@ -109,5 +107,19 @@ public class VehicleCategoryDaoImplTest extends AbstractTransactionalTestNGSprin
 
         // Assert
         Assert.assertEquals(vehicleCategoryDao.findAll().size(), itemCountBefore - 1);
+    }
+
+    @Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
+    public void testNullName() {
+        VehicleCategory vehicleCategoryNullName = new VehicleCategory(null);
+        vehicleCategoryDao.persist(vehicleCategoryNullName);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testUniqueName() {
+        VehicleCategory vehicleCategoryUniqueName1 = new VehicleCategory("Unique");
+        VehicleCategory vehicleCategoryUniqueName2 = new VehicleCategory("Unique");
+        vehicleCategoryDao.persist(vehicleCategoryUniqueName1);
+        vehicleCategoryDao.persist(vehicleCategoryUniqueName2);
     }
 }

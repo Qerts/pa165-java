@@ -27,8 +27,6 @@ import java.util.List;
  */
 
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
 public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
@@ -170,7 +168,61 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
                         j4.getDistance();
 
         double kilometrage = this.vehicleDao.getTotalKilometrage(v1.getId());
+        
+                       Assert.assertEquals(expectedKilometrage, kilometrage);
+                       }
+                       
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullVrp() {
+        Vehicle vehicleNullVrp = new Vehicle(null, "type", Year.of(1994), "enigneType", "VinNullVrp",(long) 5000);
+        vehicleDao.persist(vehicleNullVrp);
+    }
 
-        Assert.assertEquals(expectedKilometrage, kilometrage);
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testUniqueVrp() {
+        Vehicle vehicleUniqueVrp1 = new Vehicle("Unique", "type", Year.of(1994), "enigneType", "VinUniqueVrp1",(long) 5000);
+        Vehicle vehicleUniqueVrp2 = new Vehicle("Unique", "type", Year.of(1994), "enigneType", "VinUniqueVrp2",(long) 5000);
+        vehicleDao.persist(vehicleUniqueVrp1);
+        vehicleDao.persist(vehicleUniqueVrp2);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullType() {
+        Vehicle vehicleNullType = new Vehicle("NullType", null, Year.of(1994), "enigneType", "VinNullType",(long) 5000);
+        vehicleDao.persist(vehicleNullType);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullYear() {
+        Vehicle vehicleNullYear = new Vehicle("NullYear", "type", null, "enigneType", "VinNullYear",(long) 5000);
+        vehicleDao.persist(vehicleNullYear);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullEngineType() {
+        Vehicle vehicleNullEngineType= new Vehicle("NullEngineType", "type", Year.of(1994), null, "VinNullEngineType",(long) 5000);
+        vehicleDao.persist(vehicleNullEngineType);        
+    }
+
+ 
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullVin() {
+        Vehicle vehicleNullVin = new Vehicle("NullVin", "type", Year.of(1994), "enigneType", null,(long) 5000);
+        vehicleDao.persist(vehicleNullVin);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testUniqueVin() {
+        Vehicle vehicleUniqueVin1 = new Vehicle("UniqueVin1", "type", Year.of(1994), "enigneType", "VinUnique",(long) 5000);
+        Vehicle vehicleUniqueVin2 = new Vehicle("UniqueVin2", "type", Year.of(1994), "enigneType", "VinUnique",(long) 5000);
+        vehicleDao.persist(vehicleUniqueVin1);
+        vehicleDao.persist(vehicleUniqueVin2);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullInitialKilometrage() {
+        Vehicle vehicleNullInitialKilometrage = new Vehicle("NullInitialKilometrage", "type", Year.of(1994), "enigneType"
+                , "VinNullInitialKilometrage", null);
+        vehicleDao.persist(vehicleNullInitialKilometrage);
     }
 }
