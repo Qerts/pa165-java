@@ -21,8 +21,6 @@ import java.util.List;
  * @author Martin Schmidt
  */
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
 public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired

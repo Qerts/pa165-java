@@ -25,8 +25,6 @@ import static org.mockito.Mockito.mock;
  * @author Richard Trebichavský
  */
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
 public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
