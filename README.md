@@ -1,3 +1,5 @@
+![Build status](https://api.travis-ci.org/Qerts/pa165-java.svg?branch=master)
+
 # Flee Management
 
 Application for evidence of company's vehicles. See [Wiki pages](https://github.com/Qerts/pa165-java/wiki) for detailed information.
