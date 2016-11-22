@@ -129,7 +129,7 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
 
     }
 
-    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullBorrowedAt() {
         Employee employee = new Employee("nullBorrowedAt@muni.cz", "Null", "BorrowedAt", "password", Permission.USER);
         Vehicle vehicle = new Vehicle("VRPNullBorrow", "Type", Year.of(1999), "EngineType", "NullBorrowedAt", (long) 9999);

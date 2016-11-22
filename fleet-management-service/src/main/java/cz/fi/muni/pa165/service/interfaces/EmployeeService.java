@@ -10,4 +10,5 @@ public interface EmployeeService extends Service<Employee, Long> {
     void registerEmployee(Employee employee, String unencryptedPassword);
 
     boolean authenticate(Employee employee, String password);
+
 }

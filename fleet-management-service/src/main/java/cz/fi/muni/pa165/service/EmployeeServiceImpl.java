@@ -11,7 +11,6 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.inject.Inject;
 import javax.xml.bind.DatatypeConverter;
 import java.security.SecureRandom;
-import java.util.List;
 
 /**
  * @author Jozef Krcho
@@ -40,6 +39,7 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
 
     @Override
     public boolean authenticate(Employee employee, String password) {
+        if (employee == null) return false;
         return verifyPassword(password, employee.getPasswordHash());
     }
 
@@ -58,8 +58,8 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
     }
 
     public static boolean verifyPassword(String password, String correctHash) {
-        if(password==null) return false;
-        if(correctHash==null) throw new IllegalArgumentException("password hash is null");
+        if (password == null) return false;
+        if (correctHash == null) return false;
 
         String[] params = correctHash.split(":");
         int iterations = Integer.parseInt(params[0]);
@@ -93,7 +93,7 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
 
     private static boolean slowEquals(byte[] a, byte[] b) {
         int diff = a.length ^ b.length;
-        for(int i = 0; i < a.length && i < b.length; i++)
+        for (int i = 0; i < a.length && i < b.length; i++)
             diff |= a[i] ^ b[i];
         return diff == 0;
     }

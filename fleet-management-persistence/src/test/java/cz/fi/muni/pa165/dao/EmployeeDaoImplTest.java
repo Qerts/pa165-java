@@ -5,15 +5,18 @@ import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.SerializationUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.persistence.PersistenceException;
 import java.util.List;
 
 /**
@@ -111,36 +114,36 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);
     }
 
-    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testUniqueEmail() {
         uut.persist(employee1duplicate);
     }
 
-    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullEmail() {
-        Employee employeeNullName = new Employee(null, "NullEmail", "NullEmail", "password", Permission.USER);
-        uut.persist(employeeNullName);
+            Employee employeeNullName = new Employee(null, "NullEmail", "NullEmail", "password", Permission.USER);
+            uut.persist(employeeNullName);
     }
 
-    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullName() {
         Employee employeeNullName = new Employee("nullname@muni.cz", null, "NullName", "password", Permission.USER);
         uut.persist(employeeNullName);
     }
 
-    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullSurname() {
         Employee employeeNullSurame = new Employee("nullsurname@muni.cz", "NullSurname", null, "password", Permission.USER);
         uut.persist(employeeNullSurame);
     }
 
-    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullPassword() {
         Employee employeeNullName = new Employee("nullPassword@muni.cz", "NullPass", "NullPass", null, Permission.USER);
         uut.persist(employeeNullName);
     }
 
-    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullPermission() {
         Employee employeeNullName = new Employee("nullPermission@muni.cz", "NullPermission", "NullPermission", "password", null);
         uut.persist(employeeNullName);

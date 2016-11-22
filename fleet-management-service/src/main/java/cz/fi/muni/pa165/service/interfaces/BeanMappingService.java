@@ -1,9 +1,9 @@
 package cz.fi.muni.pa165.service.interfaces;
 
+import org.dozer.Mapper;
+
 import java.util.Collection;
 import java.util.List;
-
-import org.dozer.Mapper;
 
 
 public interface BeanMappingService {
