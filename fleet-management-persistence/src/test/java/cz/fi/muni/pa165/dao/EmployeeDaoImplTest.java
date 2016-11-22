@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
 import cz.fi.muni.pa165.entity.Employee;
+import cz.fi.muni.pa165.enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -31,9 +32,9 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
 
     @BeforeMethod
     public void setUp() {
-        employee1 = new Employee("John", "Doe");
-        employee1duplicate = new Employee("John", "Doe");
-        employee2 = new Employee("Jane", "Doe");
+        employee1 = new Employee("john.doe@muni.cz", "John", "Doe", "password", Permission.USER);
+        employee1duplicate = new Employee("john.doe@muni.cz", "John", "Doe", "password", Permission.USER);
+        employee2 = new Employee("jane.doe@muni.cz","Jane", "Doe", "password", Permission.USER);
 
         uut.persist(employee1);
         uut.persist(employee2);
@@ -64,7 +65,7 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
         int itemCountBefore = uut.findAll().size();
 
         // Act
-        Employee entity = new Employee("Jim", "Doe");
+        Employee entity = new Employee("jim.doe@muni.cz", "Jim", "Doe", "password", Permission.USER);
         uut.persist(entity);
 
         // Assert
@@ -111,19 +112,37 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
     }
 
     @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
-    public void testUniqueConstraint() {
+    public void testUniqueEmail() {
         uut.persist(employee1duplicate);
     }
 
     @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullEmail() {
+        Employee employeeNullName = new Employee(null, "NullEmail", "NullEmail", "password", Permission.USER);
+        uut.persist(employeeNullName);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
     public void testNullName() {
-        Employee employeeNullName = new Employee(null, "NullName");
+        Employee employeeNullName = new Employee("nullname@muni.cz", null, "NullName", "password", Permission.USER);
         uut.persist(employeeNullName);
     }
 
     @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
     public void testNullSurname() {
-        Employee employeeNullSurame = new Employee("NullSurname", null);
+        Employee employeeNullSurame = new Employee("nullsurname@muni.cz", "NullSurname", null, "password", Permission.USER);
         uut.persist(employeeNullSurame);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullPassword() {
+        Employee employeeNullName = new Employee("nullPassword@muni.cz", "NullPass", "NullPass", null, Permission.USER);
+        uut.persist(employeeNullName);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullPermission() {
+        Employee employeeNullName = new Employee("nullPermission@muni.cz", "NullPermission", "NullPermission", "password", null);
+        uut.persist(employeeNullName);
     }
 }
