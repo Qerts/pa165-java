@@ -25,8 +25,6 @@ import static org.mockito.Mockito.mock;
  * @author Richard Trebichavský
  */
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
 public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
@@ -128,6 +126,14 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
 
         Assert.assertEquals(uut.findByEmployee(employee).size(),2);
 
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullBorrowedAt() {
+        Employee employee = new Employee("Null", "BorrowedAt");
+        Vehicle vehicle = new Vehicle("VRPNullBorrow", "Type", Year.of(1999), "EngineType", "NullBorrowedAt", (long) 9999);
+        Journey journeyNullBorrowedAt = new Journey(null , vehicle, employee);
+        uut.persist(journeyNullBorrowedAt);
     }
 
 }

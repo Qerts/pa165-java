@@ -19,8 +19,6 @@ import java.util.List;
  * @author Martin Schmidt
  */
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
 public class InspectionIntervalDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
@@ -106,5 +104,19 @@ public class InspectionIntervalDaoImplTest extends AbstractTransactionalTestNGSp
 
         // Assert
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testNullName() {
+        InspectionInterval inspectionIntervalNullName = new InspectionInterval(null, 6);
+        uut.persist(inspectionIntervalNullName);
+    }
+
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    public void testUniqueName() {
+        InspectionInterval inspectionIntervalUnique1 = new InspectionInterval("unique", 12);
+        InspectionInterval inspectionIntervalUnique2 = new InspectionInterval("unique", 30);
+        uut.persist(inspectionIntervalUnique1);
+        uut.persist(inspectionIntervalUnique2);
     }
 }
