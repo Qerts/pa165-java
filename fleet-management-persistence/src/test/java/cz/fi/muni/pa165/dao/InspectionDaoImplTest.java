@@ -119,7 +119,7 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);
     }
 
-    @Test(expectedExceptions = Exception.class)
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
     public void testNullDate() {
         Inspection inspectionNullDate = new Inspection(null);
         uut.persist(inspectionNullDate);

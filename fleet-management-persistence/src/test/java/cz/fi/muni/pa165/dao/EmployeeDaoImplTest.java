@@ -110,18 +110,18 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);
     }
 
-    @Test(expectedExceptions = Exception.class)
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
     public void testUniqueConstraint() {
         uut.persist(employee1duplicate);
     }
 
-    @Test(expectedExceptions = Exception.class)
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
     public void testNullName() {
         Employee employeeNullName = new Employee(null, "NullName");
         uut.persist(employeeNullName);
     }
 
-    @Test(expectedExceptions = Exception.class)
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
     public void testNullSurname() {
         Employee employeeNullSurame = new Employee("NullSurname", null);
         uut.persist(employeeNullSurame);

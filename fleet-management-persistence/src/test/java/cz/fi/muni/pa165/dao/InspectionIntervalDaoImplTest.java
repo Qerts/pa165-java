@@ -106,13 +106,13 @@ public class InspectionIntervalDaoImplTest extends AbstractTransactionalTestNGSp
         Assert.assertEquals(uut.findAll().size(), itemCountBefore - 1);
     }
 
-    @Test(expectedExceptions = Exception.class)
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
     public void testNullName() {
         InspectionInterval inspectionIntervalNullName = new InspectionInterval(null, 6);
         uut.persist(inspectionIntervalNullName);
     }
 
-    @Test(expectedExceptions = Exception.class)
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
     public void testUniqueName() {
         InspectionInterval inspectionIntervalUnique1 = new InspectionInterval("unique", 12);
         InspectionInterval inspectionIntervalUnique2 = new InspectionInterval("unique", 30);
