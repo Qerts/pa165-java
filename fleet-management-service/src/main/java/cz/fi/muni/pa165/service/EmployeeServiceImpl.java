@@ -2,13 +2,13 @@ package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
 import cz.fi.muni.pa165.entity.Employee;
+import cz.fi.muni.pa165.service.interfaces.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by JozeFe on 11/20/2016.
  * @author Jozef Krcho
  */
 @Service

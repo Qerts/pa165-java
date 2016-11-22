@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.service;
 import cz.fi.muni.pa165.dao.interfaces.VehicleDao;
 import cz.fi.muni.pa165.entity.Vehicle;
 import cz.fi.muni.pa165.exceptions.FleetManagementDAException;
+import cz.fi.muni.pa165.service.interfaces.VehicleService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -10,7 +11,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by Martin on 13.11.2016.
+ * @author Martin Schmidt
  */
 @Service
 public class VehicleServiceImpl implements VehicleService {

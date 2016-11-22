@@ -2,15 +2,15 @@ package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.dao.interfaces.InspectionIntervalDao;
 import cz.fi.muni.pa165.entity.InspectionInterval;
+import cz.fi.muni.pa165.service.interfaces.InspectionIntervalService;
 
 import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by JozeFe on 11/20/2016.
  * @author Jozef Krcho
  */
-public class InspectionIntervalServiceImpl implements InspectionIntervalService{
+public class InspectionIntervalServiceImpl implements InspectionIntervalService {
 
     @Inject
     private InspectionIntervalDao inspectionIntervalDao;

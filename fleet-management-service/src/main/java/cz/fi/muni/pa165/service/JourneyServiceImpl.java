@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.exceptions.FleetManagementDAException;
+import cz.fi.muni.pa165.service.interfaces.JourneyService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;

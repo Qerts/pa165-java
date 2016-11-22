@@ -2,13 +2,13 @@ package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.dao.interfaces.VehicleCategoryDao;
 import cz.fi.muni.pa165.entity.VehicleCategory;
+import cz.fi.muni.pa165.service.interfaces.VehicleCategoryService;
 
 import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by JozeFe on 11/20/2016.
- * @author Jozef Krcho
+  * @author Jozef Krcho
  */
 public class VehicleCategoryServiceImpl implements VehicleCategoryService {
 

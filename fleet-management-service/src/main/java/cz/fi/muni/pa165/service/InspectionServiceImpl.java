@@ -2,12 +2,12 @@ package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.dao.interfaces.InspectionDao;
 import cz.fi.muni.pa165.entity.Inspection;
+import cz.fi.muni.pa165.service.interfaces.InspectionService;
 
 import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by JozeFe on 11/20/2016.
  * @author Jozef Krcho
  */
 public class InspectionServiceImpl implements InspectionService {
