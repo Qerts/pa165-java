@@ -32,6 +32,11 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
     }
 
     @Override
+    public Employee findByEmail(String email) {
+        return employeeDao.findByEmail(email);
+    }
+
+    @Override
     public void registerEmployee(Employee employee, String unencryptedPassword) throws IllegalArgumentException {
         if (employee == null) throw new IllegalArgumentException("employee parameter is null");
         if (unencryptedPassword == null) throw new IllegalArgumentException("unencryptedPassword parameter is null");

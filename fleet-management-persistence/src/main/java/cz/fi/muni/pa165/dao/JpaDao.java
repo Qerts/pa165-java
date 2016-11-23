@@ -51,4 +51,8 @@ public abstract class JpaDao<T, ID extends Serializable> implements Dao<T, ID> {
         T entity = this.findById(id);
         this.remove(entity);
     }
+
+    protected EntityManager getEntityManager() {
+        return entityManager;
+    }
 }
