@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.config.ServiceConfiguration;
+import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
 import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
@@ -33,6 +34,9 @@ import static org.mockito.Mockito.when;
 public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
     @Mock
     private JourneyDao journeyDao;
+
+    @Mock
+    private EmployeeDao employeeDao;
 
     @Autowired
     @InjectMocks
@@ -74,9 +78,11 @@ public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
         journeyList.add(journey1);
         journeyList.add(journey2);
 
+        when(employeeDao.findById(any(Long.class))).thenReturn(employee);
+
         when(journeyDao.findByEmployee(any(Employee.class))).thenReturn(journeyList);
 
-        Assert.assertEquals(journeyService.getAllJourneys(from, to, employee).get(0), journey1);
+        Assert.assertEquals(journeyService.getAllJourneys(from, to, employee.getId()).get(0), journey1);
 
     }
 
