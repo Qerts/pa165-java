@@ -16,6 +16,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import javax.inject.Inject;
+
 /**
  * @author Jozef Krcho
  */
@@ -26,7 +28,7 @@ public class EmplyeeServiceImplTest extends AbstractTransactionalTestNGSpringCon
     @Mock
     private EmployeeDao employeeDao;
 
-    @Autowired
+    @Inject
     @InjectMocks
     private EmployeeService employeeService;
 

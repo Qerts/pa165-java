@@ -17,6 +17,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -34,7 +35,7 @@ public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
     @Mock
     private JourneyDao journeyDao;
 
-    @Autowired
+    @Inject
     @InjectMocks
     private JourneyServiceImpl journeyService;
 

@@ -5,6 +5,7 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 @Service
 public class BeanMappingServiceImpl implements BeanMappingService {
 
-    @Autowired
+    @Inject
     private Mapper dozer;
 
     public <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
