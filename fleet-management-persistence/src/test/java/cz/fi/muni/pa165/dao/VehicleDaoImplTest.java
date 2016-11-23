@@ -136,41 +136,6 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
         // Assert
         Assert.assertEquals(vehicleDao.findAll().size(), itemCountBefore - 1);
     }
-
-
-
-    @Test
-    public void testGetTotalKilometrage(){
-
-        Employee e1 = new Employee("Name", "Username");
-        Vehicle v1 = new Vehicle("VRP", "Type", Year.of(2222), "EngineType", "VIN", (long)666.6);
-        Journey j1 = new Journey(new Date(), v1, e1);
-        j1.returnVehicle(new Date(), (float)2342.1);
-        Journey j2 = new Journey(new Date(), v1, e1);
-        j2.returnVehicle(new Date(), (float)243);
-        Journey j3 = new Journey(new Date(), v1, e1);
-        j3.returnVehicle(new Date(), (float)2.0);
-        Journey j4 = new Journey(new Date(), v1, e1);
-        j4.returnVehicle(new Date(), (float)738.9);
-
-        this.employeeDao.persist(e1);
-        this.vehicleDao.persist(v1);
-        this.journeyDao.persist(j1);
-        this.journeyDao.persist(j2);
-        this.journeyDao.persist(j3);
-        this.journeyDao.persist(j4);
-
-        double expectedKilometrage =
-                        v1.getInitialKilometrage() +
-                        j1.getDistance() +
-                        j2.getDistance() +
-                        j3.getDistance() +
-                        j4.getDistance();
-
-        double kilometrage = this.vehicleDao.getTotalKilometrage(v1.getId());
-        
-                       Assert.assertEquals(expectedKilometrage, kilometrage);
-                       }
                        
     @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
     public void testNullVrp() {

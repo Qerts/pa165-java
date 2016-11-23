@@ -15,25 +15,4 @@ import java.util.List;
  */
 @Repository
 public class VehicleDaoImpl extends JpaDao<Vehicle, Long> implements VehicleDao {
-
-    @Autowired
-    private JourneyDao journeyDao;
-
-    @Override
-    public double getTotalKilometrage(long vehicleId) {
-        double result = this.round(this.findById(vehicleId).getInitialKilometrage(), 1);
-
-        List<Journey> journeys = this.journeyDao.findAllByVehicleId(vehicleId);
-
-        for (Iterator<Journey> iterator = journeys.iterator(); iterator.hasNext();){
-            result = result + this.round(iterator.next().getDistance(), 1);
-        }
-
-        return result;
-    }
-
-    private double round (double value, int precision) {
-        int scale = (int) Math.pow(10, precision);
-        return (double) Math.round(value * scale) / scale;
-    }
 }
