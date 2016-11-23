@@ -109,13 +109,13 @@ public class VehicleCategoryDaoImplTest extends AbstractTransactionalTestNGSprin
         Assert.assertEquals(vehicleCategoryDao.findAll().size(), itemCountBefore - 1);
     }
 
-    @Test(expectedExceptions = javax.validation.ConstraintViolationException.class)
+    @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullName() {
         VehicleCategory vehicleCategoryNullName = new VehicleCategory(null);
         vehicleCategoryDao.persist(vehicleCategoryNullName);
     }
 
-    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
+    @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testUniqueName() {
         VehicleCategory vehicleCategoryUniqueName1 = new VehicleCategory("Unique");
         VehicleCategory vehicleCategoryUniqueName2 = new VehicleCategory("Unique");

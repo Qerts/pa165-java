@@ -6,7 +6,6 @@ import cz.fi.muni.pa165.entity.Inspection;
 import cz.fi.muni.pa165.service.interfaces.InspectionService;
 
 import javax.inject.Inject;
-import java.util.List;
 
 /**
  * @author Jozef Krcho

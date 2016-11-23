@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
+import cz.fi.muni.pa165.enums.Role;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -16,7 +17,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -61,7 +65,7 @@ public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
         Date in = new GregorianCalendar(2016, 10, 10).getTime();
         Date out = new GregorianCalendar(2016, 9, 1).getTime();
 
-        Employee employee = new Employee("John", "Doe");
+        Employee employee = new Employee("john.doe@muni.cz", "John", "Doe", "password", Role.EMPLOYEE);
         Vehicle vehicle = mock(Vehicle.class);
 
         Journey journey1 = new Journey(in, vehicle, employee);
@@ -72,7 +76,7 @@ public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
 
         when(journeyDao.findByEmployee(any(Employee.class))).thenReturn(journeyList);
 
-        Assert.assertEquals(journeyService.getAllJourneys(from, to, employee).get(0),journey1);
+        Assert.assertEquals(journeyService.getAllJourneys(from, to, employee).get(0), journey1);
 
     }
 

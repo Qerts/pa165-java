@@ -31,17 +31,17 @@ public class JourneyServiceImpl extends JpaService<Journey, Long> implements Jou
 
         try {
             journeys = journeyDao.findByEmployee(employee);
-        } catch(RuntimeException ex) {
+        } catch (RuntimeException ex) {
             throw new FleetManagementDAException("employee error", ex);
         }
 
         List<Journey> journeysDate = new ArrayList<>();
         for (Journey j : journeys) {
-            if (j.getBorrowedAt().compareTo(to) <=0 && j.getBorrowedAt().compareTo(from) >= 0) {
+            if (j.getBorrowedAt().compareTo(to) <= 0 && j.getBorrowedAt().compareTo(from) >= 0) {
                 journeysDate.add(j);
             }
         }
         return journeysDate;
     }
-    
+
 }

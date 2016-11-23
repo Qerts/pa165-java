@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.config;
 
+import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dto.*;
 import cz.fi.muni.pa165.entity.*;
 import cz.fi.muni.pa165.service.JourneyServiceImpl;
@@ -10,14 +11,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import cz.fi.muni.pa165.InMemoryDatabaseContext;
 
 /**
  * Created by Martin on 19.11.2016.
  */
 @Configuration
 @Import(InMemoryDatabaseContext.class)
-@ComponentScan(basePackageClasses={JourneyServiceImpl.class})  //todo add some facade class
+@ComponentScan(basePackageClasses = {JourneyServiceImpl.class})  //todo add some facade class
 public class ServiceConfiguration {
 
     @Bean
