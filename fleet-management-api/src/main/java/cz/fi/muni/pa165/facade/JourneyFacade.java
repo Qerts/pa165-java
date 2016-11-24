@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Martin on 23.11.2016.
+ * @author Martin Schmidt
  */
 public interface JourneyFacade {
     /**

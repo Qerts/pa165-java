@@ -2,7 +2,7 @@ package cz.fi.muni.pa165.dto;
 
 
 /**
- * Created by Martin on 19.11.2016.
+ * @author Martin Schmidt
  */
 public class VehicleCategoryDTO {
 

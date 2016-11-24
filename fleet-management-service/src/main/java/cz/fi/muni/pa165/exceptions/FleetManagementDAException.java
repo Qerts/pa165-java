@@ -3,7 +3,7 @@ package cz.fi.muni.pa165.exceptions;
 import org.springframework.dao.DataAccessException;
 
 /**
- * Created by Martin Schmidt on 19.11.2016.
+ * @author Martin Schmidt
  */
 public class FleetManagementDAException extends DataAccessException {
 

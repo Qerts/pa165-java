@@ -3,7 +3,7 @@ package cz.fi.muni.pa165.dto;
 import java.util.Date;
 
 /**
- * Created by Martin on 19.11.2016.
+ * @author Martin Schmidt
  */
 public class InspectionDTO {
 

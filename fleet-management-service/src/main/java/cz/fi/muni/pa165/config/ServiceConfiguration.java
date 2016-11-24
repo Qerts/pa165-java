@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Import;
 import static org.dozer.loader.api.FieldsMappingOptions.collectionStrategy;
 
 /**
- * Created by Martin on 19.11.2016.
+ * @author Martin Schmidt
  */
 @Configuration
 @Import(InMemoryDatabaseContext.class)

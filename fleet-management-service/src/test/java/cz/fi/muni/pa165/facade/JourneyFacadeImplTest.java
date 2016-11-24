@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.facade;
 
+import cz.fi.muni.pa165.config.ServiceConfiguration;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
@@ -12,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -29,9 +32,10 @@ import static org.mockito.Mockito.when;
 import static org.testng.Assert.*;
 
 /**
- * Created by Martin on 24.11.2016.
+ * @author Martin Schmidt
  */
-public class JourneyFacadeImplTest {
+@ContextConfiguration(classes = ServiceConfiguration.class)
+public class JourneyFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     @Spy
     @Inject
@@ -81,17 +85,22 @@ public class JourneyFacadeImplTest {
 
     @Test
     public void testGetJourneys() {
-
+        when(journeyService.getAllJourneys(any(Date.class), any(Date.class),any(Long.class))).thenReturn(Collections.singletonList(journey));
+        journeyFacade.getJourneys(in, out, employee.getId());
+        verify(journeyService).getAllJourneys(in, out, employee.getId());
     }
 
     @Test
     public void testBeginJourney() {
-
+        journeyFacade.beginJourney(vehicle.getId(), employee.getId(), in);
+        verify(journeyService).beginJourney(vehicle.getId(), employee.getId(), in);
     }
 
     @Test
     public void testFinishJourney() {
-
+        float distance = 1000f;
+        journeyFacade.finishJourney(journey.getId(), distance, in);
+        verify(journeyService).finishJourney(journey.getId(), distance, in);
     }
 
 }
