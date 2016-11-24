@@ -12,7 +12,6 @@ import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
@@ -35,6 +34,12 @@ import static org.mockito.Mockito.when;
 public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
     @Mock
     private JourneyDao journeyDao;
+
+    @Mock
+    private VehicleDao vehicleDao;
+
+    @Mock
+    private EmployeeDao employeeDao;
 
     @Inject
     @InjectMocks
