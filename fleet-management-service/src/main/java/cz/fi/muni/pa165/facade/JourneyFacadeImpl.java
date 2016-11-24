@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Martin on 23.11.2016.
+ * @author Martin Schmidt
  */
 @Service
 @Transactional
@@ -36,7 +36,7 @@ public class JourneyFacadeImpl implements JourneyFacade {
     }
 
     public void beginJourney(Long vehicleId, Long employeeId, Date startDate) {
-        journeyService.startJourney(vehicleId, employeeId, startDate);
+        journeyService.beginJourney(vehicleId, employeeId, startDate);
     }
 
     public void finishJourney(Long journeyId, Float drivenDistance, Date endDate) {

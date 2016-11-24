@@ -5,7 +5,7 @@ import java.time.Year;
 
 
 /**
- * Created by Martin Schmidt on 19.11.2016.
+ * @author Martin Schmidt
  */
 public class VehicleDTO {
 
