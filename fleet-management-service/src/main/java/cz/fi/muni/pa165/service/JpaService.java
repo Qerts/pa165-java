@@ -95,7 +95,7 @@ public abstract class JpaService<T, ID extends Serializable> implements Service<
     }
 
     /**
-     * Removed saved entity by id.
+     * Removes saved entity by id.
      * @param id Id.
      */
     @Override
