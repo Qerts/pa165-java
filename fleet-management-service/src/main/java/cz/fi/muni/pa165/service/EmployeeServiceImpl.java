@@ -32,7 +32,15 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
     }
 
     @Override
-    public void registerEmployee(Employee employee, String unencryptedPassword) {
+    public Employee findByEmail(String email) {
+        return employeeDao.findByEmail(email);
+    }
+
+    @Override
+    public void registerEmployee(Employee employee, String unencryptedPassword) throws IllegalArgumentException {
+        if (employee == null) throw new IllegalArgumentException("employee parameter is null");
+        if (unencryptedPassword == null) throw new IllegalArgumentException("unencryptedPassword parameter is null");
+        if (unencryptedPassword.isEmpty()) throw new IllegalArgumentException("unencryptedPassword is empty");
         employee.setPasswordHash(createHash(unencryptedPassword));
         this.create(employee);
     }
@@ -43,7 +51,12 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
         return verifyPassword(password, employee.getPasswordHash());
     }
 
-    //https://crackstation.net/hashing-security.htm#javasourcecode
+    /**
+     * source: https://crackstation.net/hashing-security.htm#javasourcecode
+     * Create encrypted password in format iterations:salt:hash
+     * @param password unencrypted password
+     * @return encrypted password
+     */
     private static String createHash(String password) {
         // Generate a random salt
         SecureRandom random = new SecureRandom();
@@ -57,7 +70,7 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
         return PBKDF2_ITERATIONS + ":" + toBase64(salt) + ":" + toBase64(hash);
     }
 
-    public static boolean verifyPassword(String password, String correctHash) {
+    private static boolean verifyPassword(String password, String correctHash) {
         if (password == null) return false;
         if (correctHash == null) return false;
 
@@ -74,6 +87,18 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
         return slowEquals(hash, testHash);
     }
 
+    /**
+     * PBKDF2 applies a pseudorandom function, such as a cryptographic hash, cipher, or hash-based message
+     * authentication code (HMAC), to the input password or passphrase along with a salt value
+     * and repeats the process many times to produce a derived key, which can then be used
+     * as a cryptographic key in subsequent operations. The added computational work makes password
+     * cracking much more difficult, and is known as key stretching.
+     * @param password input unencryptedPassword
+     * @param salt salt for password
+     * @param iterations iteration count for generating PBEKey
+     * @param bytes hash lenght
+     * @return hash
+     */
     private static byte[] pbkdf2(char[] password, byte[] salt, int iterations, int bytes) {
         try {
             PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, bytes * 8);
@@ -83,11 +108,23 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
         }
     }
 
+    /**
+     * Converts the string argument into an array of bytes
+     * @param hex A string containing lexical representation of xsd:base64Binary
+     * @return array of bytes represented by the string argument
+     * @throws IllegalArgumentException
+     */
     private static byte[] fromBase64(String hex) throws IllegalArgumentException {
         return DatatypeConverter.parseBase64Binary(hex);
     }
 
-    private static String toBase64(byte[] array) {
+    /**
+     * Converts an array of bytes into a string.
+     * @param array An array of bytes
+     * @return A string containing a lexical representation of xsd:base64Binary
+     * @throws IllegalArgumentException
+     */
+    private static String toBase64(byte[] array) throws IllegalArgumentException {
         return DatatypeConverter.printBase64Binary(array);
     }
 

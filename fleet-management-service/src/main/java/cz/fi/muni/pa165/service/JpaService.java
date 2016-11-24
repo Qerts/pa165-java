@@ -93,4 +93,20 @@ public abstract class JpaService<T, ID extends Serializable> implements Service<
             throw new FleetManagementDAException("Entity delete error.", ex);
         }
     }
+
+    /**
+     * Removes saved entity by id.
+     * @param id Id.
+     */
+    @Override
+    public void removeById(ID id) {
+        if (id == null) {
+            throw new FleetManagementDAException("Idd cannot be null.");
+        }
+        try {
+            getDao().removeById(id);
+        } catch (RuntimeException ex) {
+            throw new FleetManagementDAException("Entity delete by id error.", ex);
+        }
+    }
 }
