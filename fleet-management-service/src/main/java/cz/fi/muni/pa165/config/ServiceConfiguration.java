@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.config;
 import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dto.*;
 import cz.fi.muni.pa165.entity.*;
+import cz.fi.muni.pa165.facade.JourneyFacadeImpl;
 import cz.fi.muni.pa165.service.JourneyServiceImpl;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -21,7 +22,7 @@ import static org.dozer.loader.api.FieldsMappingOptions.collectionStrategy;
  */
 @Configuration
 @Import(InMemoryDatabaseContext.class)
-@ComponentScan(basePackageClasses = {JourneyServiceImpl.class})  //todo add some facade class
+@ComponentScan(basePackageClasses = {JourneyServiceImpl.class, JourneyFacadeImpl.class})
 public class ServiceConfiguration {
 
     @Bean
