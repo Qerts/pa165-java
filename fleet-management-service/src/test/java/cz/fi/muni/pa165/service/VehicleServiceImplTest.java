@@ -7,13 +7,13 @@ import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
 import cz.fi.muni.pa165.enums.Role;
+import org.dozer.inject.Inject;
 import org.hibernate.service.spi.ServiceException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -39,7 +39,7 @@ public class VehicleServiceImplTest {
     private EmployeeDao employeeDao;
     @Mock
     private JourneyDao journeyDao;
-    @Autowired
+    @Inject
     @InjectMocks
     private VehicleServiceImpl vehicleService = new VehicleServiceImpl();
 
