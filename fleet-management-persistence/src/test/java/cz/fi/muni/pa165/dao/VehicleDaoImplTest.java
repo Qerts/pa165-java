@@ -1,7 +1,11 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.InMemoryDatabaseContext;
+import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
+import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.dao.interfaces.VehicleDao;
+import cz.fi.muni.pa165.entity.Employee;
+import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,6 +18,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Year;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +31,10 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
 
     @Autowired
     private VehicleDao vehicleDao;
+    @Autowired
+    private EmployeeDao employeeDao;
+    @Autowired
+    private JourneyDao journeyDao;
 
     private Vehicle vehicle1;
     private Vehicle vehicle2;
@@ -127,7 +136,7 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
         // Assert
         Assert.assertEquals(vehicleDao.findAll().size(), itemCountBefore - 1);
     }
-
+                       
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullVrp() {
         Vehicle vehicleNullVrp = new Vehicle(null, "type", Year.of(1994), "enigneType", "VinNullVrp",(long) 5000);
@@ -157,10 +166,11 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullEngineType() {
         Vehicle vehicleNullEngineType= new Vehicle("NullEngineType", "type", Year.of(1994), null, "VinNullEngineType",(long) 5000);
-        vehicleDao.persist(vehicleNullEngineType);
+        vehicleDao.persist(vehicleNullEngineType);        
     }
 
-    @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
+ 
+    @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
     public void testNullVin() {
         Vehicle vehicleNullVin = new Vehicle("NullVin", "type", Year.of(1994), "enigneType", null,(long) 5000);
         vehicleDao.persist(vehicleNullVin);

@@ -68,7 +68,6 @@ public class Journey {
     }
 
     public void setDistance(Float distance) {
-        Assert.notNull(this.returnedAt);
         this.distance = distance;
     }
 

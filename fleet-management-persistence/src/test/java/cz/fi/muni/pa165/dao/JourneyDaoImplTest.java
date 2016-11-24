@@ -15,6 +15,8 @@ import org.testng.annotations.Test;
 
 import java.time.Year;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
@@ -31,13 +33,20 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
     private Employee employee;
     private Vehicle vehicle;
     private Journey journey;
+    private Journey journey1;
+    private Journey journey2;
 
     @BeforeMethod
     public void setUp() {
         employee = new Employee("john.doe@muni.cz", "John", "Doe", "password", Role.EMPLOYEE);
         vehicle = new Vehicle("VRP", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
-        journey = new Journey(new Date() , vehicle, employee);
+        journey = new Journey(new Date(), vehicle, employee);
+        journey1 = new Journey(new Date(), vehicle, employee);
+        journey2 = new Journey(new Date(), vehicle, employee);
+
         uut.persist(journey);
+        uut.persist(journey1);
+        uut.persist(journey2);
     }
 
     @Test
@@ -57,13 +66,23 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
         uut.persist(journey2);
         uut.persist(journey3);
 
+        List<Journey> allJourneys = new LinkedList<Journey>();
+
+        long counter = 1;
+        while(true) {
+            Journey j = uut.findById(counter);
+            if(j == null){
+                break;
+            }
+            allJourneys.add(j);
+            counter++;
+        }
+
         // Act
         List<Journey> foundJourneys = uut.findAll();
 
         // Assert
-        Assert.assertEquals(foundJourneys.get(0), journey);
-        Assert.assertEquals(foundJourneys.get(1), journey2);
-        Assert.assertEquals(foundJourneys.get(2), journey3);
+        Assert.assertEquals(foundJourneys, allJourneys);
     }
 
     @Test
@@ -118,12 +137,46 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
     }
 
     @Test
+    public void testFindAllByVehicleId(){
+        //Arrange
+        List<Journey> all = this.uut.findAll();
+        Iterator<Journey> iterator = all.iterator();
+
+        while (iterator.hasNext()){
+            Journey j = iterator.next();
+            if (j.getVehicle().getId() != this.vehicle.getId())
+            {
+                iterator.remove();
+            }
+        }
+
+        //Act
+        List<Journey> allByVehicleId = this.uut.findAllByVehicleId(this.vehicle.getId());
+
+        //Assert
+        Assert.assertEquals(allByVehicleId, all);
+
+    }
+
+    @Test
     public void testfindByEmployee() {
+        //Arrange
         Journey journey1 = new Journey(new Date() , vehicle, employee);
         uut.persist(journey1);
 
-        Assert.assertEquals(uut.findByEmployee(employee).size(),2);
+        List<Journey> all = this.uut.findAll();
+        Iterator<Journey> iterator = all.iterator();
 
+        while (iterator.hasNext()){
+            Journey j = iterator.next();
+            if (j.getEmployee().getId() != this.employee.getId())
+            {
+                iterator.remove();
+            }
+    	}
+    
+        //Act Assert
+        Assert.assertEquals(uut.findByEmployee(employee).size(), all.size());
     }
 
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
@@ -132,6 +185,6 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
         Vehicle vehicle = new Vehicle("VRPNullBorrow", "Type", Year.of(1999), "EngineType", "NullBorrowedAt", (long) 9999);
         Journey journeyNullBorrowedAt = new Journey(null , vehicle, employee);
         uut.persist(journeyNullBorrowedAt);
-    }
+        }
 
 }
