@@ -30,7 +30,10 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
 
     @Override
     public double getTotalKilometrage(long vehicleId) {
-        double result = this.round(this.vehicleDao.findById(vehicleId).getInitialKilometrage(), 1);
+
+        Vehicle v = this.vehicleDao.findById(vehicleId);
+
+        double result = this.round(v.getInitialKilometrage(), 1);
 
         List<Journey> journeys = this.journeyDao.findAllByVehicleId(vehicleId);
 
