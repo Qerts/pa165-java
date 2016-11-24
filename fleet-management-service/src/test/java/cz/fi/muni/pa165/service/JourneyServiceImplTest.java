@@ -36,10 +36,10 @@ public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
     private JourneyDao journeyDao;
 
     @Mock
-    private EmployeeDao employeeDao;
+    private VehicleDao vehicleDao;
 
     @Mock
-    private VehicleDao vehicleDao;
+    private EmployeeDao employeeDao;
 
     @Inject
     @InjectMocks
