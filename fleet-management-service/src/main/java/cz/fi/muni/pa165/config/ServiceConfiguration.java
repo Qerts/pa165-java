@@ -6,11 +6,15 @@ import cz.fi.muni.pa165.entity.*;
 import cz.fi.muni.pa165.service.JourneyServiceImpl;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
+import org.dozer.classmap.RelationshipType;
 import org.dozer.loader.api.BeanMappingBuilder;
+import org.dozer.loader.api.TypeMappingOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+
+import static org.dozer.loader.api.FieldsMappingOptions.collectionStrategy;
 
 /**
  * Created by Martin on 19.11.2016.
@@ -35,8 +39,10 @@ public class ServiceConfiguration {
             mapping(Inspection.class, InspectionDTO.class);
             mapping(InspectionInterval.class, InspectionIntervalDTO.class);
             mapping(Journey.class, JourneyDTO.class);
-            mapping(Vehicle.class, VehicleDTO.class);
             mapping(VehicleCategory.class, VehicleCategoryDTO.class);
+            //mapping(Vehicle.class, VehicleDTO.class);
+            mapping(Vehicle.class, VehicleDTO.class)
+                .exclude("productionYear");
         }
     }
 }
