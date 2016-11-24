@@ -40,7 +40,7 @@ public class Journey {
      *
      * @param borrowedAt Date, when vehicle was borrowed.
      * @param vehicle    Vehicle which was borrowed.
-     * @param employee   Employee who borrowed a vehicle.
+     * @param employee   EMPLOYEE who borrowed a vehicle.
      */
     public Journey(Date borrowedAt, Vehicle vehicle, Employee employee) {
         this.borrowedAt = borrowedAt;

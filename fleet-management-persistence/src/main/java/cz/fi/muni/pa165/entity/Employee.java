@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.entity;
 
 
+import cz.fi.muni.pa165.enums.Role;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,14 +11,15 @@ import java.util.Set;
  * @author Jozef Krcho
  */
 @Entity
-@Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"name", "surname"})
-})
+@Table
 public class Employee {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable=false, unique=true)
+    private String email;
 
     @Column(nullable=false)
     private String name;
@@ -24,6 +27,12 @@ public class Employee {
     @Column(nullable=false)
     private String surname;
 
+    @Column(nullable=false)
+    private String passwordHash;
+
+    @Column(nullable=false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @ManyToMany
     Set<VehicleCategory> vehicleCategories = new HashSet<>();
@@ -39,12 +48,18 @@ public class Employee {
     }
 
     /**
-     * @param name    name of the Employee
-     * @param surname surname of the Employee
+     * @param email        email of the EMPLOYEE
+     * @param name         name of the EMPLOYEE
+     * @param surname      surname of the EMPLOYEE
+     * @param passwordHash hashed password of the EMPLOYEE
+     * @param role   role of the EMPLOYEE
      */
-    public Employee(String name, String surname) {
+    public Employee(String email, String name, String surname, String passwordHash, Role role) {
+        this.email = email;
         this.name = name;
         this.surname = surname;
+        this.passwordHash = passwordHash;
+        this.role = role;
     }
 
     public Long getId() {
@@ -65,6 +80,30 @@ public class Employee {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Set<VehicleCategory> getVehicleCategories() {
@@ -90,21 +129,17 @@ public class Employee {
 
         Employee employee = (Employee) o;
 
-        if (!name.equals(employee.name)) return false;
-        return surname.equals(employee.surname);
-
+        return email.equals(employee.getEmail());
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + surname.hashCode();
-        return result;
+        return email.hashCode();
     }
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "EMPLOYEE{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
