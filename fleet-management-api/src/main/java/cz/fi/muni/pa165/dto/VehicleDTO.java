@@ -25,18 +25,22 @@ public class VehicleDTO {
 
     private VehicleCategoryDTO vehicleCategory;
 
+    //added manually
+    private boolean active;
+
 
     protected VehicleDTO() {
     }
 
 
-    public VehicleDTO(String vrp, String type, Year productionYear, String engineType, String vin, Long initialKilometrage) {
+    public VehicleDTO(String vrp, String type, Year productionYear, String engineType, String vin, Long initialKilometrage, boolean active) {
         this.vrp = vrp;
         this.type = type;
         this.productionYear = productionYear;
         this.engineType = engineType;
         this.vin = vin;
         this.initialKilometrage = initialKilometrage;
+        this.active = active;
     }
 
     public VehicleCategoryDTO getVehicleCategory() {
@@ -103,6 +107,10 @@ public class VehicleDTO {
         this.initialKilometrage = initialKilometrage;
     }
 
+    public boolean getActive() {return this.active;}
+
+    public void setActive(boolean active) { this.active = active; }
+
 
     @Override
     public boolean equals(Object o) {
@@ -131,6 +139,7 @@ public class VehicleDTO {
                 ", vin='" + vin + '\'' +
                 ", initialKilometrage=" + initialKilometrage +
                 ", vehicleCategory=" + vehicleCategory +
+                ", active=" + this.active +
                 '}';
     }
 
