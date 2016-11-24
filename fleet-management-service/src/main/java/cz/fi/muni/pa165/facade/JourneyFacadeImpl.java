@@ -3,10 +3,10 @@ package cz.fi.muni.pa165.facade;
 import cz.fi.muni.pa165.dto.JourneyDTO;
 import cz.fi.muni.pa165.service.interfaces.BeanMappingService;
 import cz.fi.muni.pa165.service.interfaces.JourneyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 
@@ -17,10 +17,10 @@ import java.util.List;
 @Transactional
 public class JourneyFacadeImpl implements JourneyFacade {
 
-    @Autowired
+    @Inject
     private JourneyService journeyService;
 
-    @Autowired
+    @Inject
     private BeanMappingService beanMappingService;
 
     public List<JourneyDTO> getAllJourneys() {
