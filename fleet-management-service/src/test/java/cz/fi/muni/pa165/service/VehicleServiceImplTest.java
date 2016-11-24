@@ -6,6 +6,7 @@ import cz.fi.muni.pa165.dao.interfaces.VehicleDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
+import cz.fi.muni.pa165.enums.Role;
 import org.hibernate.service.spi.ServiceException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -53,7 +54,7 @@ public class VehicleServiceImplTest {
     public void init() throws ServiceException{
         MockitoAnnotations.initMocks(this);
 
-        this.e1 = new Employee("Name", "Username");
+        this.e1 = new Employee("email@email.com", "Name", "Username", "PasswordHash", Role.EMPLOYEE);
         this.v1 = new Vehicle("VRP", "Type", Year.of(2222), "EngineType", "VIN", (long)666.6);
         v1.setId(0L);
         this.j1 = new Journey(new Date(), v1, e1);
