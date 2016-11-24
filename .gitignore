@@ -70,6 +70,7 @@ hs_err_pid*
 .idea/copyright/
 .idea/encodings.xml
 .idea/misc.xml
+.idea/shelf
 target/
 
 # Log files

@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -31,14 +32,9 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
 
     @BeforeMethod
     public void setUp() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2016, 1, 1);
-        Date date1 = calendar.getTime();
-        inspection1 = new Inspection(date1);
+        inspection1 = new Inspection(new GregorianCalendar(2016, 1, 1).getTime());
         uut.persist(inspection1);
-        calendar.set(2016, 2, 2);
-        Date date2 = calendar.getTime();
-        inspection2 = new Inspection(date2);
+        inspection2 = new Inspection(new GregorianCalendar(2016, 2, 2).getTime());
         uut.persist(inspection2);
     }
 

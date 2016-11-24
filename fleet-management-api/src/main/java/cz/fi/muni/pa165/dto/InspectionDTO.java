@@ -13,7 +13,7 @@ public class InspectionDTO {
 
     private InspectionIntervalDTO inspectionInterval;
 
-    protected InspectionDTO(){}
+    public InspectionDTO(){}
 
     public InspectionDTO(Date performedAt){
         this.performedAt = performedAt;
