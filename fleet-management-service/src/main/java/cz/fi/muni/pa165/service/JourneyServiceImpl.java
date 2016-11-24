@@ -59,7 +59,7 @@ public class JourneyServiceImpl extends JpaService<Journey, Long> implements Jou
         return journeysDate;
     }
 
-    public void createJourney(Long vehicleId, Long employeeId, Date startDate) {
+    public void startJourney(Long vehicleId, Long employeeId, Date startDate) {
         Employee employee = employeeDao.findById(employeeId);
         Vehicle vehicle = vehicleDao.findById(vehicleId);
         Journey jouney = new Journey(startDate, vehicle, employee);
@@ -67,7 +67,7 @@ public class JourneyServiceImpl extends JpaService<Journey, Long> implements Jou
     }
 
     @Override
-    public void finalizeJourney(Long journeyId, Float drivenDistance, Date endDate) {
+    public void finishJourney(Long journeyId, Float drivenDistance, Date endDate) {
         Journey journey = journeyDao.findById(journeyId);
         journey.setDistance(drivenDistance);
         journey.setReturnedAt(endDate);

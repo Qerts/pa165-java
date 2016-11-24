@@ -36,10 +36,10 @@ public class JourneyFacadeImpl implements JourneyFacade {
     }
 
     public void beginJourney(Long vehicleId, Long employeeId, Date startDate) {
-        journeyService.createJourney(vehicleId, employeeId, startDate);
+        journeyService.startJourney(vehicleId, employeeId, startDate);
     }
 
     public void finishJourney(Long journeyId, Float drivenDistance, Date endDate) {
-        journeyService.finalizeJourney(journeyId,drivenDistance,endDate);
+        journeyService.finishJourney(journeyId,drivenDistance,endDate);
     }
 }
