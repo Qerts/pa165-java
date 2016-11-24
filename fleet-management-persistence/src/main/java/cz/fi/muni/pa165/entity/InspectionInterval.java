@@ -110,4 +110,12 @@ public class InspectionInterval {
                 ", days=" + days +
                 '}';
     }
+
+    public Inspection getNewestInspection() {
+        return null;
+    }
+
+    public boolean hasInspections() {
+        return getInspections().size() > 0;
+    }
 }
