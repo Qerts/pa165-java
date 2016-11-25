@@ -3,10 +3,13 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
 import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
+import cz.fi.muni.pa165.dao.interfaces.VehicleCategoryDao;
 import cz.fi.muni.pa165.dao.interfaces.VehicleDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
+import cz.fi.muni.pa165.entity.VehicleCategory;
+import cz.fi.muni.pa165.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -19,7 +22,9 @@ import org.testng.annotations.Test;
 
 import java.time.Year;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by JozeFe on 10/30/2016.
@@ -35,6 +40,8 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
     private EmployeeDao employeeDao;
     @Autowired
     private JourneyDao journeyDao;
+    @Autowired
+    private VehicleCategoryDao vehicleCategoryDao;
 
     private Vehicle vehicle1;
     private Vehicle vehicle2;
@@ -189,5 +196,30 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
         Vehicle vehicleNullInitialKilometrage = new Vehicle("NullInitialKilometrage", "type", Year.of(1994), "enigneType"
                 , "VinNullInitialKilometrage", null);
         vehicleDao.persist(vehicleNullInitialKilometrage);
+    }
+
+    @Test
+    public void findVehiclesAvailableTest(){
+        Employee emp1 = new Employee("email@seznikov.com", "name", "surname", "hash", Role.EMPLOYEE);
+        Vehicle veh1 = new Vehicle("vrp1", "type", Year.of(1991), "engineType", "vin1", 666L);
+        Vehicle veh2 = new Vehicle("vrp2", "type", Year.of(1991), "engineType", "vin2", 666L);
+        Vehicle veh3 = new Vehicle("vrp3", "type", Year.of(1991), "engineType", "vin3", 666L);
+        VehicleCategory vc1 = new VehicleCategory("category");
+        Set<VehicleCategory> set = new HashSet();
+        set.add(vc1);
+        emp1.setVehicleCategories(set);
+        veh1.setVehicleCategory(vc1);
+        veh2.setVehicleCategory(vc1);
+        veh3.setVehicleCategory(vc1);
+
+        this.vehicleDao.persist(veh1);
+        this.vehicleDao.persist(veh2);
+        this.vehicleDao.persist(veh3);
+        this.employeeDao.persist(emp1);
+        this.vehicleCategoryDao.persist(vc1);
+
+        List<Vehicle> list = this.vehicleDao.findVehiclesAvailable(emp1.getId());
+
+        Assert.assertEquals(list.size(), 3);
     }
 }

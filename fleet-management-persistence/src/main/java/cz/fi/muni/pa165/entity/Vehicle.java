@@ -15,6 +15,9 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "is_active")
+    private Boolean active;
+
     /**
      * Vehicle registration plate number (SPZ).
      */
@@ -157,6 +160,9 @@ public class Vehicle {
     public void setInspectionIntervals(Set<InspectionInterval> inspectionIntervals) {
         this.inspectionIntervals = inspectionIntervals;
     }
+
+    public boolean getActive() {return this.active;}
+    public void setActive(Boolean active) {this.active = active;}
 
     @Override
     public boolean equals(Object o) {
