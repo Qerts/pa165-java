@@ -4,8 +4,6 @@ import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
 import cz.fi.muni.pa165.entity.Employee;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.TypedQuery;
-
 /**
  * @author Jozef Krcho
  */

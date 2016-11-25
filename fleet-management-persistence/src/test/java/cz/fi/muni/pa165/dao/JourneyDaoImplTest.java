@@ -6,20 +6,17 @@ import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
 import cz.fi.muni.pa165.enums.Role;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.Year;
+import javax.inject.Inject;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Richard Trebichavský
@@ -27,7 +24,7 @@ import static org.mockito.Mockito.mock;
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
 public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
-    @Autowired
+    @Inject
     private JourneyDao uut;
 
     private Employee employee;
@@ -39,7 +36,7 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
     @BeforeMethod
     public void setUp() {
         employee = new Employee("john.doe@muni.cz", "John", "Doe", "password", Role.EMPLOYEE);
-        vehicle = new Vehicle("VRP", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
+        vehicle = new Vehicle("VRP", "Type", 1999, "EngineType", "VIN", (long) 7658.54);
         journey = new Journey(new Date(), vehicle, employee);
         journey1 = new Journey(new Date(), vehicle, employee);
         journey2 = new Journey(new Date(), vehicle, employee);
@@ -182,7 +179,7 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullBorrowedAt() {
         Employee employee = new Employee("nullBorrowedAt@muni.cz", "Null", "BorrowedAt", "password", Role.EMPLOYEE);
-        Vehicle vehicle = new Vehicle("VRPNullBorrow", "Type", Year.of(1999), "EngineType", "NullBorrowedAt", (long) 9999);
+        Vehicle vehicle = new Vehicle("VRPNullBorrow", "Type", 1999, "EngineType", "NullBorrowedAt", (long) 9999);
         Journey journeyNullBorrowedAt = new Journey(null , vehicle, employee);
         uut.persist(journeyNullBorrowedAt);
         }

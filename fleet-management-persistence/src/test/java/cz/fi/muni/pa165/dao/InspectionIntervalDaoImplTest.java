@@ -3,16 +3,13 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dao.interfaces.InspectionIntervalDao;
 import cz.fi.muni.pa165.entity.InspectionInterval;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -21,7 +18,7 @@ import java.util.List;
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
 public class InspectionIntervalDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
-    @Autowired
+    @Inject
     private InspectionIntervalDao uut;
 
     private InspectionInterval InspectionInterval1;

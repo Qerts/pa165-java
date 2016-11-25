@@ -18,7 +18,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.time.Year;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,7 +55,7 @@ public class VehicleServiceImplTest {
 
         this.e1 = new Employee("email@email.com", "Name", "Username", "PasswordHash", Role.EMPLOYEE);
         e1.setId(0L);
-        this.v1 = new Vehicle("VRP", "Type", Year.of(2222), "EngineType", "VIN", (long)666.6);
+        this.v1 = new Vehicle("VRP", "Type", 2222, "EngineType", "VIN", (long)666.6);
         v1.setId(0L);
         this.j1 = new Journey(new Date(), v1, e1);
         j1.returnVehicle(new Date(), (float)2342.1);

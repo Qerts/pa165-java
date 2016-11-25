@@ -2,7 +2,6 @@ package cz.fi.muni.pa165.dao.interfaces;
 
 import cz.fi.muni.pa165.entity.Vehicle;
 
-import java.util.Collection;
 import java.util.List;
 
 /**

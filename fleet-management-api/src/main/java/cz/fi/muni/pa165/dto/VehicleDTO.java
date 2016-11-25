@@ -1,9 +1,6 @@
 package cz.fi.muni.pa165.dto;
 
 
-import java.time.Year;
-
-
 /**
  * @author Martin Schmidt
  */
@@ -15,7 +12,7 @@ public class VehicleDTO {
 
     private String type;
 
-    private Year productionYear;
+    private int productionYear;
 
     private String engineType;
 
@@ -33,7 +30,7 @@ public class VehicleDTO {
     }
 
 
-    public VehicleDTO(String vrp, String type, Year productionYear, String engineType, String vin, Long initialKilometrage, Boolean active) {
+    public VehicleDTO(String vrp, String type, int productionYear, String engineType, String vin, Long initialKilometrage, Boolean active) {
         this.vrp = vrp;
         this.type = type;
         this.productionYear = productionYear;
@@ -75,11 +72,11 @@ public class VehicleDTO {
         this.type = type;
     }
 
-    public Year getProductionYear() {
+    public int getProductionYear() {
         return productionYear;
     }
 
-    public void setProductionYear(Year productionYear) {
+    public void setProductionYear(int productionYear) {
         this.productionYear = productionYear;
     }
 

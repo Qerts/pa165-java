@@ -11,7 +11,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import javax.inject.Inject;
-import java.time.Year;
 import java.util.Date;
 
 /**
@@ -55,7 +54,7 @@ public class BeanMappingServiceImplTest extends AbstractTestNGSpringContextTests
     @Test
     public void testJourneyMapping() {
         Employee employee = new Employee("journey.test@muni.cz", "journey", "test", "password", Role.EMPLOYEE);
-        Vehicle vehicle = new Vehicle("VRP", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
+        Vehicle vehicle = new Vehicle("VRP", "Type", 1999, "EngineType", "VIN", (long) 7658.54);
         Journey journey = new Journey(new Date(), vehicle, employee);
         journey.returnVehicle(new Date(), (float)1000);
         JourneyDTO journeyDTO = beanMappingService.mapTo(journey, JourneyDTO.class);
@@ -69,18 +68,11 @@ public class BeanMappingServiceImplTest extends AbstractTestNGSpringContextTests
 
     @Test
     public void testVehicleMapping() {
-        Vehicle vehicle = new Vehicle("vehicleMapping", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
+        Vehicle vehicle = new Vehicle("vehicleMapping", "Type", 1999, "EngineType", "VIN", (long) 7658.54);
         VehicleDTO vehicleDTO = beanMappingService.mapTo(vehicle, VehicleDTO.class);
 
         Assert.assertEquals(vehicle.getVrp(), vehicleDTO.getVrp());
-        /*
-            TODO change Year type filed to something else,
-            dozer can't mapping this class, now is excluded in ServiceConfiguration
-
-            Exception:
-            org.dozer.MappingException: java.lang.NoSuchMethodException: java.time.Year.<init>()
-         */
-        //Assert.assertEquals(vehicle.getProductionYear(), vehicleDTO.getProductionYear());
+        Assert.assertEquals(vehicle.getProductionYear(), vehicleDTO.getProductionYear());
         Assert.assertEquals(vehicle.getEngineType(), vehicleDTO.getEngineType());
         Assert.assertEquals(vehicle.getType(), vehicleDTO.getType());
         Assert.assertEquals(vehicle.getVin(), vehicleDTO.getVin());
