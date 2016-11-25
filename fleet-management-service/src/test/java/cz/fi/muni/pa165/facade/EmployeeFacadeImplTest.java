@@ -11,17 +11,14 @@ import org.junit.Assert;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import javax.inject.Inject;
 import java.util.Collection;
 import java.util.Collections;
 
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -48,7 +45,7 @@ public class EmployeeFacadeImplTest extends AbstractTestNGSpringContextTests {
     private String password = "password";
     private String name = "John";
     private String surname = "Foo";
-    private Long id = (long)1;
+    private Long id = (long) 1;
 
     @BeforeClass
     public void setup() throws ServiceException {
@@ -77,7 +74,6 @@ public class EmployeeFacadeImplTest extends AbstractTestNGSpringContextTests {
         Assert.assertTrue(employeeFacade.authenticate(employeeDTO, password));
 
         verify(employeeService).authenticate(employee, password);
-        verify(beanMappingService).mapTo(employeeDTO, Employee.class);
     }
 
     @Test
@@ -90,7 +86,6 @@ public class EmployeeFacadeImplTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(list.size(), 1);
 
         verify(employeeService).findAll();
-        verify(beanMappingService).mapTo(Collections.singletonList(employee), EmployeeDTO.class);
     }
 
     @Test
@@ -98,10 +93,9 @@ public class EmployeeFacadeImplTest extends AbstractTestNGSpringContextTests {
         when(beanMappingService.mapTo(employee, EmployeeDTO.class)).thenReturn(employeeDTO);
         when(employeeService.findByEmail(email)).thenReturn(employee);
 
-        employeeFacade.findEmployeeByEmail(email);
+        Assert.assertEquals(employeeFacade.findEmployeeByEmail(email).getEmail(), email);
 
         verify(employeeService).findByEmail(email);
-        verify(beanMappingService).mapTo(employee, EmployeeDTO.class);
     }
 
     @Test
@@ -109,7 +103,7 @@ public class EmployeeFacadeImplTest extends AbstractTestNGSpringContextTests {
         when(beanMappingService.mapTo(employee, EmployeeDTO.class)).thenReturn(employeeDTO);
         when(employeeService.findById(id)).thenReturn(employee);
 
-        employeeFacade.findEmployeeById(id);
+        Assert.assertEquals(employeeFacade.findEmployeeById(id).getId(), id);
 
         verify(employeeService).findById(id);
     }

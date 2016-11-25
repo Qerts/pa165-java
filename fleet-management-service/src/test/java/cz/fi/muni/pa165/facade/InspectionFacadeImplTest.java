@@ -5,7 +5,6 @@ import cz.fi.muni.pa165.dto.InspectionDTO;
 import cz.fi.muni.pa165.dto.InspectionIntervalDTO;
 import cz.fi.muni.pa165.entity.Inspection;
 import cz.fi.muni.pa165.entity.InspectionInterval;
-import cz.fi.muni.pa165.service.BeanMappingServiceImpl;
 import cz.fi.muni.pa165.service.interfaces.BeanMappingService;
 import cz.fi.muni.pa165.service.interfaces.InspectionIntervalService;
 import cz.fi.muni.pa165.service.interfaces.InspectionService;
@@ -15,10 +14,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Collections;
 import java.util.Date;
 
@@ -74,32 +73,30 @@ public class InspectionFacadeImplTest extends AbstractTestNGSpringContextTests {
                 .thenReturn(Collections.singletonList(inspectionIntervalDTO));
         when(inspectionIntervalService.findAll()).thenReturn(Collections.singletonList(inspectionInterval));
 
-        inspectionFacade.listAllInspectionIntervals();
+        Assert.assertEquals(inspectionFacade.listAllInspectionIntervals().size(), 1);
 
         verify(inspectionIntervalService).findAll();
-        verify(beanMappingService).mapTo(Collections.singletonList(inspectionInterval), InspectionIntervalDTO.class);
     }
 
     @Test
-    public void testListPlannedInspectionIntervals () {
+    public void testListPlannedInspectionIntervals() {
         int days = 5;
         when(beanMappingService.mapTo(Collections.singletonList(inspectionInterval), InspectionIntervalDTO.class))
                 .thenReturn(Collections.singletonList(inspectionIntervalDTO));
         when(inspectionIntervalService.findAllWithPlannedInspection(days)).thenReturn(Collections.singletonList(inspectionInterval));
 
 
-        inspectionFacade.listPlannedInspectionIntervals(days);
+        Assert.assertEquals(inspectionFacade.listPlannedInspectionIntervals(days).size(), 1);
 
         verify(inspectionIntervalService).findAllWithPlannedInspection(days);
     }
 
     @Test
-    public void testPerformInspection () {
+    public void testPerformInspection() {
         when(beanMappingService.mapTo(inspectionDTO, Inspection.class)).thenReturn(inspection);
 
         inspectionFacade.performInspection(inspectionDTO);
 
         verify(inspectionService).create(inspection);
-        verify(beanMappingService).mapTo(inspectionDTO, Inspection.class);
     }
 }
