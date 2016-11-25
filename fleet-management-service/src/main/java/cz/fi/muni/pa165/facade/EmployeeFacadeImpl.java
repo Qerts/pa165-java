@@ -51,7 +51,7 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
 
     @Override
     public boolean authenticate(EmployeeDTO employeeDTO, String password) {
-        return employeeService.authenticate(employeeService.findById(employeeDTO.getId()), password);
+        return employeeService.authenticate(beanMappingService.mapTo(employeeDTO, Employee.class), password);
     }
 
     @Override
