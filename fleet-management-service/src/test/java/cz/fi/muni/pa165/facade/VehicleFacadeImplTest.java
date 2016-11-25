@@ -39,13 +39,13 @@ public class VehicleFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     private VehicleDTO vehicleDTO;
 
-    private long id = 1;
+    private Long id = (long) 1;
     private String vrp = "VRP";
     private String type = "car type";
     private int productionYear = 1994;
     private String engineType = "engine Type";
     private String vin = "vin code";
-    private Long initialKilometrage = (long)10000;
+    private Long initialKilometrage = (long) 10000;
     private boolean active = false;
 
     @BeforeClass
@@ -54,26 +54,26 @@ public class VehicleFacadeImplTest extends AbstractTestNGSpringContextTests {
 
         vehicle = new Vehicle(vrp, type, productionYear, engineType, vin, initialKilometrage);
         vehicleDTO = new VehicleDTO(vrp, type, productionYear, engineType, vin, initialKilometrage, active);
+        vehicle.setId(id);
+        vehicleDTO.setId(id);
     }
 
     @Test
     public void testFindVehiclesAvailable() {
-        Long id = (long)15;
         when(beanMappingService.mapTo(Collections.singletonList(vehicle), VehicleDTO.class))
                 .thenReturn(Collections.singletonList(vehicleDTO));
         when(vehicleService.findVehiclesAvailable(id)).thenReturn(Collections.singletonList(vehicle));
 
-        vehicleFacade.findVehiclesAvailable(id);
+        Assert.assertEquals(vehicleFacade.findVehiclesAvailable(id).size(), 1);
 
         verify(vehicleService).findVehiclesAvailable(id);
-        verify(beanMappingService).mapTo(Collections.singletonList(vehicle), VehicleDTO.class);
     }
 
     @Test
     public void testGetTotalKilometrage() {
-        when(vehicleService.getTotalKilometrage(id)).thenReturn((double)initialKilometrage);
+        when(vehicleService.getTotalKilometrage(id)).thenReturn((double) initialKilometrage);
 
-        Assert.assertEquals(vehicleFacade.getTotalKilometrage(id),(double)initialKilometrage);
+        Assert.assertEquals(vehicleFacade.getTotalKilometrage(id), (double) initialKilometrage);
 
         verify(vehicleService).getTotalKilometrage(id);
     }
@@ -83,10 +83,9 @@ public class VehicleFacadeImplTest extends AbstractTestNGSpringContextTests {
         when(beanMappingService.mapTo(vehicle, VehicleDTO.class)).thenReturn(vehicleDTO);
         when(vehicleService.findById(id)).thenReturn(vehicle);
 
-        vehicleFacade.findVehicleById(id);
+        Assert.assertEquals(vehicleFacade.findVehicleById(id).getId(), id);
 
         verify(vehicleService).findById(id);
-        verify(beanMappingService).mapTo(vehicle, VehicleDTO.class);
     }
 
     @Test
@@ -96,7 +95,6 @@ public class VehicleFacadeImplTest extends AbstractTestNGSpringContextTests {
         vehicleFacade.addNewVehicle(vehicleDTO);
 
         verify(vehicleService).create(vehicle);
-        verify(beanMappingService).mapTo(vehicleDTO, Vehicle.class);
     }
 
     @Test
