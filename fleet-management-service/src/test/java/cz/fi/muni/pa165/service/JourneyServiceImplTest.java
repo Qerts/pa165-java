@@ -22,7 +22,6 @@ import org.testng.annotations.Test;
 import javax.inject.Inject;
 import java.util.*;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 /**
@@ -125,11 +124,10 @@ public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
         when(journeyDao.findById(any(Long.class))).thenReturn(journey1);
         journeyService.finishJourney(journey1.getId(),distance,endDate);
 
-        Journey expectedJourney = journey1;
-        expectedJourney.setDistance(distance);
-        expectedJourney.setReturnedAt(endDate);
+        journey1.setDistance(distance);
+        journey1.setReturnedAt(endDate);
 
-        verify(journeyDao).merge(expectedJourney);
+        verify(journeyDao).merge(journey1);
 
     }
 

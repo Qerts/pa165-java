@@ -24,7 +24,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 /**

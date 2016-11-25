@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cz.muni.fi.pa165</groupId>
     <artifactId>fleet-management-service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
