@@ -26,14 +26,14 @@ public class VehicleDTO {
     private VehicleCategoryDTO vehicleCategory;
 
     //added manually
-    private boolean active;
+    private Boolean active;
 
 
     protected VehicleDTO() {
     }
 
 
-    public VehicleDTO(String vrp, String type, Year productionYear, String engineType, String vin, Long initialKilometrage, boolean active) {
+    public VehicleDTO(String vrp, String type, Year productionYear, String engineType, String vin, Long initialKilometrage, Boolean active) {
         this.vrp = vrp;
         this.type = type;
         this.productionYear = productionYear;
@@ -107,7 +107,7 @@ public class VehicleDTO {
         this.initialKilometrage = initialKilometrage;
     }
 
-    public boolean getActive() {return this.active;}
+    public Boolean getActive() {return this.active;}
 
     public void setActive(boolean active) { this.active = active; }
 
