@@ -43,4 +43,10 @@ public interface Service<T, ID extends Serializable> {
      * @param entity Entity.
      */
     void remove(T entity);
+
+    /**
+     * Remove saved entity by id.
+     * @param id Id.
+     */
+    void removeById(ID id);
 }

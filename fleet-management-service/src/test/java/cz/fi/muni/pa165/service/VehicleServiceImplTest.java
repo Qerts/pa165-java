@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.service;
 
+import cz.fi.muni.pa165.config.ServiceConfiguration;
 import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
 import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.dao.interfaces.VehicleDao;
@@ -9,11 +10,10 @@ import cz.fi.muni.pa165.entity.Vehicle;
 import cz.fi.muni.pa165.enums.Role;
 import org.dozer.inject.Inject;
 import org.hibernate.service.spi.ServiceException;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.ContextConfiguration;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -30,7 +30,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Michal Balicky on 23/11/2016.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(classes = ServiceConfiguration.class)
 public class VehicleServiceImplTest {
 
     @Mock

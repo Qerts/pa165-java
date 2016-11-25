@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Martin on 19.11.2016.
+ * @author Martin Schmidt
  */
 public class EmployeeDTO {
 
@@ -37,6 +37,10 @@ public class EmployeeDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

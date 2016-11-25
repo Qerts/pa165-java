@@ -4,12 +4,14 @@ import cz.fi.muni.pa165.dao.interfaces.Dao;
 import cz.fi.muni.pa165.dao.interfaces.InspectionDao;
 import cz.fi.muni.pa165.entity.Inspection;
 import cz.fi.muni.pa165.service.interfaces.InspectionService;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
 /**
  * @author Jozef Krcho
  */
+@Service
 public class InspectionServiceImpl extends JpaService<Inspection, Long> implements InspectionService {
 
     @Inject

@@ -57,6 +57,24 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
     }
 
     @Test
+    public void testFindByEmail() {
+        // Act
+        Employee foundEmployee1 = uut.findByEmail(employee1.getEmail());
+        Employee foundEmployee2 = uut.findByEmail(employee2.getEmail());
+        // Assert
+        Assert.assertEquals(foundEmployee1, employee1);
+        Assert.assertEquals(foundEmployee2, employee2);
+    }
+
+    @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
+    public void testFindByNullEmail() {
+        // Act
+        Employee foundEmployee1 = uut.findByEmail(null);
+        // Assert
+        Assert.assertEquals(foundEmployee1, employee1);
+    }
+
+    @Test
     public void testPersist() {
         // Arrange
         int itemCountBefore = uut.findAll().size();
