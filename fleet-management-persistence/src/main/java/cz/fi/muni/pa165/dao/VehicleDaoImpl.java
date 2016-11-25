@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.dao.interfaces.VehicleDao;
+import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,9 @@ public class VehicleDaoImpl extends JpaDao<Vehicle, Long> implements VehicleDao 
                 "SELECT v " +
                     "FROM Vehicle v " +
                     "INNER JOIN v.vehicleCategory vc " +
-                    "INNER JOIN vc.employees e" +
-                    "WHERE e.id = :employeeId",
-                Journey.class);
+                    "INNER JOIN vc.employees emp " +
+                    "WHERE emp.id = :employeeId",
+                Vehicle.class);
 
         query.setParameter("employeeId", employeeId);
 
@@ -40,8 +41,4 @@ public class VehicleDaoImpl extends JpaDao<Vehicle, Long> implements VehicleDao 
 
         return result;
     }
-    //vozidla
-    //join employees
-    //kde id categorie je stejne
-    //join journey
 }

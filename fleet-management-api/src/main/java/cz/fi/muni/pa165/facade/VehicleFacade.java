@@ -9,13 +9,13 @@ import java.util.Collection;
  */
 public interface VehicleFacade {
 
-/*
+
     /**
      * Finds all vehicles that are borrowable by the employee.
      * @param employeeId Id of the employee
      * @return List of vehicles available to borrow for given employee.
      */
-    //Collection<VehicleDTO> findVehiclesAvailable(Long employeeId);
+    Collection<VehicleDTO> findVehiclesAvailable(Long employeeId);
 
     /**
      * Counts total kilometres gone with given vehicle. It sums all journey and initial kilometrage of the vehicle.

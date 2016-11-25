@@ -23,11 +23,11 @@ public class VehicleFacadeImpl implements VehicleFacade {
     @Inject
     private BeanMappingService beanMappingService;
 
-    /*
+    
     @Override
     public Collection<VehicleDTO> findVehiclesAvailable(Long employeeId) {
         return this.beanMappingService.mapTo(this.vehicleService.findVehiclesAvailable(employeeId), VehicleDTO.class);
-    }*/
+    }
 
     @Override
     public double getTotalKilometrage(long vehicleId) {

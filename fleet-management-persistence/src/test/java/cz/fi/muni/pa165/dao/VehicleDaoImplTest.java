@@ -46,7 +46,7 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
     private Vehicle vehicle1;
     private Vehicle vehicle2;
 
-    @BeforeMethod
+    //@BeforeMethod
     public void setUp() {
         vehicle1 = new Vehicle("VRP", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
         vehicle1.setEngineType("Diesel engine");
@@ -200,10 +200,10 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
 
     @Test
     public void findVehiclesAvailableTest(){
-        Employee emp1 = new Employee("email", "name", "surname", "hash", Role.EMPLOYEE);
-        Vehicle veh1 = new Vehicle("vrp", "type", Year.of(1991), "engineType", "vin", 666L);
-        Vehicle veh2 = new Vehicle("vrp", "type", Year.of(1991), "engineType", "vin", 666L);
-        Vehicle veh3 = new Vehicle("vrp", "type", Year.of(1991), "engineType", "vin", 666L);
+        Employee emp1 = new Employee("email@seznikov.com", "name", "surname", "hash", Role.EMPLOYEE);
+        Vehicle veh1 = new Vehicle("vrp1", "type", Year.of(1991), "engineType", "vin1", 666L);
+        Vehicle veh2 = new Vehicle("vrp2", "type", Year.of(1991), "engineType", "vin2", 666L);
+        Vehicle veh3 = new Vehicle("vrp3", "type", Year.of(1991), "engineType", "vin3", 666L);
         VehicleCategory vc1 = new VehicleCategory("category");
         Set<VehicleCategory> set = new HashSet();
         set.add(vc1);

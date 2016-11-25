@@ -21,12 +21,11 @@ public interface VehicleService extends Service<Vehicle, Long> {
      */
     void disable(long vehicleId);
 
-    /*
     /**
      * Finds all vehicles available to borrow for given employee
      * @param employeeId Id of given employee
      * @return Collection of all vehicles that are borrowable by the employee
      */
-    //List<Vehicle> findVehiclesAvailable(long employeeId);
+    List<Vehicle> findVehiclesAvailable(long employeeId);
 
 }

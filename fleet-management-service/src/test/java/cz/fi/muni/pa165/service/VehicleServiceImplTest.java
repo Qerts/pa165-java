@@ -55,6 +55,7 @@ public class VehicleServiceImplTest {
         MockitoAnnotations.initMocks(this);
 
         this.e1 = new Employee("email@email.com", "Name", "Username", "PasswordHash", Role.EMPLOYEE);
+        e1.setId(0L);
         this.v1 = new Vehicle("VRP", "Type", Year.of(2222), "EngineType", "VIN", (long)666.6);
         v1.setId(0L);
         this.j1 = new Journey(new Date(), v1, e1);
@@ -72,8 +73,12 @@ public class VehicleServiceImplTest {
         list.add(j3);
         list.add(j4);
 
+        List<Vehicle> vehicleList = new LinkedList();
+        vehicleList.add(v1);
+
         when(this.vehicleDao.findById(anyLong())).thenReturn(v1);
         when(this.journeyDao.findAllByVehicleId(any(long.class))).thenReturn(list);
+        when(this.vehicleDao.findVehiclesAvailable(0L)).thenReturn(vehicleList);
     }
 
     @Test
@@ -95,5 +100,12 @@ public class VehicleServiceImplTest {
         this.vehicleService.disable(v1.getId());
         Vehicle v = this.vehicleService.findById(v1.getId());
         Assert.assertEquals(v.getActive(), false);
+    }
+
+    @Test
+    public void testGetAllAvailable(){
+        List<Vehicle> list = this.vehicleService.findVehiclesAvailable(e1.getId());
+
+        Assert.assertEquals(list.size(), 1);
     }
 }

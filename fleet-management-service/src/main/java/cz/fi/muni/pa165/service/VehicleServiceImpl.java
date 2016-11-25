@@ -43,11 +43,11 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
         return result;
     }
 
-    /*
+
     @Override
-    List<Vehicle> findVehiclesAvailable(long employeeId){
+    public List<Vehicle> findVehiclesAvailable(long employeeId){
         return this.vehicleDao.findVehiclesAvailable(employeeId);
-    }*/
+    }
 
     @Override
     public void disable(long vehicleId){
