@@ -46,7 +46,7 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
     private Vehicle vehicle1;
     private Vehicle vehicle2;
 
-    //@BeforeMethod
+    @BeforeMethod
     public void setUp() {
         vehicle1 = new Vehicle("VRP", "Type", Year.of(1999), "EngineType", "VIN", (long) 7658.54);
         vehicle1.setEngineType("Diesel engine");
