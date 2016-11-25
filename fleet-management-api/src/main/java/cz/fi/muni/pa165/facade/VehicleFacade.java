@@ -5,7 +5,7 @@ import cz.fi.muni.pa165.dto.VehicleDTO;
 import java.util.Collection;
 
 /**
- * Created by Michal Balicky on 24/11/2016.
+ * @author Michal Balicky
  */
 public interface VehicleFacade {
 
@@ -27,7 +27,7 @@ public interface VehicleFacade {
     /**
      * Finds vehicle by its id.
      * @param vehicleId Id of the vehicle
-     * @return
+     * @return Vehicle.
      */
     VehicleDTO findVehicleById(Long vehicleId);
 
