@@ -89,7 +89,6 @@ public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
         when(journeyDao.findByEmployee(any(Employee.class))).thenReturn(journeyList);
 
         Assert.assertEquals(journeyService.getAllJourneys(from, to, employee.getId()).get(0), journey1);
-
     }
 
     @Test
@@ -111,7 +110,6 @@ public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
         Journey expectedJourney = new Journey(startDate, vehicle, employee);
 
         verify(journeyDao).persist(expectedJourney);
-
     }
 
     @Test
@@ -124,11 +122,7 @@ public class JourneyServiceImplTest extends AbstractTestNGSpringContextTests {
         when(journeyDao.findById(any(Long.class))).thenReturn(journey1);
         journeyService.finishJourney(journey1.getId(),distance,endDate);
 
-        journey1.setDistance(distance);
-        journey1.setReturnedAt(endDate);
-
         verify(journeyDao).merge(journey1);
-
     }
 
 
