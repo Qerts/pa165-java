@@ -3,17 +3,14 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dao.interfaces.VehicleCategoryDao;
 import cz.fi.muni.pa165.entity.VehicleCategory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by MBalicky on 23/10/2016.
@@ -23,7 +20,7 @@ import java.util.*;
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
 public class VehicleCategoryDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
-    @Autowired
+    @Inject
     private VehicleCategoryDao vehicleCategoryDao;
 
     private VehicleCategory vehicleCategory1;

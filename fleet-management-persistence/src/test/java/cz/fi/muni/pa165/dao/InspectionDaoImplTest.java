@@ -3,16 +3,13 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dao.interfaces.InspectionDao;
 import cz.fi.muni.pa165.entity.Inspection;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.inject.Inject;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -24,7 +21,7 @@ import java.util.List;
 @ContextConfiguration(classes = InMemoryDatabaseContext.class)
 public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
-    @Autowired
+    @Inject
     private InspectionDao uut;
 
     private Inspection inspection1;

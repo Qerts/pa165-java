@@ -9,7 +9,9 @@ import cz.fi.muni.pa165.service.interfaces.VehicleService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author Martin Schmidt

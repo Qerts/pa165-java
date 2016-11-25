@@ -1,17 +1,12 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.dao.interfaces.VehicleDao;
-import cz.fi.muni.pa165.entity.Employee;
-import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Iterator;
 import java.util.List;
 
 /**

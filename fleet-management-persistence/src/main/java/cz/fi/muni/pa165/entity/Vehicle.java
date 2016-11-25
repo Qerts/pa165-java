@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.entity;
 
 import javax.persistence.*;
-import java.time.Year;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,7 +30,7 @@ public class Vehicle {
     private String type;
 
     @Column(nullable = false)
-    private Year productionYear;
+    private int productionYear;
 
     @Column(nullable = false)
     private String engineType;
@@ -69,7 +68,7 @@ public class Vehicle {
      * @param vin                Vehicle VIN.
      * @param initialKilometrage The driven distance when vehicle was added to the catalogue. In kilometres.
      */
-    public Vehicle(String vrp, String type, Year productionYear, String engineType, String vin, Long initialKilometrage) {
+    public Vehicle(String vrp, String type, int productionYear, String engineType, String vin, Long initialKilometrage) {
         this.vrp = vrp;
         this.type = type;
         this.productionYear = productionYear;
@@ -113,11 +112,11 @@ public class Vehicle {
         this.type = type;
     }
 
-    public Year getProductionYear() {
+    public int getProductionYear() {
         return productionYear;
     }
 
-    public void setProductionYear(Year productionYear) {
+    public void setProductionYear(int productionYear) {
         this.productionYear = productionYear;
     }
 

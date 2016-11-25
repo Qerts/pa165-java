@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.service.interfaces;
 
-import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 
 import java.util.Date;
