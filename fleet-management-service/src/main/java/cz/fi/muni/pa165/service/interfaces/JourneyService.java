@@ -32,8 +32,9 @@ public interface JourneyService extends Service<Journey, Long> {
      * @param vehicleId vehicle id for new journey
      * @param employeeId employee id
      * @param startDate star date of journey
+     * @return created journey
      */
-    void beginJourney(Long vehicleId, Long employeeId, Date startDate);
+    Journey beginJourney(Long vehicleId, Long employeeId, Date startDate);
 
     /**
      * final update of journey
