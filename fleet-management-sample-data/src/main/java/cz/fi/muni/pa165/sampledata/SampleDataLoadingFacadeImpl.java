@@ -32,10 +32,18 @@ public class SampleDataLoadingFacadeImpl implements  SampleDataLoadingFacade{
     private JourneyService journeyService;
 
     public void loadData() throws IOException {
-        //TODO add all startup data
         Employee admin = employee("admin@muni.cz", "Admin", "Foo", "admin", Role.ADMINISTRATOR);
 
-        Vehicle vehicle1 = vehicle("VRP", "Type", 1999, "EngineType", "VIN", (long) 7658.54);
+        Vehicle vehicle1 = vehicle("4A23000", "Citroen DS3 1.6 VTi DStyle 3dr", 2011, "Petrol engine", "1FMCU0C73AKC53597", (long) 31570);
+        Vehicle vehicle2 = vehicle("6B26635", "Fiat 500 1.2 Sport 3dr", 2010, "Petrol engine", "1B7GL12X52S609193", (long) 98000);
+        Vehicle vehicle3 = vehicle("4C82878", "BMW 3 SERIES 3.0 335i M Sport 2dr", 2007, "Petrol engine", "1G8ZE1598PZ242153", (long) 89500);
+        Vehicle vehicle4 = vehicle("2E77010", "Volkswagen Golf 2.0 TDI GT DSG 5dr", 2012, "Diesel engine", "1JCUX7811FT114873", (long) 33000);
+        Vehicle vehicle5 = vehicle("2H42270", "Audi TT 1.8 T Sport Quattro 3dr", 2002, "Petrol engine", "WMEEJ9AA5DK782726", (long) 170000);
+        Vehicle vehicle6 = vehicle("3J57942", "Peugeot 3008 1.6 HDi Active 5dr", 2013, "Diesel engine", "JSAAK47A052170790", (long) 56900);
+        Vehicle vehicle7 = vehicle("2L02404", "Nissan Leaf E Acenta 5dr", 2014, "Electric engine", "5KKHAEDE47PY01338", (long) 16700);
+        Vehicle vehicle8 = vehicle("2M51384", "Nissan X-Trail 2.2 dCi SVE 5dr", 2005, "Diesel engine", "1HGCA5524KA102482", (long) 147200);
+        Vehicle vehicle9 = vehicle("4P63285", "Renault Megane 1.5 dCi Expression 4dr", 2007, "Diesel engine", "1GNES13M582139763", (long) 231700);
+        Vehicle vehicle10 = vehicle("7S59790", "Alfa Romeo GT 1.9 JTDM 16v 2dr", 2005, "Diesel engine", "1FTPW14525KD01647", (long) 261900);
 
         Journey jourmey1 = journey(new GregorianCalendar(2016,1,1).getTime(),
                 new GregorianCalendar(2016,1,6).getTime(), 1200, admin, vehicle1);
