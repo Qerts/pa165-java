@@ -26,7 +26,7 @@ public class VehicleDTO {
     private Boolean active;
 
 
-    protected VehicleDTO() {
+    public VehicleDTO() {
     }
 
 

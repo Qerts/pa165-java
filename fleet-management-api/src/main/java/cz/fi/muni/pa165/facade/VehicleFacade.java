@@ -9,6 +9,12 @@ import java.util.Collection;
  */
 public interface VehicleFacade {
 
+    /**
+     * find all vehicles
+     * @return list of all vehicles
+     */
+    Collection<VehicleDTO> getAllVehicles();
+
 
     /**
      * Finds all vehicles that are borrowable by the employee.
@@ -34,8 +40,9 @@ public interface VehicleFacade {
     /**
      * Adds new vehicle to company's fleet.
      * @param vehicle Vehicle to be created
+     * @return vehicle id
      */
-    void addNewVehicle(VehicleDTO vehicle);
+    Long addNewVehicle(VehicleDTO vehicle);
 
     /**
      * Updates given vehicle.

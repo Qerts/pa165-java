@@ -21,12 +21,7 @@
         </dependency>
 
         <!-- servlet, JSP, JSTL -->
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
-        </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -36,13 +31,6 @@
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
-        </dependency>
-
-        <!-- Spring MVC -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>4.3.4.RELEASE</version>
         </dependency>
 
         <!-- validator for bean properties -->
@@ -57,12 +45,22 @@
             <version>5.2.4.Final</version>
         </dependency>
 
-        <!-- must provide logging implementation, this is a runnable project -->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.3</version>
+            <groupId>cz.muni.fi.pa165</groupId>
+            <artifactId>fleet-management-sample-data</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.2.7.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
