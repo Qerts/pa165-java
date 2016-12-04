@@ -8,11 +8,14 @@
     <artifactId>fleet-management-app</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
- 
-  <modules>
-    <module>fleet-management-persistence</module>
-    <module>fleet-management-service</module>
-      <module>fleet-management-api</module>
 
-  </modules>
+    <modules>
+        <module>fleet-management-persistence</module>
+        <module>fleet-management-service</module>
+        <module>fleet-management-api</module>
+        <module>fleet-management-sample-data</module>
+        <module>fleet-management-spring-mvc</module>
+
+    </modules>
+
 </project>
