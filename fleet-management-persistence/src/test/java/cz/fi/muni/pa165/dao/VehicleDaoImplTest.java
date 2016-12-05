@@ -193,9 +193,7 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
         Vehicle veh2 = new Vehicle("vrp2", "type", 1991, "engineType", "vin2", 666L);
         Vehicle veh3 = new Vehicle("vrp3", "type", 1991, "engineType", "vin3", 666L);
         VehicleCategory vc1 = new VehicleCategory("category");
-        Set<VehicleCategory> set = new HashSet();
-        set.add(vc1);
-        emp1.setVehicleCategories(set);
+        emp1.addVehicleCategory(vc1);
         veh1.setVehicleCategory(vc1);
         veh2.setVehicleCategory(vc1);
         veh3.setVehicleCategory(vc1);

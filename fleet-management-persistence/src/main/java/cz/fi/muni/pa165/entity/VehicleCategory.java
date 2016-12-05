@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.entity;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,23 +55,27 @@ public class VehicleCategory {
     }
 
     public Set<Vehicle> getVehicles() {
-        return vehicles;
-    }
-
-    public void setVehicles(Set<Vehicle> vehicles) {
-        this.vehicles = vehicles;
+        return Collections.unmodifiableSet(vehicles);
     }
 
     public void addVehicle(Vehicle vehicle) {
-        vehicles.add(vehicle);
+        this.vehicles.add(vehicle);
+    }
+
+    public void removeVehicle(Vehicle vehicle) {
+        this.vehicles.remove(vehicle);
     }
 
     public Set<Employee> getEmployees() {
-        return employees;
+        return Collections.unmodifiableSet(employees);
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void addEmployee(Employee employee) {
+        this.employees.add(employee);
+    }
+
+    public void removeEmployee(Employee employee) {
+        this.employees.remove(employee);
     }
 
     @Override
