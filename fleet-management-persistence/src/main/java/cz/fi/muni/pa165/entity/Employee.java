@@ -4,6 +4,7 @@ package cz.fi.muni.pa165.entity;
 import cz.fi.muni.pa165.enums.Role;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -108,11 +109,16 @@ public class Employee {
     }
 
     public Set<VehicleCategory> getVehicleCategories() {
-        return vehicleCategories;
+        return Collections.unmodifiableSet(vehicleCategories);
     }
 
-    public void setVehicleCategories(Set<VehicleCategory> vehicleCategories) {
-        this.vehicleCategories = vehicleCategories;
+    public void addVehicleCategory(VehicleCategory vehicleCategory) {
+        vehicleCategories.add(vehicleCategory);
+        vehicleCategory.addEmployee(this);
+    }
+
+    public void removeVehicleCategory(VehicleCategory vehicleCategory) {
+        this.vehicleCategories.remove(vehicleCategory);
     }
 
     public Set<Journey> getJourneys() {
