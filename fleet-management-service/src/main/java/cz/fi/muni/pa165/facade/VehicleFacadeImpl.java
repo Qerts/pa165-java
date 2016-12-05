@@ -23,6 +23,10 @@ public class VehicleFacadeImpl implements VehicleFacade {
     @Inject
     private BeanMappingService beanMappingService;
 
+    @Override
+    public Collection<VehicleDTO> getAllVehicles() {
+        return beanMappingService.mapTo(vehicleService.findAll(), VehicleDTO.class);
+    }
     
     @Override
     public Collection<VehicleDTO> findVehiclesAvailable(Long employeeId) {
@@ -40,8 +44,10 @@ public class VehicleFacadeImpl implements VehicleFacade {
     }
 
     @Override
-    public void addNewVehicle(VehicleDTO vehicle) {
-        this.vehicleService.create(this.beanMappingService.mapTo(vehicle, Vehicle.class));
+    public Long addNewVehicle(VehicleDTO vehicle) {
+        Vehicle mappedVehicle = this.beanMappingService.mapTo(vehicle, Vehicle.class);
+        this.vehicleService.create(mappedVehicle);
+        return mappedVehicle.getId();
     }
 
     @Override
