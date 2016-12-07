@@ -7,8 +7,23 @@
 
 <tag:template>
 <jsp:attribute name="body">
-
-<p>Hello world, my happy day!</p>
-
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>vrp</th>
+        <th>type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${vehicles}" var="vehicle">
+        <tr>
+            <td>${vehicle.id}</td>
+            <td>${vehicle.vrp}</td>
+            <td>${vehicle.type}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 </jsp:attribute>
 </tag:template>
