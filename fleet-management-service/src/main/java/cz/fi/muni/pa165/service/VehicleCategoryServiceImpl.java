@@ -4,12 +4,14 @@ import cz.fi.muni.pa165.dao.interfaces.Dao;
 import cz.fi.muni.pa165.dao.interfaces.VehicleCategoryDao;
 import cz.fi.muni.pa165.entity.VehicleCategory;
 import cz.fi.muni.pa165.service.interfaces.VehicleCategoryService;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
 /**
  * @author Jozef Krcho
  */
+@Service
 public class VehicleCategoryServiceImpl extends JpaService<VehicleCategory, Long> implements VehicleCategoryService {
 
     @Inject

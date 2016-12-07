@@ -44,7 +44,6 @@ public class InMemoryDatabaseContext {
     /**
      * Starts up a container that emulates behavior prescribed in JPA spec for container-managed EntityManager
      */
-    @SuppressWarnings("WeakerAccess")
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean jpaFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -59,13 +58,11 @@ public class InMemoryDatabaseContext {
         return new LocalValidatorFactoryBean();
     }
 
-    @SuppressWarnings("WeakerAccess")
     @Bean
     public LoadTimeWeaver instrumentationLoadTimeWeaver() {
         return new InstrumentationLoadTimeWeaver();
     }
 
-    @SuppressWarnings("WeakerAccess")
     @Bean
     public DataSource db() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();

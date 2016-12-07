@@ -42,7 +42,7 @@ public class VehicleController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
-        model.addAttribute("vehicle", vehicleFacade.getAllVehicles());
+        model.addAttribute("vehicles", vehicleFacade.getAllVehicles());
         return "vehicle/list";
     }
 

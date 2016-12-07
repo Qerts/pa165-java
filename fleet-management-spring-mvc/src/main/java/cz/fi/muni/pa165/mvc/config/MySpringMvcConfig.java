@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.mvc.config;
 
+import cz.fi.muni.pa165.config.ServiceConfiguration;
+//import cz.fi.muni.pa165.sampledata.FleetManagementWithSampleDataConfig;
 import cz.fi.muni.pa165.sampledata.FleetManagementWithSampleDataConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +34,7 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
     final static Logger log = LoggerFactory.getLogger(MySpringMvcConfig.class);
 
-    public static final String TEXTS = "Texts";
+    public static final String TEXTS = "Text";
 
     /**
      * Maps the main page to a specific view.

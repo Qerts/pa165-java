@@ -9,6 +9,8 @@ import cz.fi.muni.pa165.service.interfaces.EmployeeService;
 import cz.fi.muni.pa165.service.interfaces.JourneyService;
 import cz.fi.muni.pa165.service.interfaces.VehicleCategoryService;
 import cz.fi.muni.pa165.service.interfaces.VehicleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,8 @@ import java.util.GregorianCalendar;
 @Component
 @Transactional
 public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
+
+    final static Logger log = LoggerFactory.getLogger(SampleDataLoadingFacadeImpl.class);
 
     @Inject
     private EmployeeService employeeService;
@@ -40,6 +44,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         VehicleCategory categoryL = vehicleCategory("Category L: light motor vehicles");
         VehicleCategory categoryM = vehicleCategory("Category M: used for the carriage of passengers");
         VehicleCategory categoryN = vehicleCategory("Category N: used for the carriage of goods");
+        log.info("Loaded vehicle categorys.");
 
         Employee admin = employee("admin@muni.cz", "Admin", "Man", "admin", Role.ADMINISTRATOR);
         Employee serviceman = employee("serviceman@muni.cz", "Thomas", "Cooper", "password", Role.SERVICEMAN);
@@ -54,6 +59,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         addEmployeeVehicleCategory(employee2, categoryL, categoryM);
         addEmployeeVehicleCategory(employee3, categoryL, categoryM, categoryN);
         addEmployeeVehicleCategory(employee4, categoryM);
+        log.info("Loaded employees.");
 
         Vehicle vehicle1 = vehicle(categoryM, "4A23000", "Citroen DS3 1.6 VTi DStyle 3dr", 2011, "Petrol engine", "1FMCU0C73AKC53597", (long) 31570);
         Vehicle vehicle2 = vehicle(categoryM, "6B26635", "Fiat 500 1.2 Sport 3dr", 2010, "Petrol engine", "1B7GL12X52S609193", (long) 98000);
@@ -69,7 +75,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Vehicle truck1 = vehicle(categoryN, "3A24987", "Mitsubishi FUSO FE 180", 2012, "Diesel engine", "2B3KA43D89H525247", (long) 221400);
         Vehicle truck2 = vehicle(categoryN, "1A97103", "Mitsubishi FUSO FE 160", 2012, "Diesel engine", "4S3BMEH68B2260267", (long) 356200);
         Vehicle truck3 = vehicle(categoryN, "1A29434", "Isuzu NPR HD", 2008, "Diesel engine", "1GC1KVE80CF291272", (long) 481800);
-        Vehicle truck4 = vehicle(categoryN, "3A24987", "Ford E-450", 2006, "Diesel engine", "3GNGK26U4YG121594", (long) 297900);
+        Vehicle truck4 = vehicle(categoryN, "3A21245", "Ford E-450", 2006, "Diesel engine", "3GNGK26U4YG121594", (long) 297900);
         Vehicle truck5 = vehicle(categoryN, "2A31734", "Freightliner CASCADIA", 2009, "Diesel engine", "1FTJE34F6SHA08131", (long) 187100);
 
         Vehicle bike1 = vehicle(categoryL, "2A79905", "BMW R1200GS ADVENTURE TE 1170cc", 2016, "Petrol engine", "3VWMZ81K89M306845", (long) 7865);
@@ -77,7 +83,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Vehicle bike3 = vehicle(categoryL, "2A44304", "Honda CB500 500cc", 2002, "Petrol engine", "WAUNF78P27A123055", (long) 35408);
         Vehicle bike4 = vehicle(categoryL, "2A39700", "Pioneer XF 124cc", 1997, "Petrol engine", "WVWYK73C18E115975", (long) 14148);
         Vehicle bike5 = vehicle(categoryL, "2A91101", "Honda CB1 398cc", 1989, "Petrol engine", "1FMCU0DG0AKB22433", (long) 77500);
-
+        log.info("Loaded vehicles.");
         //vehicle journeys
         journey(2016, 1, 1, 2016, 1, 6, 1200, admin, vehicle1);
         journey(2016, 1, 15, 2016, 1, 23, 2304, serviceman, vehicle1);
@@ -113,8 +119,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         journey(2016, 2, 22, 2016, 2, 26, 1127, employee1, bike4);
         journey(2016, 3, 2, 2016, 3, 7, 1400, employee1, bike5);
         journey(2016, 3, 11, 2016, 3, 16, 1722, employee1, bike5);
-
-
+        log.info("Loaded journeys.");
     }
 
     private void addEmployeeVehicleCategory(Employee employee,VehicleCategory... vehicleCategorys) {
