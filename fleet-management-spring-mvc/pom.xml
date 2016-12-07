@@ -16,7 +16,7 @@
         <!-- dependency on eshop sample data, other eshop parts are imported by transitive dependencies of this one-->
         <dependency>
             <groupId>cz.fi.muni.pa165</groupId>
-            <artifactId>fleet-management-service</artifactId>
+            <artifactId>fleet-management-sample-data</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
@@ -56,10 +56,7 @@
 
         <!-- must provide logging implementation, this is a runnable project -->
         <!-- see viz http://docs.spring.io/platform/docs/1.1.4.RELEASE/reference/htmlsingle/#getting-started-logging -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-logging</artifactId>
-        </dependency>
+
 
         <!-- libraries needed for unit tests -->
         <dependency>
