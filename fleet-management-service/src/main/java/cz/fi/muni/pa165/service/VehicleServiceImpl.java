@@ -9,6 +9,7 @@ import cz.fi.muni.pa165.service.interfaces.VehicleService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +44,17 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
         }
 
         return result;
+    }
+
+    public List<Vehicle> findActiveVehicles() {
+        List<Vehicle> all = vehicleDao.findAll();
+        List<Vehicle> active = new ArrayList<>();
+        for (Vehicle v : all) {
+            if (v.getActive()==null || v.getActive()) {
+                active.add(v);
+            }
+        }
+        return active;
     }
 
 

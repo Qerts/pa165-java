@@ -55,4 +55,11 @@ public interface VehicleFacade {
      * @param vehicleId Id of the vehicle
      */
     void disableVehicle(Long vehicleId);
+
+    /**
+     * get all vehicles that are not disabled
+     * @return collection of vehicles dto
+     */
+    Collection<VehicleDTO> getAllActiveVehicles();
+
 }

@@ -160,7 +160,7 @@ public class Vehicle {
         this.inspectionIntervals = inspectionIntervals;
     }
 
-    public boolean getActive() {return this.active;}
+    public Boolean getActive() {return this.active;}
     public void setActive(Boolean active) {this.active = active;}
 
     @Override
