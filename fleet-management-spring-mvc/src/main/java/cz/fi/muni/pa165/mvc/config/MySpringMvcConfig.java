@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.mvc.config;
 
-import cz.fi.muni.pa165.sampledata.FleetManagementWithSampleDataConfig;
+import cz.fi.muni.pa165.config.ServiceConfiguration;
+//import cz.fi.muni.pa165.sampledata.FleetManagementWithSampleDataConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -26,7 +27,7 @@ import javax.validation.Validator;
 
 @EnableWebMvc
 @Configuration
-@Import({FleetManagementWithSampleDataConfig.class})
+@Import({ServiceConfiguration.class})
 @ComponentScan(basePackages = "cz.fi.muni.pa165.mvc.controllers")
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 

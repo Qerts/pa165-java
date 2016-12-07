@@ -7,12 +7,12 @@ import cz.fi.muni.pa165.enums.Role;
 import cz.fi.muni.pa165.service.interfaces.BeanMappingService;
 import cz.fi.muni.pa165.service.interfaces.EmployeeService;
 import org.hibernate.service.spi.ServiceException;
-import org.junit.Assert;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
