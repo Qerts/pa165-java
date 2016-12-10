@@ -15,7 +15,7 @@ public class Vehicle {
     private Long id;
 
     @Column(name = "is_active")
-    private Boolean active;
+    private Boolean active = true;
 
     /**
      * Vehicle registration plate number (SPZ).

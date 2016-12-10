@@ -50,7 +50,7 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
         List<Vehicle> all = vehicleDao.findAll();
         List<Vehicle> active = new ArrayList<>();
         for (Vehicle v : all) {
-            if (v.getActive()==null || v.getActive()) {
+            if (Boolean.TRUE.equals(v.getActive())) {
                 active.add(v);
             }
         }

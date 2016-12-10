@@ -50,6 +50,7 @@ public class VehicleFacadeImpl implements VehicleFacade {
 
     @Override
     public Long addNewVehicle(VehicleDTO vehicle) {
+        vehicle.setActive(true);
         Vehicle mappedVehicle = this.beanMappingService.mapTo(vehicle, Vehicle.class);
         this.vehicleService.create(mappedVehicle);
         return mappedVehicle.getId();
