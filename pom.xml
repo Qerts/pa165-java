@@ -73,6 +73,7 @@
         <module>fleet-management-spring-mvc</module>
         <module>fleet-management-rest</module>
 
+
     </modules>
 
 </project>

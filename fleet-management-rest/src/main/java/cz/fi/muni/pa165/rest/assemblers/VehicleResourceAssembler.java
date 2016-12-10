@@ -21,18 +21,18 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 public class VehicleResourceAssembler implements ResourceAssembler<VehicleDTO, Resource<VehicleDTO>> {
 
     @Override
-    public Resource<VehicleDTO> toResource(VehicleDTO productDTO) {
-        long id = productDTO.getId();
-        Resource<VehicleDTO> productResource = new Resource<VehicleDTO>(productDTO);
+    public Resource<VehicleDTO> toResource(VehicleDTO vehicleDTO) {
+        long id = vehicleDTO.getId();
+        Resource<VehicleDTO> vehicleResource = new Resource<VehicleDTO>(vehicleDTO);
 
         try {
-            productResource.add(linkTo(VehiclesControllerHateoas.class).slash(productDTO.getId()).withSelfRel());
-            productResource.add(linkTo(VehiclesControllerHateoas.class).slash(productDTO.getId()).withRel("DELETE"));
+            vehicleResource.add(linkTo(VehiclesControllerHateoas.class).slash(vehicleDTO.getId()).withSelfRel());
+            vehicleResource.add(linkTo(VehiclesControllerHateoas.class).slash(vehicleDTO.getId()).withRel("DELETE"));
 
         } catch (Exception ex) {
             Logger.getLogger(VehicleResourceAssembler.class.getName()).log(Level.SEVERE, "could not link resource from VehiclesControllerHateoas", ex);
         }
 
-        return productResource;
+        return vehicleResource;
     }
 }
