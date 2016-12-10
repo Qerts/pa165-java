@@ -98,7 +98,7 @@ public class VehicleServiceImplTest {
     public void testSoftDelete(){
         this.vehicleService.disable(v1.getId());
         Vehicle v = this.vehicleService.findById(v1.getId());
-        Assert.assertEquals(v.getActive(), false);
+        Assert.assertEquals(v.getActive(), Boolean.FALSE);
     }
 
     @Test
