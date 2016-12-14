@@ -1,9 +1,12 @@
 package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.config.ServiceConfiguration;
+import cz.fi.muni.pa165.dto.VehicleCreateDTO;
 import cz.fi.muni.pa165.dto.VehicleDTO;
 import cz.fi.muni.pa165.entity.Vehicle;
+import cz.fi.muni.pa165.entity.VehicleCategory;
 import cz.fi.muni.pa165.service.interfaces.BeanMappingService;
+import cz.fi.muni.pa165.service.interfaces.VehicleCategoryService;
 import cz.fi.muni.pa165.service.interfaces.VehicleService;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -17,6 +20,7 @@ import org.testng.annotations.Test;
 
 import java.util.Collections;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -32,12 +36,17 @@ public class VehicleFacadeImplTest extends AbstractTestNGSpringContextTests {
     @Mock
     private VehicleService vehicleService;
 
+    @Mock
+    private VehicleCategoryService vehicleCategoryService;
+
     @InjectMocks
     private VehicleFacadeImpl vehicleFacade;
 
     private Vehicle vehicle;
 
     private VehicleDTO vehicleDTO;
+
+    private VehicleCreateDTO vehicleCreateDTO;
 
     private Long id = (long) 1;
     private String vrp = "VRP";
@@ -54,8 +63,12 @@ public class VehicleFacadeImplTest extends AbstractTestNGSpringContextTests {
 
         vehicle = new Vehicle(vrp, type, productionYear, engineType, vin, initialKilometrage);
         vehicleDTO = new VehicleDTO(vrp, type, productionYear, engineType, vin, initialKilometrage, active);
+        vehicleCreateDTO = new VehicleCreateDTO(vrp, type, productionYear, engineType, vin, initialKilometrage, active);
         vehicle.setId(id);
         vehicleDTO.setId(id);
+
+
+
     }
 
     @Test
@@ -90,9 +103,10 @@ public class VehicleFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testAddNewVehicle() {
-        when(beanMappingService.mapTo(vehicleDTO, Vehicle.class)).thenReturn(vehicle);
+        when(beanMappingService.mapTo(vehicleCreateDTO, Vehicle.class)).thenReturn(vehicle);
+        when(vehicleCategoryService.findById(any())).thenReturn(new VehicleCategory("new Category"));
 
-        vehicleFacade.addNewVehicle(vehicleDTO);
+        vehicleFacade.addNewVehicle(vehicleCreateDTO);
 
         verify(vehicleService).create(vehicle);
     }

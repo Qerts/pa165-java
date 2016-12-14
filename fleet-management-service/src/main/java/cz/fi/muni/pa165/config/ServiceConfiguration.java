@@ -38,6 +38,7 @@ public class ServiceConfiguration {
             mapping(Journey.class, JourneyDTO.class);
             mapping(VehicleCategory.class, VehicleCategoryDTO.class);
             mapping(Vehicle.class, VehicleDTO.class);
+            //mapping(Vehicle.class, VehicleCreateDTO.class);
         }
     }
 }

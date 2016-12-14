@@ -1,8 +1,11 @@
 package cz.fi.muni.pa165.facade;
 
+import cz.fi.muni.pa165.dto.VehicleCategoryDTO;
+import cz.fi.muni.pa165.dto.VehicleCreateDTO;
 import cz.fi.muni.pa165.dto.VehicleDTO;
 import cz.fi.muni.pa165.entity.Vehicle;
 import cz.fi.muni.pa165.service.interfaces.BeanMappingService;
+import cz.fi.muni.pa165.service.interfaces.VehicleCategoryService;
 import cz.fi.muni.pa165.service.interfaces.VehicleService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +24,9 @@ public class VehicleFacadeImpl implements VehicleFacade {
     private VehicleService vehicleService;
 
     @Inject
+    private VehicleCategoryService vehicleCategoryService;
+
+    @Inject
     private BeanMappingService beanMappingService;
 
     @Override
@@ -32,7 +38,12 @@ public class VehicleFacadeImpl implements VehicleFacade {
     public Collection<VehicleDTO> getAllActiveVehicles() {
         return beanMappingService.mapTo(vehicleService.findActiveVehicles(), VehicleDTO.class);
     }
-    
+
+    @Override
+    public Collection<VehicleCategoryDTO> getAllVehicleCategories() {
+        return beanMappingService.mapTo(vehicleCategoryService.findAll(), VehicleCategoryDTO.class);
+    }
+
     @Override
     public Collection<VehicleDTO> findVehiclesAvailable(Long employeeId) {
         return this.beanMappingService.mapTo(this.vehicleService.findVehiclesAvailable(employeeId), VehicleDTO.class);
@@ -49,9 +60,10 @@ public class VehicleFacadeImpl implements VehicleFacade {
     }
 
     @Override
-    public Long addNewVehicle(VehicleDTO vehicle) {
+    public Long addNewVehicle(VehicleCreateDTO vehicle) {
         vehicle.setActive(true);
         Vehicle mappedVehicle = this.beanMappingService.mapTo(vehicle, Vehicle.class);
+        mappedVehicle.setVehicleCategory(vehicleCategoryService.findById(vehicle.getVehicleCategoryId()));
         this.vehicleService.create(mappedVehicle);
         return mappedVehicle.getId();
     }
@@ -65,4 +77,6 @@ public class VehicleFacadeImpl implements VehicleFacade {
     public void disableVehicle(Long vehicleId) {
         this.vehicleService.disable(vehicleId);
     }
+
+
 }
