@@ -85,15 +85,6 @@ public class VehicleController {
         return "vehicle/new";
     }
 
-    /*
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        if (binder.getTarget() instanceof VehicleDTO) {
-            binder.addValidators(new VehicleDTOValidator());
-        }
-    } */
-
-
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("vehicleCreate") VehicleCreateDTO formBean, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {

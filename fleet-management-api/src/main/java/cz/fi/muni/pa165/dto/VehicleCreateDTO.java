@@ -66,7 +66,7 @@ public class VehicleCreateDTO {
     }
 
     public void setVrp(String vrp) {
-        this.vrp = vrp;
+        this.vrp = vrp.toUpperCase();
     }
 
     public String getType() {
