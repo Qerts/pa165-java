@@ -1,0 +1,33 @@
+Sprava vozoveho parku
+
+Aplikácia eviduje vozidlá vo vozovom parku imaginárnej organizácie. Pre každé auto je možné definovat servisné intervaly, ktoré sú priradené k jednotlivým vozidlám. Vozidlo je definované základnými parametrami (znacka, typ, rok výroby, typ motora, VIN, pocet km ...). Každému autu je priradených viac servisných intervalov, pricom sa definuje ci daná kontrola prebehla, ak áno tak kedy. Auto musí íst na kontrolu v pravidelných intervaloch. Ak dosiahne urcitý stav najazdených km nesmie byt dostupné pri výbere. Aplikácia bude schopná pridávat zamestnancov, ktorí si môžu auto požicat, avšak iba také, ktoré prináleží do jeho triedy zaradenia. Každému zamestnancovi je možné evidovat jazdy, ktoré absolvoval a bude možný výpis jázd, poctu km za urcité obdobie.
+
+
+Prava:
+Admin - prava vsude
+Employee - C journey, R vsude
+Technician - CRU inspeciton, R vehicle, R inspectionInterval
+
+Obrazovky:
+	1. Login page
+	2. Rozcestnik
+		a. Admin page 
+			i. CRUD vehicle
+			ii. CRUD employee
+			iii. CRUD vehicle category
+			iv. CRUD inspection interval
+			v. CRUD journey
+			vi. CRUD Inspection
+			vii. Log out
+		b. Employee page 
+			i. CR journey
+			ii. R vehicle
+			iii. R category
+			iv. Log out
+		c. Service guy page
+			i. CRU Inspection
+			ii. R Vehicle
+Log out
+
+Link to wireframe:
+https://app.moqups.com/michal.balicky@gmail.com/641GUagnhj/view 
