@@ -19,7 +19,7 @@ public class JourneyDTO {
 
     private EmployeeDTO employee;
 
-    protected JourneyDTO() {
+    public JourneyDTO() {
     }
 
     public JourneyDTO(Date borrowedAt, VehicleDTO vehicle, EmployeeDTO employee) {

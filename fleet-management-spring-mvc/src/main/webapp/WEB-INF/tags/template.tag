@@ -44,6 +44,7 @@
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="${pageContext.request.contextPath}/technician/vehicleListView/"><f:message key="Vehicles"/></a></li>
+                        <li><a href="${pageContext.request.contextPath}/employee/vehicleListView/"><f:message key="Available Vehicles"/></a></li>
                     </ul>
                 </li>
             </ul>

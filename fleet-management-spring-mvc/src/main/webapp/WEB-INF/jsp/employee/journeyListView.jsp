@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<tag:template title="Vehicles">
+<tag:template title="journeys">
 <jsp:attribute name="body">
 
 <table class="table table-striped">
@@ -18,15 +18,12 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${vehicles}" var="vehicle">
+    <c:forEach items="${journeys}" var="journey">
         <tr>
-            <td>${vehicle.id}</td>
-            <td>${vehicle.vrp}</td>
-            <td>${vehicle.type}</td>
-            <td><c:out value="${vehicle.productionYear}"/></td>
-            <td>
-                <a href="${pageContext.request.contextPath}/employee/vehicleAddInspectionView/${vehicle.id}" modelAttribute="journeyCreate" class="btn btn-primary">Add journey</a>
-            </td>
+            <td>${journey.id}</td>
+            <td>${journey.distance}</td>
+            <td><c:out value="${journey.borrowedAt}"/></td>
+            <td><c:out value="${journey.returnedAt}"/></td>
         </tr>
     </c:forEach>
     </tbody>

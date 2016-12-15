@@ -31,6 +31,13 @@ public interface JourneyFacade {
      */
     List<JourneyDTO> getJourneys(Date from, Date to, Long employeeId);
 
+
+    /**
+     * add existing journey
+     * @param journey
+     */
+    void addJourney(JourneyDTO journey);
+
     /**
      * creates new journey
      * @param vehicleId vehicle id for new journey
