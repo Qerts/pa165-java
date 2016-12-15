@@ -8,7 +8,13 @@
 <tag:template>
 <jsp:attribute name="body">
 
-<p>Hello world, my happy day!</p>
+<form action="login.html" method="post">
+    <label> UserName: </label>
+    <input type="text" name="userName"/> <br/>
+    <label> Password: </label>
+    <input type="password" name="password"/><br/>
+    <input type="submit" value="login"/>
+</form>
 
 </jsp:attribute>
 </tag:template>

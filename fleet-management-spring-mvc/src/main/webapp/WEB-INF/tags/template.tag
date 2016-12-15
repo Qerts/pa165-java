@@ -43,7 +43,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.options"/><b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="${pageContext.request.contextPath}/vehicle/list/"><f:message key="nav.vehicle.list"/></a></li>
+                        <li><a href="${pageContext.request.contextPath}/technician/vehicleListView/"><f:message key="Vehicles"/></a></li>
                     </ul>
                 </li>
             </ul>
