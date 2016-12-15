@@ -33,7 +33,7 @@ import java.util.Locale;
 @EnableWebMvc
 @Configuration
 @Import({FleetManagementWithSampleDataConfig.class})
-@ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.controllers", "cz.fi.muni.pa165.rest.controllers"})
+@ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.controllers"})
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
     final static Logger log = LoggerFactory.getLogger(MySpringMvcConfig.class);
