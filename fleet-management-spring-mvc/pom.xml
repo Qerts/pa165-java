@@ -19,11 +19,6 @@
             <artifactId>fleet-management-sample-data</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>cz.fi.muni.pa165</groupId>
-            <artifactId>fleet-management-rest</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
