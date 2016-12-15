@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Richard Trebichavský
@@ -33,8 +35,9 @@ public class VehiclesController {
      * @throws JsonProcessingException
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final Collection<VehicleDTO> getVehicles() throws JsonProcessingException {
+    public final List<VehicleDTO> getVehicles() throws JsonProcessingException {
         logger.debug("rest getVehicles()");
-        return vehiclesFacade.getAllVehicles();
+        List<VehicleDTO> allVehicles = new ArrayList<>(vehiclesFacade.getAllVehicles());
+        return allVehicles;
     }
 }

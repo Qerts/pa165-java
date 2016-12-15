@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.mvc.config;
 
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -38,6 +40,12 @@ public class MyStartInitializer extends AbstractAnnotationConfigDispatcherServle
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return null;
+    }
+
+    @Override
+    public void onStartup(javax.servlet.ServletContext servletContext) throws javax.servlet.ServletException {
+        super.onStartup(servletContext);
+        servletContext.addListener(RequestContextListener.class);
     }
 
 }
