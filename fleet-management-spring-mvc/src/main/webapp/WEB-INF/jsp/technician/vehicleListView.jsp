@@ -25,7 +25,7 @@
             <td>${vehicle.type}</td>
             <td><c:out value="${vehicle.productionYear}"/></td>
             <td>
-                <a href="${pageContext.request.contextPath}/technician/vehicleAddInspectionView/${vehicle.id}" class="btn btn-primary">Add inspection</a>
+                <a href="${pageContext.request.contextPath}/technician/vehicleAddInspectionView/${vehicle.id}" modelAttribute="vehicleCreate" class="btn btn-primary">Add inspection</a>
             </td>
         </tr>
     </c:forEach>

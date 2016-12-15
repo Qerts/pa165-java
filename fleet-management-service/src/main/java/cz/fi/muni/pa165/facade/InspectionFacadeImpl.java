@@ -42,7 +42,8 @@ public class InspectionFacadeImpl implements InspectionFacade {
     }
 
     @Override
-    public void performInspection(InspectionDTO inspectionDTO) {
+    public long performInspection(InspectionDTO inspectionDTO) {
         inspectionService.create(bms.mapTo(inspectionDTO, Inspection.class));
+        return inspectionDTO.getId();
     }
 }
