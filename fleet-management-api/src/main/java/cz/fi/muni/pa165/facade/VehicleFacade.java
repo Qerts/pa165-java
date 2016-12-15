@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.facade;
 
+import cz.fi.muni.pa165.dto.VehicleCategoryDTO;
+import cz.fi.muni.pa165.dto.VehicleCreateDTO;
 import cz.fi.muni.pa165.dto.VehicleDTO;
 
 import java.util.Collection;
@@ -42,7 +44,7 @@ public interface VehicleFacade {
      * @param vehicle Vehicle to be created
      * @return vehicle id
      */
-    Long addNewVehicle(VehicleDTO vehicle);
+    Long addNewVehicle(VehicleCreateDTO vehicle);
 
     /**
      * Updates given vehicle.
@@ -61,5 +63,11 @@ public interface VehicleFacade {
      * @return collection of vehicles dto
      */
     Collection<VehicleDTO> getAllActiveVehicles();
+
+    /**
+     * get all vehicle categories
+     * @return collection of vehicle categories dto
+     */
+    Collection<VehicleCategoryDTO> getAllVehicleCategories();
 
 }

@@ -25,8 +25,19 @@
                 <form:errors path="type" cssClass="help-block"/>
             </div>
         </div>
+        <div class="form-group">
+            <form:label path="vehicleCategoryId" cssClass="col-sm-2 control-label">Vehicle category</form:label>
+            <div class="col-sm-10">
+                    <form:select path="vehicleCategoryId" cssClass="form-control">
+                        <c:forEach items="${vehicleCategories}" var="c">
+                            <form:option value="${c.id}">${c.name}</form:option>
+                        </c:forEach>
+                    </form:select>
+                <p class="help-block"><form:errors path="vehicleCategoryId" cssClass="error"/></p>
+            </div>
+        </div>
 
-        <div class="form-group ${productionYear_error?'has-error':''}" >
+        <div class="form-group ${productionYear_error?'has-error':''}">
             <form:label path="productionYear" cssClass="col-sm-2 control-label">Year of production</form:label>
             <div class="col-sm-10">
                 <form:input path="productionYear" cssClass="form-control"/>
@@ -34,7 +45,7 @@
             </div>
         </div>
 
-        <div class="form-group ${engineType_error?'has-error':''}" >
+        <div class="form-group ${engineType_error?'has-error':''}">
             <form:label path="engineType" cssClass="col-sm-2 control-label">Type of engine</form:label>
             <div class="col-sm-10">
                 <form:input path="engineType" cssClass="form-control"/>
@@ -43,7 +54,7 @@
         </div>
 
 
-        <div class="form-group ${vin_error?'has-error':''}" >
+        <div class="form-group ${vin_error?'has-error':''}">
             <form:label path="vin" cssClass="col-sm-2 control-label">Vin</form:label>
             <div class="col-sm-10">
                 <form:input path="vin" cssClass="form-control"/>
@@ -51,7 +62,7 @@
             </div>
         </div>
 
-        <div class="form-group ${initialKilometrage_error?'has-error':''}" >
+        <div class="form-group ${initialKilometrage_error?'has-error':''}">
             <form:label path="initialKilometrage" cssClass="col-sm-2 control-label">Initial kilometrage</form:label>
             <div class="col-sm-10">
                 <form:input path="initialKilometrage" cssClass="form-control"/>
