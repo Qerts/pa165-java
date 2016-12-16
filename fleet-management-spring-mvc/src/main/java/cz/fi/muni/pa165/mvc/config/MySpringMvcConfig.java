@@ -32,7 +32,7 @@ import java.util.Locale;
 
 @EnableWebMvc
 @Configuration
-@Import({FleetManagementWithSampleDataConfig.class})
+@Import({FleetManagementWithSampleDataConfig.class, SecurityConfig.class})
 @ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.controllers", "cz.fi.muni.pa165.rest.controllers", "cz.fi.muni.pa165.rest.assemblers"})
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
