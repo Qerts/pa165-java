@@ -1,52 +1,44 @@
 package cz.fi.muni.pa165.rest.controllers;
 
-import cz.fi.muni.pa165.rest.ApiUris;
-
-import java.util.Collection;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import cz.fi.muni.pa165.dto.VehicleDTO;
+import cz.fi.muni.pa165.facade.VehicleFacade;
+import cz.fi.muni.pa165.rest.tools.ApiUris;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import cz.fi.muni.pa165.dto.VehicleDTO;
-
-import cz.fi.muni.pa165.facade.VehicleFacade;
-import cz.fi.muni.pa165.rest.exceptions.InvalidParameterException;
-import cz.fi.muni.pa165.rest.exceptions.ResourceAlreadyExistingException;
-import cz.fi.muni.pa165.rest.exceptions.ResourceNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
- * REST Controller for Vehicles
- *
- * @author Martin Schmidt
+ * @author Richard Trebichavský
  */
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_VEHICLES)
 public class VehiclesController {
-
     final static Logger logger = LoggerFactory.getLogger(VehiclesController.class);
 
     @Inject
-    private VehicleFacade vehicleFacade;
+    private VehicleFacade vehiclesFacade;
 
     /**
-     * Get list of Vehicles curl -i -X GET
-     * http://localhost:8080/fleet-management-rest/vehicles
+     * Get list of all Vehicles GET
+     * http://localhost:8080/rest/vehicles
      *
-     * @return VehicleDTO
+     * @return list of VehicleDTO
+     * @throws JsonProcessingException
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final Collection<VehicleDTO> getVehicles() {
+    public final List<VehicleDTO> getVehicles() throws JsonProcessingException {
         logger.debug("rest getVehicles()");
-        return vehicleFacade.getAllActiveVehicles();
+        List<VehicleDTO> allVehicles = new ArrayList<>(vehiclesFacade.getAllVehicles());
+        return allVehicles;
     }
 
     /**
@@ -109,6 +101,4 @@ public class VehiclesController {
             throw new ResourceAlreadyExistingException();
         }
     }
-
-
 }

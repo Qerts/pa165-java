@@ -1,9 +1,11 @@
 package cz.fi.muni.pa165.mvc.controllers;
 
 import cz.fi.muni.pa165.dto.VehicleCategoryDTO;
+import cz.fi.muni.pa165.dto.VehicleCreateDTO;
 import cz.fi.muni.pa165.dto.VehicleDTO;
 import cz.fi.muni.pa165.entity.VehicleCategory;
 import cz.fi.muni.pa165.facade.VehicleFacade;
+import cz.fi.muni.pa165.mvc.validators.VehicleDTOValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,6 +65,13 @@ public class VehicleController {
         return "vehicle/view";
     }
 
+    @ModelAttribute("vehicleCategories")
+    public List<VehicleCategoryDTO> vehicleCategories() {
+        log.debug("vehicleCategories()");
+        List<VehicleCategoryDTO> vehicleCategories = new ArrayList(vehicleFacade.getAllVehicleCategories());
+        return vehicleCategories;
+    }
+
     /**
      * Prepares an empty form.
      *
@@ -71,13 +81,12 @@ public class VehicleController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newVehicle(Model model) {
         log.debug("new()");
-        model.addAttribute("vehicleCreate", new VehicleDTO());
+        model.addAttribute("vehicleCreate", new VehicleCreateDTO());
         return "vehicle/new";
     }
 
-
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("vehicleCreate") VehicleDTO formBean, BindingResult bindingResult,
+    public String create(@Valid @ModelAttribute("vehicleCreate") VehicleCreateDTO formBean, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         log.debug("create(vehicleCreate={})", formBean);
         //in case of validation error forward back to the the form
