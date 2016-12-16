@@ -1,6 +1,9 @@
 package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.config.ServiceConfiguration;
+import cz.fi.muni.pa165.dto.EmployeeDTO;
+import cz.fi.muni.pa165.dto.JourneyDTO;
+import cz.fi.muni.pa165.dto.VehicleDTO;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
@@ -32,12 +35,11 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class JourneyFacadeImplTest extends AbstractTestNGSpringContextTests {
 
-    @Spy
-    @Inject
-    private final BeanMappingService beanMappingService = new BeanMappingServiceImpl();
+    @Mock
+    private BeanMappingService beanMappingService;
 
     @InjectMocks
-    private final JourneyFacadeImpl journeyFacade = new JourneyFacadeImpl();
+    private JourneyFacadeImpl journeyFacade;
 
     @Mock
     private JourneyServiceImpl journeyService;
@@ -52,6 +54,7 @@ public class JourneyFacadeImplTest extends AbstractTestNGSpringContextTests {
     private Employee employee;
     private Vehicle vehicle;
     private Journey journey;
+    private JourneyDTO journeyDTO;
 
     @BeforeMethod
     public void init() {
@@ -60,6 +63,9 @@ public class JourneyFacadeImplTest extends AbstractTestNGSpringContextTests {
         employee = new Employee("john.doe@muni.cz", "John", "Doe", "password", Role.EMPLOYEE);
         vehicle = mock(Vehicle.class);
         journey = new Journey(in, vehicle, employee);
+        EmployeeDTO employeeDTO = new EmployeeDTO("john.doe@muni.cz", "John", "Doe", "password", Role.EMPLOYEE);
+        VehicleDTO vehicleDTO = new VehicleDTO("vrp", "type", 2012, "engineType", "vin", 20000l, false);
+        journeyDTO = new JourneyDTO(in, vehicleDTO, employeeDTO);
 
     }
 
@@ -87,6 +93,8 @@ public class JourneyFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testBeginJourney() {
+        when(journeyService.beginJourney(vehicle.getId(), employee.getId(), in)).thenReturn(journey);
+        when(beanMappingService.mapTo(journey, JourneyDTO.class)).thenReturn(journeyDTO);
         journeyFacade.beginJourney(vehicle.getId(), employee.getId(), in);
         verify(journeyService).beginJourney(vehicle.getId(), employee.getId(), in);
     }
