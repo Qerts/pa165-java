@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.InMemoryDatabaseContext;
 import cz.fi.muni.pa165.dto.*;
 import cz.fi.muni.pa165.entity.*;
 import cz.fi.muni.pa165.facade.JourneyFacadeImpl;
+import cz.fi.muni.pa165.security.SecurityConfig;
 import cz.fi.muni.pa165.service.JourneyServiceImpl;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -17,7 +18,7 @@ import org.springframework.context.annotation.Import;
  * @author Martin Schmidt
  */
 @Configuration
-@Import(InMemoryDatabaseContext.class)
+@Import({InMemoryDatabaseContext.class, SecurityConfig.class})
 @ComponentScan(basePackageClasses = {JourneyServiceImpl.class, JourneyFacadeImpl.class})
 public class ServiceConfiguration {
 

@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.inject.Inject;
-import javax.inject.Qualifier;
 
 
 /**
@@ -20,7 +19,7 @@ import javax.inject.Qualifier;
  */
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.security"})
+@ComponentScan(basePackages = {"cz.fi.muni.pa165.security"})
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Inject
@@ -34,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ADMINISTRATOR')")
-                .antMatchers("/technician/**").access("hasRole('ADMINISTRATOR') and hasRole('SERVICEMAN')")
+                .antMatchers("/technician/**").access("hasRole('ADMINISTRATOR') or hasRole('SERVICEMAN')")
                 //.anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
                     .usernameParameter("inputEmail").passwordParameter("inputPassword")
@@ -49,11 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Inject
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 }

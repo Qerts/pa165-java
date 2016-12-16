@@ -1,8 +1,8 @@
-package cz.fi.muni.pa165.mvc.security;
+package cz.fi.muni.pa165.security;
 
-import cz.fi.muni.pa165.dto.EmployeeDTO;
+import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.enums.Role;
-import cz.fi.muni.pa165.facade.EmployeeFacade;
+import cz.fi.muni.pa165.service.interfaces.EmployeeService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -25,14 +25,14 @@ import java.util.Set;
 public class MyUserDetailsService implements UserDetailsService {
 
     @Inject
-    private EmployeeFacade employeeFacade;
+    private EmployeeService employeeService;
 
     @Transactional(readOnly=true)
     @Override
     public UserDetails loadUserByUsername(final String email)
             throws UsernameNotFoundException {
 
-        EmployeeDTO user = employeeFacade.findEmployeeByEmail(email);
+        Employee user = employeeService.findByEmail(email);
         List<GrantedAuthority> authorities =
                 buildUserAuthority(user.getRole());
 
@@ -42,8 +42,10 @@ public class MyUserDetailsService implements UserDetailsService {
 
     // Converts Employee user to
     // org.springframework.security.core.userdetails.User
-    private User buildUserForAuthentication(EmployeeDTO user,
+    private User buildUserForAuthentication(Employee user,
                                             List<GrantedAuthority> authorities) {
+        System.out.println("--------------------------------------------------------------");
+        System.out.println(user.getEmail() + "  pass:"  + user.getPasswordHash());
         return new User(user.getEmail(), user.getPasswordHash(),
                 true, true, true, true, authorities);
     }

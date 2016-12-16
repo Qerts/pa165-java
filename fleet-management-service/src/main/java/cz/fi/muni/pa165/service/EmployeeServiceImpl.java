@@ -28,7 +28,8 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
     @Inject
     private EmployeeDao employeeDao;
 
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Inject
+    private PasswordEncoder passwordEncoder;
 
     @Override
     protected Dao<Employee, Long> getDao() {
