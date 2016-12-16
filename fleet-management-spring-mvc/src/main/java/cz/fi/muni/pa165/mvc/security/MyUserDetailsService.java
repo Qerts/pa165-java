@@ -55,16 +55,16 @@ public class MyUserDetailsService implements UserDetailsService {
         // Build user's authorities
         switch (role) {
             case EMPLOYEE:
-                setAuths.add(new SimpleGrantedAuthority(Role.EMPLOYEE.name()));
+                setAuths.add(new SimpleGrantedAuthority(Role.EMPLOYEE.toString()));
                 break;
             case SERVICEMAN:
-                setAuths.add(new SimpleGrantedAuthority(Role.EMPLOYEE.name()));
-                setAuths.add(new SimpleGrantedAuthority(Role.SERVICEMAN.name()));
+                setAuths.add(new SimpleGrantedAuthority(Role.EMPLOYEE.toString()));
+                setAuths.add(new SimpleGrantedAuthority(Role.SERVICEMAN.toString()));
                 break;
             case ADMINISTRATOR:
-                setAuths.add(new SimpleGrantedAuthority(Role.EMPLOYEE.name()));
-                setAuths.add(new SimpleGrantedAuthority(Role.SERVICEMAN.name()));
-                setAuths.add(new SimpleGrantedAuthority(Role.ADMINISTRATOR.name()));
+                setAuths.add(new SimpleGrantedAuthority(Role.EMPLOYEE.toString()));
+                setAuths.add(new SimpleGrantedAuthority(Role.SERVICEMAN.toString()));
+                setAuths.add(new SimpleGrantedAuthority(Role.ADMINISTRATOR.toString()));
                 break;
         }
 

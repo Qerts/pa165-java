@@ -8,19 +8,19 @@
 <tag:template>
 <jsp:attribute name="body">
 
-    <div class="container">
-
-        <form class="form-signin">
+        <form method="POST" action="${contextPath}/login" class="form-signin">
             <h2 class="form-signin-heading">Please sign in</h2>
+
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address"
+                   required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password"
+                   required>
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
-
-    </div>
-
 
 </jsp:attribute>
 </tag:template>

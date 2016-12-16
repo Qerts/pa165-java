@@ -34,11 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ADMINISTRATOR')")
+                .antMatchers("/technician/**").access("hasRole('ADMINISTRATOR') and hasRole('SERVICEMAN')")
                 //.anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
-                    .usernameParameter("loginName").passwordParameter("loginPassword")
+                    .usernameParameter("inputEmail").passwordParameter("inputPassword")
                 .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/home");
+                .and().exceptionHandling().accessDeniedPage("/403");
                    /* .permitAll()
                     .and()
                 .logout()

@@ -44,11 +44,11 @@
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="${pageContext.request.contextPath}/technician/vehicleListView/"><f:message
-                                key="Vehicles"/></a></li>
+                                key="nav.vehicles"/></a></li>
                         <li><a href="${pageContext.request.contextPath}/employee/vehicleListView/1"><f:message
-                                key="Available Vehicles"/></a></li>
+                                key="nav.vehicles.availabe"/></a></li>
                         <li><a href="${pageContext.request.contextPath}/admin/entityListView/"><f:message
-                                key="Entities"/></a></li>
+                                key="nav.entities"/></a></li>
                     </ul>
                 </li>
             </ul>
