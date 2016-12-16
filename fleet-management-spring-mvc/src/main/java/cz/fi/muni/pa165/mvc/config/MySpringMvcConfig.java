@@ -13,6 +13,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -33,7 +34,10 @@ import java.util.Locale;
 @EnableWebMvc
 @Configuration
 @Import({FleetManagementWithSampleDataConfig.class, SecurityConfig.class})
-@ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.controllers", "cz.fi.muni.pa165.rest.controllers", "cz.fi.muni.pa165.rest.assemblers"})
+@EnableTransactionManagement
+@ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.controllers",
+        "cz.fi.muni.pa165.rest.controllers",
+        "cz.fi.muni.pa165.rest.assemblers"})
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
     final static Logger log = LoggerFactory.getLogger(MySpringMvcConfig.class);

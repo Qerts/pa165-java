@@ -4,6 +4,8 @@ import cz.fi.muni.pa165.dao.interfaces.Dao;
 import cz.fi.muni.pa165.dao.interfaces.EmployeeDao;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.service.interfaces.EmployeeService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
@@ -26,6 +28,8 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
     @Inject
     private EmployeeDao employeeDao;
 
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     protected Dao<Employee, Long> getDao() {
         return employeeDao;
@@ -41,14 +45,17 @@ public class EmployeeServiceImpl extends JpaService<Employee, Long> implements E
         if (employee == null) throw new IllegalArgumentException("employee parameter is null");
         if (unencryptedPassword == null) throw new IllegalArgumentException("unencryptedPassword parameter is null");
         if (unencryptedPassword.isEmpty()) throw new IllegalArgumentException("unencryptedPassword is empty");
-        employee.setPasswordHash(createHash(unencryptedPassword));
+        //employee.setPasswordHash(createHash(unencryptedPassword));
+        employee.setPasswordHash(passwordEncoder.encode(unencryptedPassword));
         this.create(employee);
     }
 
     @Override
     public boolean authenticate(Employee employee, String password) {
         if (employee == null) return false;
-        return verifyPassword(password, employee.getPasswordHash());
+        if (password == null) return false;
+        //return verifyPassword(password, employee.getPasswordHash());
+        return passwordEncoder.matches(password, employee.getPasswordHash());
     }
 
     /**
