@@ -29,7 +29,7 @@
             <td>${vehicle.type}</td>
             <td><c:out value="${vehicle.productionYear}"/></td>
             <td>
-                <a href="${pageContext.request.contextPath}/employee/vehicleAddJourneyView/${vehicle.id}"
+                <a href="${pageContext.request.contextPath}/employee/vehicleAddJourneyView/${vehicle.id}/${employee.id}"
                    modelAttribute="journeyCreate" class="btn btn-primary">Add journey</a>
             </td>
         </tr>

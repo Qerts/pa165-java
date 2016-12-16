@@ -45,6 +45,7 @@ public class EmployeeController {
     @RequestMapping(value = "/vehicleListView/{id}", method = RequestMethod.GET)
     public String vehicleList(@PathVariable long id, Model model) {
         model.addAttribute("vehicles", this.vehicleFacade.findVehiclesAvailable(id));
+        model.addAttribute("employee", this.employeeFacade.findEmployeeById(id));
         return "employee/vehicleListView";
     }
 

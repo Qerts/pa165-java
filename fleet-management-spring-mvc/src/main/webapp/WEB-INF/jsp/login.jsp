@@ -32,5 +32,29 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
 
+        <h3>Testing accounts credentials</h3>
+        <table class="table table-striped">
+            <tr>
+                <th>Role</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+            <tr>
+                <th>Admin</th>
+                <td>admin@muni.cz</td>
+                <td>admin</td>
+            </tr>
+            <tr>
+                <th>Serviceman</th>
+                <td>serviceman@muni.cz</td>
+                <td>password</td>
+            </tr>
+            <tr>
+                <th>Admin</th>
+                <td>employee1@muni.cz</td>
+                <td>password</td>
+            </tr>
+        </table>
+
 </jsp:attribute>
 </tag:template>
