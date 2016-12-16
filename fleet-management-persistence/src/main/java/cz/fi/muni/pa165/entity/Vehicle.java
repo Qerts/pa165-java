@@ -160,8 +160,13 @@ public class Vehicle {
         this.inspectionIntervals = inspectionIntervals;
     }
 
-    public Boolean getActive() {return this.active;}
-    public void setActive(Boolean active) {this.active = active;}
+    public Boolean getActive() {
+        return this.active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.dto.JourneyDTO;
-import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.service.interfaces.BeanMappingService;
 import cz.fi.muni.pa165.service.interfaces.JourneyService;
 import org.springframework.stereotype.Service;
@@ -47,6 +46,6 @@ public class JourneyFacadeImpl implements JourneyFacade {
     }
 
     public void finishJourney(Long journeyId, Float drivenDistance, Date endDate) {
-        journeyService.finishJourney(journeyId,drivenDistance,endDate);
+        journeyService.finishJourney(journeyId, drivenDistance, endDate);
     }
 }

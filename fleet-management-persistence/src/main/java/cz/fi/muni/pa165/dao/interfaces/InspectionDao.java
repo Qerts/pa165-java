@@ -5,5 +5,5 @@ import cz.fi.muni.pa165.entity.Inspection;
 /**
  * @author Michal Balický
  */
-public interface InspectionDao extends Dao<Inspection, Long>{
+public interface InspectionDao extends Dao<Inspection, Long> {
 }

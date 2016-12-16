@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author Jozef Krcho
  */
-public interface Dao<T,ID> {
+public interface Dao<T, ID> {
     /**
      * Finds entity by ID.
      *

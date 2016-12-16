@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.mvc.controllers;
 
 import cz.fi.muni.pa165.dto.InspectionDTO;
-import cz.fi.muni.pa165.dto.VehicleDTO;
 import cz.fi.muni.pa165.facade.InspectionFacade;
 import cz.fi.muni.pa165.facade.VehicleFacade;
 import org.slf4j.Logger;
@@ -35,7 +34,7 @@ public class TechnicianController {
     private InspectionFacade inspectionFacade;
 
     @RequestMapping(value = "/vehicleListView", method = RequestMethod.GET)
-    public String list(Model model){
+    public String list(Model model) {
         model.addAttribute("vehicles", vehicleFacade.getAllActiveVehicles());
         return "technician/vehicleListView";
     }

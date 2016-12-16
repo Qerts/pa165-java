@@ -24,7 +24,6 @@ import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
-import java.util.StringJoiner;
 
 
 /**
@@ -44,19 +43,19 @@ public class EmployeeController {
     private EmployeeFacade employeeFacade;
 
     @RequestMapping(value = "/vehicleListView/{id}", method = RequestMethod.GET)
-    public String vehicleList(@PathVariable long id, Model model){
+    public String vehicleList(@PathVariable long id, Model model) {
         model.addAttribute("vehicles", this.vehicleFacade.findVehiclesAvailable(id));
         return "employee/vehicleListView";
     }
 
     @RequestMapping(value = "/journeyListView/{id}", method = RequestMethod.GET)
-    public String jorneyList(@PathVariable long id, Model model){
+    public String jorneyList(@PathVariable long id, Model model) {
         model.addAttribute("journeys", this.journeyFacade.getJourneysByEmployee(id));
         return "employee/journeyListView";
     }
 
     @RequestMapping(value = "/vehicleAddJourneyView/{vehicleId}/{employeeId}", method = RequestMethod.GET)
-    public String addJourneyToVehicle(@PathVariable long vehicleId, @PathVariable long employeeId, Model model){
+    public String addJourneyToVehicle(@PathVariable long vehicleId, @PathVariable long employeeId, Model model) {
         EmployeeDTO e = this.employeeFacade.findEmployeeById(employeeId);
         VehicleDTO v = this.vehicleFacade.findVehicleById(vehicleId);
         JourneyDTO d = new JourneyDTO(Date.from(Instant.now()), v, e);

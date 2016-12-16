@@ -17,18 +17,21 @@ public interface VehicleService extends Service<Vehicle, Long> {
 
     /**
      * Disables vehicle. Vehicle should be soft deleted.
+     *
      * @param vehicleId Id of the vehicle
      */
     void disable(long vehicleId);
 
     /**
      * get all vehicles that are not disabled
+     *
      * @return list of vehicles
      */
     List<Vehicle> findActiveVehicles();
 
     /**
      * Finds all vehicles available to borrow for given employee
+     *
      * @param employeeId Id of given employee
      * @return Collection of all vehicles that are borrowable by the employee
      */

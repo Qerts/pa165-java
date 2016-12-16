@@ -38,7 +38,7 @@ public class EmplyeeServiceImplTest extends AbstractTransactionalTestNGSpringCon
 
     @Test
     public void testAuthenticate() {
-        Employee employee = new Employee("joe.foo@muni.cz","joe", "foo", "pass", Role.EMPLOYEE);
+        Employee employee = new Employee("joe.foo@muni.cz", "joe", "foo", "pass", Role.EMPLOYEE);
         String password = "password";
         String wrongPass = "wrongPassword";
         employeeService.registerEmployee(employee, password);

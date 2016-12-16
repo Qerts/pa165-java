@@ -2,11 +2,12 @@ package cz.fi.muni.pa165.rest.assemblers;
 
 import cz.fi.muni.pa165.dto.VehicleDTO;
 import cz.fi.muni.pa165.rest.controllers.VehiclesControllerHateoas;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -15,7 +16,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  * mapping the DTO to a resource that can provide links to the different parts
  * of the API See
  * http://docs.spring.io/spring-hateoas/docs/current/reference/html/
- *
  */
 @Component
 public class VehicleResourceAssembler implements ResourceAssembler<VehicleDTO, Resource<VehicleDTO>> {

@@ -32,5 +32,5 @@ public interface InspectionFacade {
      *
      * @param inspection Inspection DTO.
      */
-    long performInspection(InspectionDTO inspection);
+    void performInspection(InspectionDTO inspection);
 }

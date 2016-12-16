@@ -7,6 +7,6 @@ import java.util.List;
 /**
  * @author Martin Schmidt
  */
-public interface VehicleDao extends Dao<Vehicle, Long>{
+public interface VehicleDao extends Dao<Vehicle, Long> {
     List<Vehicle> findVehiclesAvailable(long employeeId);
 }

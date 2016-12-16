@@ -11,7 +11,7 @@
 <form:form method="post" action="${pageContext.request.contextPath}/technician/create"
            modelAttribute="inspectionCreate" cssClass="form-horizontal">
 
-        <div class="form-group ${performedAt_error?'has-error':''}" >
+        <div class="form-group ${performedAt_error?'has-error':''}">
             <form:label path="performedAt" cssClass="col-sm-2 control-label">Date:</form:label>
             <div class="col-sm-10">
                 <form:input type="Date" path="performedAt" cssClass="form-control"/>
@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="form-group ${engineType_error?'has-error':''}" >
+        <div class="form-group ${engineType_error?'has-error':''}">
             <form:label path="inspectionInterval" cssClass="col-sm-2 control-label">Interval</form:label>
             <div class="col-sm-10">
                 <form:input path="inspectionInterval" cssClass="form-control"/>

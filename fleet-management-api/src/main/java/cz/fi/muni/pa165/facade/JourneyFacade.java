@@ -11,12 +11,14 @@ import java.util.List;
 public interface JourneyFacade {
     /**
      * get list of all journeys
+     *
      * @return list of journeys
      */
     List<JourneyDTO> getAllJourneys();
 
     /**
      * get all Journeys for given employee
+     *
      * @param employeeId employee id
      * @return list of journeys
      */
@@ -24,8 +26,9 @@ public interface JourneyFacade {
 
     /**
      * get journeys for given employee started in given interval
-     * @param from start date of interval
-     * @param to end of interval
+     *
+     * @param from       start date of interval
+     * @param to         end of interval
      * @param employeeId employee id
      * @return list of journeys
      */
@@ -34,23 +37,26 @@ public interface JourneyFacade {
 
     /**
      * add existing journey
+     *
      * @param journey
      */
     void addJourney(JourneyDTO journey);
 
     /**
      * creates new journey
-     * @param vehicleId vehicle id for new journey
+     *
+     * @param vehicleId  vehicle id for new journey
      * @param employeeId employee id who goes on journey
-     * @param startDate start date of journey
+     * @param startDate  start date of journey
      */
     JourneyDTO beginJourney(Long vehicleId, Long employeeId, Date startDate);
 
     /**
      * end journey
-     * @param journeyId journey id to end
+     *
+     * @param journeyId      journey id to end
      * @param drivenDistance total driven distance on journey
-     * @param endDate end date of journey
+     * @param endDate        end date of journey
      */
     void finishJourney(Long journeyId, Float drivenDistance, Date endDate);
 

@@ -24,25 +24,27 @@ public class Inspection {
      * All persistent classes must have a default constructor (which can be non-public)
      * so that Hibernate can instantiate them using Constructor.newInstance().
      */
-    protected Inspection(){}
+    protected Inspection() {
+    }
 
     /**
      * Initializes new Inspection object.
+     *
      * @param performedAt date when Inspection was performed
      */
-    public Inspection(Date performedAt){
+    public Inspection(Date performedAt) {
         this.performedAt = performedAt;
     }
 
-    public Long getId(){
+    public Long getId() {
         return this.id;
     }
 
-    public Date getPerformedAt(){
+    public Date getPerformedAt() {
         return this.performedAt;
     }
 
-    public void setPerformedAt(Date performedAt){
+    public void setPerformedAt(Date performedAt) {
         this.performedAt = performedAt;
     }
 

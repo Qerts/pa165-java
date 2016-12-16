@@ -68,7 +68,6 @@ public class VehicleFacadeImplTest extends AbstractTestNGSpringContextTests {
         vehicleDTO.setId(id);
 
 
-
     }
 
     @Test

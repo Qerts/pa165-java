@@ -66,9 +66,9 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
         List<Journey> allJourneys = new LinkedList<Journey>();
 
         long counter = 1;
-        while(true) {
+        while (true) {
             Journey j = uut.findById(counter);
-            if(j == null){
+            if (j == null) {
                 break;
             }
             allJourneys.add(j);
@@ -134,15 +134,14 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
     }
 
     @Test
-    public void testFindAllByVehicleId(){
+    public void testFindAllByVehicleId() {
         //Arrange
         List<Journey> all = this.uut.findAll();
         Iterator<Journey> iterator = all.iterator();
 
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Journey j = iterator.next();
-            if (j.getVehicle().getId() != this.vehicle.getId())
-            {
+            if (j.getVehicle().getId() != this.vehicle.getId()) {
                 iterator.remove();
             }
         }
@@ -158,20 +157,19 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
     @Test
     public void testfindByEmployee() {
         //Arrange
-        Journey journey1 = new Journey(new Date() , vehicle, employee);
+        Journey journey1 = new Journey(new Date(), vehicle, employee);
         uut.persist(journey1);
 
         List<Journey> all = this.uut.findAll();
         Iterator<Journey> iterator = all.iterator();
 
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Journey j = iterator.next();
-            if (j.getEmployee().getId() != this.employee.getId())
-            {
+            if (j.getEmployee().getId() != this.employee.getId()) {
                 iterator.remove();
             }
-    	}
-    
+        }
+
         //Act Assert
         Assert.assertEquals(uut.findByEmployee(employee).size(), all.size());
     }
@@ -180,8 +178,8 @@ public class JourneyDaoImplTest extends AbstractTransactionalTestNGSpringContext
     public void testNullBorrowedAt() {
         Employee employee = new Employee("nullBorrowedAt@muni.cz", "Null", "BorrowedAt", "password", Role.EMPLOYEE);
         Vehicle vehicle = new Vehicle("VRPNullBorrow", "Type", 1999, "EngineType", "NullBorrowedAt", (long) 9999);
-        Journey journeyNullBorrowedAt = new Journey(null , vehicle, employee);
+        Journey journeyNullBorrowedAt = new Journey(null, vehicle, employee);
         uut.persist(journeyNullBorrowedAt);
-        }
+    }
 
 }
