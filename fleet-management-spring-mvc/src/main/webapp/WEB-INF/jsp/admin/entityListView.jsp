@@ -5,28 +5,25 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<tag:template title="Journeys">
+<tag:template title="Entities">
 <jsp:attribute name="body">
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>id</th>
-        <th>distance</th>
-        <th>borrowed at</th>
-        <th>returned at</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${journeys}" var="journey">
+<form method="get" action="${pageContext.request.contextPath}/admin/entityListView/selectTable">
         <tr>
-            <td>${journey.id}</td>
-            <td>${journey.distance}</td>
-            <td><c:out value="${journey.borrowedAt}"/></td>
-            <td><c:out value="${journey.returnedAt}"/></td>
+            <td>
+                <form:select path="entities" name="entity" items="${entities}" />
+
+            </td>
+            <td>
+                <button type="submit" class="btn btn-primary">Find</button>
+            </td>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
+    </form>
+
+<jsp:include page="tables/vehicleTable.jsp">
+        <jsp:param name="items" value="${items}"/>
+    </jsp:include>
+
+
 </jsp:attribute>
 </tag:template>

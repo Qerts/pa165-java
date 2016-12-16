@@ -44,7 +44,7 @@ public interface JourneyFacade {
      * @param employeeId employee id who goes on journey
      * @param startDate start date of journey
      */
-    void beginJourney(Long vehicleId, Long employeeId, Date startDate);
+    JourneyDTO beginJourney(Long vehicleId, Long employeeId, Date startDate);
 
     /**
      * end journey
