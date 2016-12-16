@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.mvc.config;
+package cz.fi.muni.pa165.mvc.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

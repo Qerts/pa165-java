@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.mvc.config;
+package cz.fi.muni.pa165.mvc.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,7 +20,7 @@ import javax.inject.Qualifier;
  */
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.config"})
+@ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.security"})
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Inject

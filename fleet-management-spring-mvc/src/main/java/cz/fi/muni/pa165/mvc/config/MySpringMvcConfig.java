@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import cz.fi.muni.pa165.mvc.security.SecurityConfig;
 import cz.fi.muni.pa165.rest.AllowOriginInterceptor;
 import cz.fi.muni.pa165.sampledata.FleetManagementWithSampleDataConfig;
 import org.slf4j.Logger;
@@ -34,7 +35,6 @@ import java.util.Locale;
 @EnableWebMvc
 @Configuration
 @Import({FleetManagementWithSampleDataConfig.class, SecurityConfig.class})
-@EnableTransactionManagement
 @ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.controllers",
         "cz.fi.muni.pa165.rest.controllers",
         "cz.fi.muni.pa165.rest.assemblers"})

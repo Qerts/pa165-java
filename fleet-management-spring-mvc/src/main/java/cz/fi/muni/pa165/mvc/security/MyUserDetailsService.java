@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.mvc.config;
+package cz.fi.muni.pa165.mvc.security;
 
 import cz.fi.muni.pa165.dto.EmployeeDTO;
 import cz.fi.muni.pa165.enums.Role;
