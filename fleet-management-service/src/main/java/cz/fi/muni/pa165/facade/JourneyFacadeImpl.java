@@ -35,11 +35,17 @@ public class JourneyFacadeImpl implements JourneyFacade {
         return beanMappingService.mapTo(journeyService.getAllJourneys(from, to, employeeId), JourneyDTO.class);
     }
 
-    public void beginJourney(Long vehicleId, Long employeeId, Date startDate) {
-        journeyService.beginJourney(vehicleId, employeeId, startDate);
+
+    public void addJourney(JourneyDTO journey) {
+        Long id = journeyService.beginJourney(journey.getVehicle().getId(), journey.getEmployee().getId(), journey.getBorrowedAt()).getId();
+        journeyService.finishJourney(id, journey.getDistance(), journey.getReturnedAt());
+    }
+
+    public JourneyDTO beginJourney(Long vehicleId, Long employeeId, Date startDate) {
+        return beanMappingService.mapTo(journeyService.beginJourney(vehicleId, employeeId, startDate), JourneyDTO.class);
     }
 
     public void finishJourney(Long journeyId, Float drivenDistance, Date endDate) {
-        journeyService.finishJourney(journeyId,drivenDistance,endDate);
+        journeyService.finishJourney(journeyId, drivenDistance, endDate);
     }
 }

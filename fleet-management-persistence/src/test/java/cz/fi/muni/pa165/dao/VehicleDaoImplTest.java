@@ -16,12 +16,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.inject.Inject;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by JozeFe on 10/30/2016.
+ *
  * @author Jozef Krcho
  */
 
@@ -137,44 +136,44 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
         // Assert
         Assert.assertEquals(vehicleDao.findAll().size(), itemCountBefore - 1);
     }
-                       
+
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullVrp() {
-        Vehicle vehicleNullVrp = new Vehicle(null, "type", 1994, "enigneType", "VinNullVrp",(long) 5000);
+        Vehicle vehicleNullVrp = new Vehicle(null, "type", 1994, "enigneType", "VinNullVrp", (long) 5000);
         vehicleDao.persist(vehicleNullVrp);
     }
 
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testUniqueVrp() {
-        Vehicle vehicleUniqueVrp1 = new Vehicle("Unique", "type", 1994, "enigneType", "VinUniqueVrp1",(long) 5000);
-        Vehicle vehicleUniqueVrp2 = new Vehicle("Unique", "type", 1994, "enigneType", "VinUniqueVrp2",(long) 5000);
+        Vehicle vehicleUniqueVrp1 = new Vehicle("Unique", "type", 1994, "enigneType", "VinUniqueVrp1", (long) 5000);
+        Vehicle vehicleUniqueVrp2 = new Vehicle("Unique", "type", 1994, "enigneType", "VinUniqueVrp2", (long) 5000);
         vehicleDao.persist(vehicleUniqueVrp1);
         vehicleDao.persist(vehicleUniqueVrp2);
     }
 
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullType() {
-        Vehicle vehicleNullType = new Vehicle("NullType", null, 1994, "enigneType", "VinNullType",(long) 5000);
+        Vehicle vehicleNullType = new Vehicle("NullType", null, 1994, "enigneType", "VinNullType", (long) 5000);
         vehicleDao.persist(vehicleNullType);
     }
 
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullEngineType() {
-        Vehicle vehicleNullEngineType= new Vehicle("NullEngineType", "type", 1994, null, "VinNullEngineType",(long) 5000);
-        vehicleDao.persist(vehicleNullEngineType);        
+        Vehicle vehicleNullEngineType = new Vehicle("NullEngineType", "type", 1994, null, "VinNullEngineType", (long) 5000);
+        vehicleDao.persist(vehicleNullEngineType);
     }
 
- 
+
     @Test(expectedExceptions = org.springframework.orm.jpa.JpaSystemException.class)
     public void testNullVin() {
-        Vehicle vehicleNullVin = new Vehicle("NullVin", "type", 1994, "enigneType", null,(long) 5000);
+        Vehicle vehicleNullVin = new Vehicle("NullVin", "type", 1994, "enigneType", null, (long) 5000);
         vehicleDao.persist(vehicleNullVin);
     }
 
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testUniqueVin() {
-        Vehicle vehicleUniqueVin1 = new Vehicle("UniqueVin1", "type", 1994, "enigneType", "VinUnique",(long) 5000);
-        Vehicle vehicleUniqueVin2 = new Vehicle("UniqueVin2", "type", 1994, "enigneType", "VinUnique",(long) 5000);
+        Vehicle vehicleUniqueVin1 = new Vehicle("UniqueVin1", "type", 1994, "enigneType", "VinUnique", (long) 5000);
+        Vehicle vehicleUniqueVin2 = new Vehicle("UniqueVin2", "type", 1994, "enigneType", "VinUnique", (long) 5000);
         vehicleDao.persist(vehicleUniqueVin1);
         vehicleDao.persist(vehicleUniqueVin2);
     }
@@ -187,7 +186,7 @@ public class VehicleDaoImplTest extends AbstractTransactionalTestNGSpringContext
     }
 
     @Test
-    public void findVehiclesAvailableTest(){
+    public void findVehiclesAvailableTest() {
         Employee emp1 = new Employee("email@seznikov.com", "name", "surname", "hash", Role.EMPLOYEE);
         Vehicle veh1 = new Vehicle("vrp1", "type", 1991, "engineType", "vin1", 666L);
         Vehicle veh2 = new Vehicle("vrp2", "type", 1991, "engineType", "vin2", 666L);

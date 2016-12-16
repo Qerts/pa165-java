@@ -13,6 +13,7 @@ public interface VehicleFacade {
 
     /**
      * find all vehicles
+     *
      * @return list of all vehicles
      */
     Collection<VehicleDTO> getAllVehicles();
@@ -20,6 +21,7 @@ public interface VehicleFacade {
 
     /**
      * Finds all vehicles that are borrowable by the employee.
+     *
      * @param employeeId Id of the employee
      * @return List of vehicles available to borrow for given employee.
      */
@@ -27,6 +29,7 @@ public interface VehicleFacade {
 
     /**
      * Counts total kilometres gone with given vehicle. It sums all journey and initial kilometrage of the vehicle.
+     *
      * @param vehicleId Id of the vehicle
      * @return Get current state of the vehicle's tachometer.
      */
@@ -34,6 +37,7 @@ public interface VehicleFacade {
 
     /**
      * Finds vehicle by its id.
+     *
      * @param vehicleId Id of the vehicle
      * @return Vehicle.
      */
@@ -41,6 +45,7 @@ public interface VehicleFacade {
 
     /**
      * Adds new vehicle to company's fleet.
+     *
      * @param vehicle Vehicle to be created
      * @return vehicle id
      */
@@ -48,24 +53,28 @@ public interface VehicleFacade {
 
     /**
      * Updates given vehicle.
+     *
      * @param vehicle Vehicle to be updated
      */
     void updateVehicle(VehicleDTO vehicle);
 
     /**
      * Disables given vehicle. Record still stays in database.
+     *
      * @param vehicleId Id of the vehicle
      */
     void disableVehicle(Long vehicleId);
 
     /**
      * get all vehicles that are not disabled
+     *
      * @return collection of vehicles dto
      */
     Collection<VehicleDTO> getAllActiveVehicles();
 
     /**
      * get all vehicle categories
+     *
      * @return collection of vehicle categories dto
      */
     Collection<VehicleCategoryDTO> getAllVehicleCategories();

@@ -36,7 +36,7 @@ public class InMemoryDatabaseContext {
     @Bean
     public JpaTransactionManager transactionManager() {
         EntityManagerFactory emf = entityManagerFactory().getObject();
-        EntityManager em =  emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
         return new JpaTransactionManager(emf);
     }

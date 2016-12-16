@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Created by MBalicky on 23/10/2016.
+ *
  * @author Michal Balický
  */
 

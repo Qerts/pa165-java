@@ -23,7 +23,7 @@ import java.io.IOException;
 @ContextConfiguration(classes = {FleetManagementWithSampleDataConfig.class})
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class SampleDataLoadingFacadeImplTest extends AbstractTestNGSpringContextTests{
+public class SampleDataLoadingFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     final static Logger log = LoggerFactory.getLogger(SampleDataLoadingFacadeImplTest.class);
 

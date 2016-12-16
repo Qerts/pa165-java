@@ -25,9 +25,9 @@ public class JourneyDaoImpl extends JpaDao<Journey, Long> implements JourneyDao 
 
         Query query = this.em.createQuery(
                 "SELECT j " +
-                "FROM Journey j " +
-                "INNER JOIN j.vehicle v " +
-                "WHERE v.id = :vehicleId",
+                        "FROM Journey j " +
+                        "INNER JOIN j.vehicle v " +
+                        "WHERE v.id = :vehicleId",
                 Journey.class);
 
         query.setParameter("vehicleId", vehicleId);
@@ -36,8 +36,8 @@ public class JourneyDaoImpl extends JpaDao<Journey, Long> implements JourneyDao 
 
         return result;
     }
-    
-    
+
+
     @Override
     public List<Journey> findByEmployee(Employee e) {
         TypedQuery<Journey> query = em.createQuery(

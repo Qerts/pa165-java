@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.Arrays;
 
 /**
+ * This shows how a @ControllerAdvice can be used so that all the
+ * handlers can be managed from a central location.
+ * It is also possible to associate one handler to a set of Controllers
+ * See https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/ControllerAdvice.html
+ *
  * @author Richard Trebichavský
  */
 @ControllerAdvice

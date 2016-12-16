@@ -24,10 +24,10 @@ public class VehicleDaoImpl extends JpaDao<Vehicle, Long> implements VehicleDao 
     public List<Vehicle> findVehiclesAvailable(long employeeId) {
         Query query = this.em.createQuery(
                 "SELECT v " +
-                    "FROM Vehicle v " +
-                    "INNER JOIN v.vehicleCategory vc " +
-                    "INNER JOIN vc.employees emp " +
-                    "WHERE emp.id = :employeeId",
+                        "FROM Vehicle v " +
+                        "INNER JOIN v.vehicleCategory vc " +
+                        "INNER JOIN vc.employees emp " +
+                        "WHERE emp.id = :employeeId",
                 Vehicle.class);
 
         query.setParameter("employeeId", employeeId);

@@ -13,21 +13,22 @@ public class InspectionDTO {
 
     private InspectionIntervalDTO inspectionInterval;
 
-    public InspectionDTO(){}
+    public InspectionDTO() {
+    }
 
-    public InspectionDTO(Date performedAt){
+    public InspectionDTO(Date performedAt) {
         this.performedAt = performedAt;
     }
 
-    public Long getId(){
+    public Long getId() {
         return this.id;
     }
 
-    public Date getPerformedAt(){
+    public Date getPerformedAt() {
         return this.performedAt;
     }
 
-    public void setPerformedAt(Date performedAt){
+    public void setPerformedAt(Date performedAt) {
         this.performedAt = performedAt;
     }
 

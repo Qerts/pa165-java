@@ -55,7 +55,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         addEmployeeVehicleCategory(admin, categoryL, categoryM, categoryN);
         addEmployeeVehicleCategory(serviceman, categoryL, categoryM, categoryN);
-        addEmployeeVehicleCategory(employee1,categoryL);
+        addEmployeeVehicleCategory(employee1, categoryL);
         addEmployeeVehicleCategory(employee2, categoryL, categoryM);
         addEmployeeVehicleCategory(employee3, categoryL, categoryM, categoryN);
         addEmployeeVehicleCategory(employee4, categoryM);
@@ -122,7 +122,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         log.info("Loaded journeys.");
     }
 
-    private void addEmployeeVehicleCategory(Employee employee,VehicleCategory... vehicleCategorys) {
+    private void addEmployeeVehicleCategory(Employee employee, VehicleCategory... vehicleCategorys) {
         for (VehicleCategory vehicleCategory : vehicleCategorys) {
             employee.addVehicleCategory(vehicleCategory);
         }

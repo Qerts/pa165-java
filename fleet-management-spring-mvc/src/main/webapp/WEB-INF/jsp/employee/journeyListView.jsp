@@ -5,33 +5,25 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<tag:template title="Vehicles">
+<tag:template title="Journeys">
 <jsp:attribute name="body">
-
-<a href="${pageContext.request.contextPath}/vehicle/new" class="btn btn-primary">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        New vehicle
-    </a>
 
 <table class="table table-striped">
     <thead>
     <tr>
         <th>id</th>
-        <th>vrp</th>
-        <th>type</th>
-        <th>year of production</th>
+        <th>distance</th>
+        <th>borrowed at</th>
+        <th>returned at</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${vehicles}" var="vehicle">
+    <c:forEach items="${journeys}" var="journey">
         <tr>
-            <td>${vehicle.id}</td>
-            <td>${vehicle.vrp}</td>
-            <td>${vehicle.type}</td>
-            <td><c:out value="${vehicle.productionYear}"/></td>
-            <td>
-                <a href="${pageContext.request.contextPath}/vehicle/view/${vehicle.id}" class="btn btn-primary">View</a>
-            </td>
+            <td>${journey.id}</td>
+            <td>${journey.distance}</td>
+            <td><c:out value="${journey.borrowedAt}"/></td>
+            <td><c:out value="${journey.returnedAt}"/></td>
         </tr>
     </c:forEach>
     </tbody>

@@ -19,7 +19,10 @@ public class JourneyDTO {
 
     private EmployeeDTO employee;
 
-    protected JourneyDTO() {
+    public JourneyDTO() {
+        this.distance = 5.0f;
+        this.borrowedAt = new Date(1243);
+        this.returnedAt = new Date(12345);
     }
 
     public JourneyDTO(Date borrowedAt, VehicleDTO vehicle, EmployeeDTO employee) {

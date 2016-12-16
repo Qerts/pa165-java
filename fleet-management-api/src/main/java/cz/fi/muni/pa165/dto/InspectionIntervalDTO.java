@@ -14,7 +14,7 @@ public class InspectionIntervalDTO {
 
     private VehicleDTO vehicle;
 
-    protected InspectionIntervalDTO(){
+    protected InspectionIntervalDTO() {
     }
 
     public InspectionIntervalDTO(String name, int interval) {

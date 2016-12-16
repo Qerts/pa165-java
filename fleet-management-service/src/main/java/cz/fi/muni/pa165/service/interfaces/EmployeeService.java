@@ -12,7 +12,7 @@ public interface EmployeeService extends Service<Employee, Long> {
     /**
      * Creates an employee in database.
      *
-     * @param employee Employee.
+     * @param employee            Employee.
      * @param unencryptedPassword Plain password.
      * @throws IllegalArgumentException If invalid employee is given.
      */

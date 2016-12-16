@@ -12,6 +12,7 @@ public interface JourneyService extends Service<Journey, Long> {
 
     /**
      * get journeys for given employee
+     *
      * @param employeeId employee id
      * @return list of journeys
      */
@@ -20,8 +21,8 @@ public interface JourneyService extends Service<Journey, Long> {
     /**
      * get all journeys for given employee in the time interval (start of the journey)
      *
-     * @param from     start of time interval
-     * @param to       end of time interval
+     * @param from       start of time interval
+     * @param to         end of time interval
      * @param employeeId employee id
      * @return list of journeys
      */
@@ -29,18 +30,20 @@ public interface JourneyService extends Service<Journey, Long> {
 
     /**
      * create new journey, begin journey
-     * @param vehicleId vehicle id for new journey
+     *
+     * @param vehicleId  vehicle id for new journey
      * @param employeeId employee id
-     * @param startDate star date of journey
+     * @param startDate  star date of journey
      * @return created journey
      */
     Journey beginJourney(Long vehicleId, Long employeeId, Date startDate);
 
     /**
      * final update of journey
-     * @param journeyId journey id
+     *
+     * @param journeyId      journey id
      * @param drivenDistance total distance for journey
-     * @param endDate date of journey ending
+     * @param endDate        date of journey ending
      */
     void finishJourney(Long journeyId, Float drivenDistance, Date endDate);
 
