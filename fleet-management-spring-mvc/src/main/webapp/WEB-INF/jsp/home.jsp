@@ -8,13 +8,13 @@
 <tag:template>
 <jsp:attribute name="body">
 
-<form action="login.html" method="post">
-    <label> UserName: </label>
-    <input type="text" name="userName"/> <br/>
-    <label> Password: </label>
-    <input type="password" name="password"/><br/>
-    <input type="submit" value="login"/>
-</form>
+<div class="starter-template">
+    <h1>Fleet management</h1>
+    <p class="lead">Login accounts:<br>
+        Admin email: <b>admin@muni.cz</b> password: <b>admin</b><br>
+            Serviceman email: <b>serviceman@muni.cz</b> password: <b>password</b><br>
+        Employee email: <b>employee1@muni.cz</b> password: <b>password</b><br></p>
+</div>
 
 </jsp:attribute>
 </tag:template>

@@ -53,7 +53,7 @@
                                 key="nav.entities"/></a></li>
                     </ul>
                 </li>
-                <sec:authorize access="hasRole('ADMINISTRATOR')">
+
                 <sec:authorize access="hasRole('SERVICEMAN')">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.technician"/><b
@@ -65,6 +65,7 @@
                     </ul>
                 </li>
                 </sec:authorize>
+                <sec:authorize access="hasRole('ADMINISTRATOR')">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.administrator"/><b
                         class="caret"></b></a>
@@ -74,10 +75,12 @@
                     </ul>
                 </li>
                 </sec:authorize>
-                <sec:authorize access="hasAnyRole('ADMINISTRATOR', 'SERVICEMAN', 'EMPLOYEE')">
-                <li><a href="${pageContext.request.contextPath}/logout"><f:message key="nav.logout"/></a></li>
-                </sec:authorize>
             </ul>
+            <sec:authorize access="hasRole('EMPLOYEE')">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="${pageContext.request.contextPath}/logout"><f:message key="nav.logout"/></a></li>
+                </ul>
+            </sec:authorize>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
