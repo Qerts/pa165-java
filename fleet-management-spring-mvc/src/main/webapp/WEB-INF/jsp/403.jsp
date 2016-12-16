@@ -8,13 +8,7 @@
 <tag:template>
 <jsp:attribute name="body">
 
-<div class="starter-template">
-    <h1>Fleet management</h1>
-    <p class="lead">Login accounts:<br>
-        Admin email: <b>admin@muni.cz</b> password: <b>admin</b><br>
-            Serviceman email: <b>serviceman@muni.cz</b> password: <b>password</b><br>
-        Employee email: <b>employee1@muni.cz</b> password: <b>password</b><br></p>
-</div>
+    <p>You don't have permission to access this page.</p>
 
 </jsp:attribute>
 </tag:template>

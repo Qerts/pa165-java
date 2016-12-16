@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import cz.fi.muni.pa165.mvc.security.SecurityConfig;
 import cz.fi.muni.pa165.rest.AllowOriginInterceptor;
 import cz.fi.muni.pa165.sampledata.FleetManagementWithSampleDataConfig;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -32,8 +34,10 @@ import java.util.Locale;
 
 @EnableWebMvc
 @Configuration
-@Import({FleetManagementWithSampleDataConfig.class})
-@ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.controllers", "cz.fi.muni.pa165.rest.controllers", "cz.fi.muni.pa165.rest.assemblers"})
+@Import({FleetManagementWithSampleDataConfig.class, SecurityConfig.class})
+@ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.controllers",
+        "cz.fi.muni.pa165.rest.controllers",
+        "cz.fi.muni.pa165.rest.assemblers"})
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
     final static Logger log = LoggerFactory.getLogger(MySpringMvcConfig.class);
@@ -47,6 +51,8 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         log.debug("mapping URL / to home view");
         registry.addViewController("/").setViewName("home");
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/403").setViewName("403");
     }
 
 
