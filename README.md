@@ -12,7 +12,9 @@ checkout the repository and run command `mvn pacakge` from command line to downl
 To run web application, execute `cd fleet-management-spring-mvc && mvn tomcat7:run` GUI application will be available on [http://localhost:8080/pa165](http://localhost:8080/pa165).
 and API will we available on [http://localhost:8080/pa165/rest](http://localhost:8080/pa165/rest) with following endpoints:
 
-- `/vehicles` - lists all vehicles
+- `/vehicles` - `GET` lists all vehicles
+- `/vehicles/{id}` - `GET`,`DELETE` list od delete single vehicle
+- `/vehicles/create` - `POST` create new vehicle
 
 ## Development
 
