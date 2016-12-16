@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import cz.fi.muni.pa165.dto.VehicleCreateDTO;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -162,7 +163,7 @@ public class VehiclesControllerTest  extends AbstractTestNGSpringContextTests {
         vehicleCreateDTO.setType("Ford");
 
         doReturn(1l).when(vehicleFacade).addNewVehicle(
-                any(VehicleDTO.class));
+                any(VehicleCreateDTO.class));
 
         String json = this.convertObjectToJsonBytes(vehicleCreateDTO);
 
@@ -177,7 +178,7 @@ public class VehiclesControllerTest  extends AbstractTestNGSpringContextTests {
 
     private List<VehicleDTO> createVehicles() {
         VehicleDTO vehicleOne = new VehicleDTO();
-        vehicleOne.setId(10L);
+        //vehicleOne.setId(10L);
         vehicleOne.setType("Ford");
         vehicleOne.setEngineType("diesel");
         vehicleOne.setProductionYear(2000);
@@ -187,7 +188,7 @@ public class VehiclesControllerTest  extends AbstractTestNGSpringContextTests {
 
 
         VehicleDTO vehicleTwo = new VehicleDTO();
-        vehicleTwo.setId(20L);
+        //vehicleTwo.setId(20L);
         vehicleTwo.setType("Skoda");
         vehicleTwo.setEngineType("diesel");
         vehicleTwo.setProductionYear(2005);

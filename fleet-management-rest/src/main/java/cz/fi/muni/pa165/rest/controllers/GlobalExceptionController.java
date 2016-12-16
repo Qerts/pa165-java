@@ -5,7 +5,6 @@ import cz.fi.muni.pa165.rest.exceptions.ResourceAlreadyExistingException;
 import java.util.Arrays;
 import cz.fi.muni.pa165.rest.exceptions.ResourceNotFoundException;
 import cz.fi.muni.pa165.rest.exceptions.ResourceNotModifiedException;
-import cz.fi.muni.pa165.rest.tools.ApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

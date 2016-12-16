@@ -1,15 +1,16 @@
 package cz.fi.muni.pa165.rest.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import cz.fi.muni.pa165.dto.VehicleCreateDTO;
 import cz.fi.muni.pa165.dto.VehicleDTO;
 import cz.fi.muni.pa165.facade.VehicleFacade;
+import cz.fi.muni.pa165.rest.exceptions.ResourceAlreadyExistingException;
+import cz.fi.muni.pa165.rest.exceptions.ResourceNotFoundException;
 import cz.fi.muni.pa165.rest.tools.ApiUris;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class VehiclesController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final VehicleDTO getVehicle(@PathVariable("id") long id) throws Exception {
         logger.debug("rest getVehicle({})", id);
-        VehicleDTO vehicleDTO = vehicleFacade.findVehicleById(id);
+        VehicleDTO vehicleDTO = vehiclesFacade.findVehicleById(id);
         if (vehicleDTO != null) {
             return vehicleDTO;
         } else {
@@ -73,7 +74,7 @@ public class VehiclesController {
     public final void deleteVehicle(@PathVariable("id") long id) throws Exception {
         logger.debug("rest deleteVehicle({})", id);
         try {
-            vehicleFacade.disableVehicle(id);
+            vehiclesFacade.disableVehicle(id);
         } catch (Exception ex) {
             throw new ResourceNotFoundException();
         }
@@ -90,13 +91,13 @@ public class VehiclesController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final VehicleDTO createVehicle(@RequestBody VehicleDTO vehicle) throws Exception {
+    public final VehicleDTO createVehicle(@RequestBody VehicleCreateDTO vehicle) throws Exception {
 
         logger.debug("rest createVehicle()");
 
         try {
-            Long id = vehicleFacade.addNewVehicle(vehicle);
-            return vehicleFacade.findVehicleById(id);
+            Long id = vehiclesFacade.addNewVehicle(vehicle);
+            return vehiclesFacade.findVehicleById(id);
         } catch (Exception ex) {
             throw new ResourceAlreadyExistingException();
         }
