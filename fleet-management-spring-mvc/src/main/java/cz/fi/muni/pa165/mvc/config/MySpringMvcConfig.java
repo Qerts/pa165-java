@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.mvc.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import cz.fi.muni.pa165.rest.AllowOriginInterceptor;
@@ -27,13 +28,12 @@ import java.util.Locale;
  * The @Configuration annotation declares it as Spring configuration.
  * The @EnableWebMvc enables default  MVC config for using @Controller, @RequestMapping and so on,
  * see http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-config-enable
- *
  */
 
 @EnableWebMvc
 @Configuration
 @Import({FleetManagementWithSampleDataConfig.class})
-@ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.controllers", "cz.fi.muni.pa165.rest.controllers"})
+@ComponentScan(basePackages = {"cz.fi.muni.pa165.mvc.controllers", "cz.fi.muni.pa165.rest.controllers", "cz.fi.muni.pa165.rest.assemblers"})
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
     final static Logger log = LoggerFactory.getLogger(MySpringMvcConfig.class);
@@ -109,6 +109,8 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH));
+
+        objectMapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
 
         jsonConverter.setObjectMapper(objectMapper);
         return jsonConverter;

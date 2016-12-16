@@ -5,5 +5,5 @@ import cz.fi.muni.pa165.entity.InspectionInterval;
 /**
  * @author Michal Balický
  */
-public interface InspectionIntervalDao extends Dao<InspectionInterval, Long>{
+public interface InspectionIntervalDao extends Dao<InspectionInterval, Long> {
 }

@@ -16,11 +16,16 @@
             <td>${item.surname}</td>
             <td>${item.role}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/admin/createItem/${item.id}/${item.type}" modelAttribute="itemCreate" class="btn btn-primary">Add</a>
-            </td><td>
-                <a href="${pageContext.request.contextPath}/admin/updateItem/${item.id}/${item.type}" modelAttribute="itemUpdate" class="btn btn-primary">Update</a>
-            </td><td>
-                <a href="${pageContext.request.contextPath}/admin/disableItem/${item.id}/${item.type}" modelAttribute="itemDisable" class="btn btn-primary">Disable</a>
+                <a href="${pageContext.request.contextPath}/admin/createItem/${item.id}/${item.type}"
+                   modelAttribute="itemCreate" class="btn btn-primary">Add</a>
+            </td>
+            <td>
+                <a href="${pageContext.request.contextPath}/admin/updateItem/${item.id}/${item.type}"
+                   modelAttribute="itemUpdate" class="btn btn-primary">Update</a>
+            </td>
+            <td>
+                <a href="${pageContext.request.contextPath}/admin/disableItem/${item.id}/${item.type}"
+                   modelAttribute="itemDisable" class="btn btn-primary">Disable</a>
             </td>
         </tr>
     </c:forEach>

@@ -28,7 +28,7 @@ public class InspectionIntervalDaoImplTest extends AbstractTransactionalTestNGSp
     public void setUp() {
         InspectionInterval1 = new InspectionInterval("brakes", 12);
         uut.persist(InspectionInterval1);
-        InspectionInterval2 = new InspectionInterval("oil",6);
+        InspectionInterval2 = new InspectionInterval("oil", 6);
         uut.persist(InspectionInterval2);
     }
 

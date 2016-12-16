@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -43,7 +42,6 @@ public class VehiclesController {
     }
 
     /**
-     *
      * Get Vehicle by identifier id curl -i -X GET
      * http://localhost:8080/fleet-management-rest/vehicles/1
      *
@@ -82,7 +80,7 @@ public class VehiclesController {
 
     /**
      * Create a new vehicle by POST method
-
+     * <p>
      * http://localhost:8080/fleet-management-rest/vehicles/create
      *
      * @param vehicle VehicleCreateDTO with required fields for creation

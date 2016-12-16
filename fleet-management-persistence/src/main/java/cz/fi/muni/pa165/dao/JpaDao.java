@@ -26,7 +26,7 @@ public abstract class JpaDao<T, ID extends Serializable> implements Dao<T, ID> {
     }
 
 
-    public List<T> findAll(){
+    public List<T> findAll() {
         return entityManager.createQuery("from " + entityClass.getName()).getResultList();
     }
 

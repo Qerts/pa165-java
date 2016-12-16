@@ -31,7 +31,7 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
     public void setUp() {
         employee1 = new Employee("john.doe@muni.cz", "John", "Doe", "password", Role.EMPLOYEE);
         employee1duplicate = new Employee("john.doe@muni.cz", "John", "Doe", "password", Role.EMPLOYEE);
-        employee2 = new Employee("jane.doe@muni.cz","Jane", "Doe", "password", Role.EMPLOYEE);
+        employee2 = new Employee("jane.doe@muni.cz", "Jane", "Doe", "password", Role.EMPLOYEE);
 
         uut.persist(employee1);
         uut.persist(employee2);
@@ -133,8 +133,8 @@ public class EmployeeDaoImplTest extends AbstractTransactionalTestNGSpringContex
 
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)
     public void testNullEmail() {
-            Employee employeeNullEmail = new Employee(null, "NullEmail", "NullEmail", "password", Role.EMPLOYEE);
-            uut.persist(employeeNullEmail);
+        Employee employeeNullEmail = new Employee(null, "NullEmail", "NullEmail", "password", Role.EMPLOYEE);
+        uut.persist(employeeNullEmail);
     }
 
     @Test(expectedExceptions = org.springframework.dao.DataAccessException.class)

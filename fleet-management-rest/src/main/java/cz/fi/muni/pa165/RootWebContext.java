@@ -1,3 +1,4 @@
+/*
 package cz.fi.muni.pa165;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -64,4 +65,4 @@ public class RootWebContext extends WebMvcConfigurerAdapter {
         converters.add(customJackson2HttpMessageConverter());
     }
     
-}
+} */

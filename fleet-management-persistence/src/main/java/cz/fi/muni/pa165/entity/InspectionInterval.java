@@ -31,18 +31,18 @@ public class InspectionInterval {
     private Set<Inspection> inspections = new HashSet<>();
 
 
-
     /**
      * All persistent classes must have a default constructor (which can be non-public)
      * so that Hibernate can instantiate them using Constructor.newInstance().
      */
-    protected InspectionInterval(){
+    protected InspectionInterval() {
     }
 
     /**
      * Initializes new InspectionInterval object
-     * @param name      name of the inspection interval, i.e. "oil change"
-     * @param interval  days between inspections
+     *
+     * @param name     name of the inspection interval, i.e. "oil change"
+     * @param interval days between inspections
      */
     public InspectionInterval(String name, int interval) {
         this.name = name;

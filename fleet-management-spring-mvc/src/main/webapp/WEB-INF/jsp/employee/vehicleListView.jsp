@@ -9,8 +9,8 @@
 <jsp:attribute name="body">
 
 <form method="get" action="${pageContext.request.contextPath}/employee/journeyListView/1">
-        <button type="submit" class="btn btn-primary">Get all journeys</button>
-    </form>
+    <button type="submit" class="btn btn-primary">Get all journeys</button>
+</form>
 
 <table class="table table-striped">
     <thead>
@@ -29,7 +29,8 @@
             <td>${vehicle.type}</td>
             <td><c:out value="${vehicle.productionYear}"/></td>
             <td>
-                <a href="${pageContext.request.contextPath}/employee/vehicleAddJourneyView/${vehicle.id}" modelAttribute="journeyCreate" class="btn btn-primary">Add journey</a>
+                <a href="${pageContext.request.contextPath}/employee/vehicleAddJourneyView/${vehicle.id}"
+                   modelAttribute="journeyCreate" class="btn btn-primary">Add journey</a>
             </td>
         </tr>
     </c:forEach>

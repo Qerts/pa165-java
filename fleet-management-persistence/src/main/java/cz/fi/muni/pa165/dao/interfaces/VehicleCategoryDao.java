@@ -5,6 +5,6 @@ import cz.fi.muni.pa165.entity.VehicleCategory;
 /**
  * @author Martin Schmidt
  */
-public interface VehicleCategoryDao extends Dao<VehicleCategory, Long>{
+public interface VehicleCategoryDao extends Dao<VehicleCategory, Long> {
 
 }

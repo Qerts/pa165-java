@@ -9,16 +9,16 @@
 <jsp:attribute name="body">
 
 <form method="get" action="${pageContext.request.contextPath}/admin/entityListView/selectTable">
-        <tr>
-            <td>
-                <form:select path="entities" name="entity" items="${entities}" />
+    <tr>
+        <td>
+            <form:select path="entities" name="entity" items="${entities}"/>
 
-            </td>
-            <td>
-                <button type="submit" class="btn btn-primary">Find</button>
-            </td>
-        </tr>
-    </form>
+        </td>
+        <td>
+            <button type="submit" class="btn btn-primary">Find</button>
+        </td>
+    </tr>
+</form>
 
 <jsp:include page="tables/vehicleTable.jsp">
         <jsp:param name="items" value="${items}"/>

@@ -16,22 +16,22 @@ import java.util.Set;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String surname;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String passwordHash;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -53,7 +53,7 @@ public class Employee {
      * @param name         name of the EMPLOYEE
      * @param surname      surname of the EMPLOYEE
      * @param passwordHash hashed password of the EMPLOYEE
-     * @param role   role of the EMPLOYEE
+     * @param role         role of the EMPLOYEE
      */
     public Employee(String email, String name, String surname, String passwordHash, Role role) {
         this.email = email;
@@ -66,7 +66,10 @@ public class Employee {
     public Long getId() {
         return id;
     }
-    public void setId(long id){this.id = id;}
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

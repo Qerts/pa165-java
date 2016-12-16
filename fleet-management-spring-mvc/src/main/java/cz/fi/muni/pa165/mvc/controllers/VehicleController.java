@@ -3,9 +3,7 @@ package cz.fi.muni.pa165.mvc.controllers;
 import cz.fi.muni.pa165.dto.VehicleCategoryDTO;
 import cz.fi.muni.pa165.dto.VehicleCreateDTO;
 import cz.fi.muni.pa165.dto.VehicleDTO;
-import cz.fi.muni.pa165.entity.VehicleCategory;
 import cz.fi.muni.pa165.facade.VehicleFacade;
-import cz.fi.muni.pa165.mvc.validators.VehicleDTOValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -34,7 +34,6 @@ public class VehicleController {
 
     @Autowired
     private VehicleFacade vehicleFacade;
-
 
 
     /**

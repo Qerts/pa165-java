@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * @author Jozef Krcho
  */
 @Repository
-public class EmployeeDaoImpl extends JpaDao<Employee, Long> implements EmployeeDao{
+public class EmployeeDaoImpl extends JpaDao<Employee, Long> implements EmployeeDao {
 
     @Override
     public Employee findByEmail(String email) {

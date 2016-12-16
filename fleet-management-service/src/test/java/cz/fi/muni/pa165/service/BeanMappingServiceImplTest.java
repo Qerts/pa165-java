@@ -56,7 +56,7 @@ public class BeanMappingServiceImplTest extends AbstractTestNGSpringContextTests
         Employee employee = new Employee("journey.test@muni.cz", "journey", "test", "password", Role.EMPLOYEE);
         Vehicle vehicle = new Vehicle("VRP", "Type", 1999, "EngineType", "VIN", (long) 7658.54);
         Journey journey = new Journey(new Date(), vehicle, employee);
-        journey.returnVehicle(new Date(), (float)1000);
+        journey.returnVehicle(new Date(), (float) 1000);
         JourneyDTO journeyDTO = beanMappingService.mapTo(journey, JourneyDTO.class);
 
         Assert.assertEquals(journey.getBorrowedAt(), journeyDTO.getBorrowedAt());

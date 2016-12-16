@@ -32,7 +32,7 @@ public class AdminController {
 
     private List<String> list;
 
-    public AdminController(){
+    public AdminController() {
         list = new LinkedList<String>();
         list.add("vehicle");
         list.add("employee");
@@ -41,15 +41,15 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/entityListView", method = RequestMethod.GET)
-    public String vehicleList(Model model){
+    public String vehicleList(Model model) {
         model.addAttribute("entities", this.list);
         return "admin/entityListView";
     }
 
     @RequestMapping(value = "entityListView/selectTable/{entity}", method = RequestMethod.GET)
-    public String vehicleList(@PathVariable String entity, Model model){
+    public String vehicleList(@PathVariable String entity, Model model) {
 
-        switch (entity){
+        switch (entity) {
             case "vehicle":
                 model.addAttribute("items", this.vehicleFacade.getAllVehicles());
                 break;

@@ -9,34 +9,34 @@
 <jsp:attribute name="body">
 
 <form:form method="post" action="${pageContext.request.contextPath}/employee/create"
-                         modelAttribute="journeyCreate" cssClass="form-horizontal">
+           modelAttribute="journeyCreate" cssClass="form-horizontal">
 
-                      <div class="form-group ${borrowedAt_error?'has-error':''}" >
-                                  <form:label path="borrowedAt" cssClass="col-sm-2 control-label">Borrowed at:</form:label>
-                                  <div class="col-sm-10">
-                                      <form:errors path="borrowedAt" cssClass="help-block"/>
+                      <div class="form-group ${borrowedAt_error?'has-error':''}">
+                          <form:label path="borrowedAt" cssClass="col-sm-2 control-label">Borrowed at:</form:label>
+                          <div class="col-sm-10">
+                              <form:errors path="borrowedAt" cssClass="help-block"/>
+                              <fmt:formatDate value="${now}"
+                                              type="date"
+                                              pattern="dd-MM-yyyy"
+                                              var="theFormattedDate"/>
+                              <form:input type="text" path="borrowedAt" value="${theFormattedDate}"/>
+                          </div>
+                      </div>
+
+
+                      <div class="form-group ${returnedAt_error?'has-error':''}">
+                          <form:label path="returnedAt" cssClass="col-sm-2 control-label">Returned at:</form:label>
+                          <div class="col-sm-10">
                                       <fmt:formatDate value="${now}"
                                                       type="date"
                                                       pattern="dd-MM-yyyy"
-                                                      var="theFormattedDate" />
-                                      <form:input type="text" path="borrowedAt" value="${theFormattedDate}"/>
-                                  </div>
-                              </div>
+                                                      var="theFormattedDate"/>
+                              <form:input type="text" path="borrowedAt" value="${theFormattedDate}"/>
+                              <form:errors path="returnedAt" cssClass="help-block"/>
+                          </div>
+                      </div>
 
-
-                      <div class="form-group ${returnedAt_error?'has-error':''}" >
-                                  <form:label path="returnedAt" cssClass="col-sm-2 control-label">Returned at:</form:label>
-                                  <div class="col-sm-10">
-                                      <fmt:formatDate value="${now}"
-                                                        type="date"
-                                                        pattern="dd-MM-yyyy"
-                                                        var="theFormattedDate" />
-                                      <form:input type="text" path="borrowedAt" value="${theFormattedDate}"/>
-                                      <form:errors path="returnedAt" cssClass="help-block"/>
-                                  </div>
-                              </div>
-
-                      <div class="form-group ${distance_error?'has-error':''}" >
+                      <div class="form-group ${distance_error?'has-error':''}">
                           <form:label path="distance" cssClass="col-sm-2 control-label">Distance:</form:label>
                           <div class="col-sm-10">
                               <form:input path="distance" cssClass="form-control"/>

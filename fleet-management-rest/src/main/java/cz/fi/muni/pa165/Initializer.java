@@ -1,3 +1,4 @@
+/*
 package cz.fi.muni.pa165;
 
 import javax.servlet.Filter;
@@ -40,4 +41,4 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
         servletContext.addListener(RequestContextListener.class);
     }
 
-}
+} */

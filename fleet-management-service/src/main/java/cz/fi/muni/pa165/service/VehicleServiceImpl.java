@@ -39,7 +39,7 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
 
         List<Journey> journeys = this.journeyDao.findAllByVehicleId(vehicleId);
 
-        for (Iterator<Journey> iterator = journeys.iterator(); iterator.hasNext();){
+        for (Iterator<Journey> iterator = journeys.iterator(); iterator.hasNext(); ) {
             result = result + this.round(iterator.next().getDistance(), 1);
         }
 
@@ -59,12 +59,12 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
 
 
     @Override
-    public List<Vehicle> findVehiclesAvailable(long employeeId){
+    public List<Vehicle> findVehiclesAvailable(long employeeId) {
         return this.vehicleDao.findVehiclesAvailable(employeeId);
     }
 
     @Override
-    public void disable(long vehicleId){
+    public void disable(long vehicleId) {
         List<Journey> journeys = this.journeyDao.findAllByVehicleId(vehicleId);
         journeys.sort(JourneyComparator);
 
@@ -73,7 +73,7 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
         this.vehicleDao.merge(v);
     }
 
-    private double round (double value, int precision) {
+    private double round(double value, int precision) {
         int scale = (int) Math.pow(10, precision);
         return (double) Math.round(value * scale) / scale;
     }

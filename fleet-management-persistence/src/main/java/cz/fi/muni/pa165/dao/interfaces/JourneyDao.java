@@ -11,12 +11,13 @@ import java.util.List;
 public interface JourneyDao extends Dao<Journey, Long> {
 
     List<Journey> findAllByVehicleId(long vehicleId);
-    
-   /**
-    * find all journeys for given employee
-    * @param e employee
-    * @return list of journeys
-    */
-   List<Journey> findByEmployee(Employee e);
+
+    /**
+     * find all journeys for given employee
+     *
+     * @param e employee
+     * @return list of journeys
+     */
+    List<Journey> findByEmployee(Employee e);
 
 }

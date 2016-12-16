@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.mvc.validators;
+/* package cz.fi.muni.pa165.mvc.validators;
 
 import cz.fi.muni.pa165.dto.VehicleDTO;
 import org.springframework.validation.Errors;
@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 /**
  * @author Jozef Krcho
- */
+ *
 public class VehicleDTOValidator implements Validator{
 
     @Override
@@ -20,6 +20,6 @@ public class VehicleDTOValidator implements Validator{
         /*if (productCreateDTO.getColor() == null) return;
         if (productCreateDTO.getPrice() == null) return;
         if (productCreateDTO.getColor() == Color.BLACK && productCreateDTO.getPrice().longValue() > 100)
-            errors.rejectValue("price", "ProductCreateDTOValidator.expensive.black.product"); */
+            errors.rejectValue("price", "ProductCreateDTOValidator.expensive.black.product"); *
     }
-}
+} */

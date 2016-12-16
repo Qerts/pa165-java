@@ -8,21 +8,18 @@ import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
 import cz.fi.muni.pa165.enums.Role;
-import cz.fi.muni.pa165.service.BeanMappingServiceImpl;
 import cz.fi.muni.pa165.service.JourneyServiceImpl;
 import cz.fi.muni.pa165.service.interfaces.BeanMappingService;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.inject.Inject;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -86,7 +83,7 @@ public class JourneyFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetJourneys() {
-        when(journeyService.getAllJourneys(any(Date.class), any(Date.class),any(Long.class))).thenReturn(Collections.singletonList(journey));
+        when(journeyService.getAllJourneys(any(Date.class), any(Date.class), any(Long.class))).thenReturn(Collections.singletonList(journey));
         journeyFacade.getJourneys(in, out, employee.getId());
         verify(journeyService).getAllJourneys(in, out, employee.getId());
     }

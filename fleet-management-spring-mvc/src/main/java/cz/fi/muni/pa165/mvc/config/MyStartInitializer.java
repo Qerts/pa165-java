@@ -2,7 +2,6 @@ package cz.fi.muni.pa165.mvc.config;
 
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -16,7 +15,6 @@ import javax.servlet.Filter;
  * <li>maps dispatcher servlet to URL returned by {@link #getServletMappings()}</li>
  * <li>maps filters returned by {@link #getServletFilters()} to the dispatcher servlet</li>
  * </ul>
- *
  */
 public class MyStartInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
