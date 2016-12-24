@@ -39,48 +39,48 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="${pageContext.request.contextPath}"><f:message key="nav.home"/></a></li>
-                <li><a href="${pageContext.request.contextPath}/login"><f:message key="nav.login"/></a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.options"/><b
-                            class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="${pageContext.request.contextPath}/technician/vehicleListView/"><f:message
-                                key="nav.vehicles"/></a></li>
-                        <li><a href="${pageContext.request.contextPath}/employee/vehicleListView/1"><f:message
-                                key="nav.vehicles.availabe"/></a></li>
-                        <li><a href="${pageContext.request.contextPath}/admin/entityListView/"><f:message
-                                key="nav.entities"/></a></li>
-                    </ul>
-                </li>
+
+                <sec:authorize access="hasRole('EMPLOYEE')">
+                    <li><a href="${pageContext.request.contextPath}/employee/vehicleListView/1"><f:message
+                                key="nav.vehicles.available"/></a></li>
+                </sec:authorize>
 
                 <sec:authorize access="hasRole('SERVICEMAN')">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.technician"/><b
-                        class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="${pageContext.request.contextPath}/technician/vehicleListView/"><f:message
-                            key="nav.technician.vehicleList"/></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.technician"/><b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="${pageContext.request.contextPath}/technician/vehicleListView/"><f:message
+                                    key="nav.technician.vehicleList"/></a></li>
 
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
                 </sec:authorize>
+
                 <sec:authorize access="hasRole('ADMINISTRATOR')">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.administrator"/><b
-                        class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="${pageContext.request.contextPath}/admin/entityListView/"><f:message
-                            key="nav.administrator.entityList"/></a></li>
-                    </ul>
-                </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.administrator"/><b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="${pageContext.request.contextPath}/admin/entityListView/"><f:message
+                                    key="nav.administrator.entityList"/></a></li>
+                        </ul>
+                    </li>
                 </sec:authorize>
             </ul>
-            <sec:authorize access="hasRole('EMPLOYEE')">
+
+            <sec:authorize access="isAnonymous()">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="${pageContext.request.contextPath}/logout"><f:message key="nav.logout"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/login"><f:message key="nav.login"/></a></li>
                 </ul>
             </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <sec:authentication var="principal" property="principal" />
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="${pageContext.request.contextPath}/logout">${principal.username} (<f:message key="nav.logout"/>)</a></li>
+                </ul>
+            </sec:authorize>
+
         </div><!--/.nav-collapse -->
     </div>
 </nav>
