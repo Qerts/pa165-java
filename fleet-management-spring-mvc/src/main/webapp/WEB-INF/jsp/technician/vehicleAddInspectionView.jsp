@@ -5,30 +5,33 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<tag:template title="New inspection">
+<tag:template title="New inspection interval">
 <jsp:attribute name="body">
 
 <form:form method="post" action="${pageContext.request.contextPath}/technician/create"
            modelAttribute="inspectionCreate" cssClass="form-horizontal">
 
-        <div class="form-group ${performedAt_error?'has-error':''}">
-            <form:label path="performedAt" cssClass="col-sm-2 control-label">Date:</form:label>
+    <div class="form-group ${name_error?'has-error':''}">
+        <form:label path="name" cssClass="col-sm-2 control-label">Name:</form:label>
+        <div class="col-sm-10">
+            <form:input path="name" cssClass="form-control"/>
+            <form:errors path="name" cssClass="help-block"/>
+        </div>
+    </div>
+
+        <div class="form-group ${days_error?'has-error':''}">
+            <form:label path="days" cssClass="col-sm-2 control-label">Interval (days):</form:label>
             <div class="col-sm-10">
-                <form:input type="Date" path="performedAt" cssClass="form-control"/>
-                <form:errors path="performedAt" cssClass="help-block"/>
+                <form:input path="days" cssClass="form-control"/>
+                <form:errors path="days" cssClass="help-block"/>
             </div>
         </div>
 
-        <div class="form-group ${engineType_error?'has-error':''}">
-            <form:label path="inspectionInterval" cssClass="col-sm-2 control-label">Interval</form:label>
-            <div class="col-sm-10">
-                <form:input path="inspectionInterval" cssClass="form-control"/>
-                <form:errors path="inspectionInterval" cssClass="help-block"/>
-            </div>
-        </div>
+            <form:input path="vehicle.id" type="hidden"/>
 
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <button class="btn btn-primary" type="submit">Create inspection</button>
+
     </form:form>
 
 

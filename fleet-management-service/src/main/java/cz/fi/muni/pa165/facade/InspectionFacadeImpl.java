@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.facade;
 import cz.fi.muni.pa165.dto.InspectionDTO;
 import cz.fi.muni.pa165.dto.InspectionIntervalDTO;
 import cz.fi.muni.pa165.entity.Inspection;
+import cz.fi.muni.pa165.entity.InspectionInterval;
 import cz.fi.muni.pa165.service.interfaces.BeanMappingService;
 import cz.fi.muni.pa165.service.interfaces.InspectionIntervalService;
 import cz.fi.muni.pa165.service.interfaces.InspectionService;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Richard Trebichavský
@@ -45,4 +47,16 @@ public class InspectionFacadeImpl implements InspectionFacade {
     public void performInspection(InspectionDTO inspectionDTO) {
         inspectionService.create(bms.mapTo(inspectionDTO, Inspection.class));
     }
+
+    @Override
+    public void addNewInspectionInterval(InspectionIntervalDTO i) {
+        inspectionIntervalService.create(bms.mapTo(i, InspectionInterval.class));
+    }
+
+    @Override
+    public List<InspectionIntervalDTO> getInspectionInterval(Long vehicleId) {
+        return bms.mapTo(inspectionIntervalService.getInspectionIntervalsForVehicle(vehicleId), InspectionIntervalDTO.class);
+    }
+
+
 }

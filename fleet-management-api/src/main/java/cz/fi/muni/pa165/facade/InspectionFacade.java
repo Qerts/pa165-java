@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.dto.InspectionDTO;
 import cz.fi.muni.pa165.dto.InspectionIntervalDTO;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Richard Trebichavský
@@ -33,4 +34,17 @@ public interface InspectionFacade {
      * @param inspection Inspection DTO.
      */
     void performInspection(InspectionDTO inspection);
+
+    /**
+     * create new inspection interval
+     * @param i insp. interval
+     */
+    void addNewInspectionInterval(InspectionIntervalDTO i);
+
+    /**
+     * get inspection interval for given vehicle id
+     * @param vehicleId vehicle id
+     * @return list of ins. intevals
+     */
+    List<InspectionIntervalDTO> getInspectionInterval(Long vehicleId);
 }

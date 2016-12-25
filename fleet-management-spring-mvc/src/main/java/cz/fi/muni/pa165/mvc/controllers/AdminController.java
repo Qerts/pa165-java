@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -46,8 +47,8 @@ public class AdminController {
         return "admin/entityListView";
     }
 
-    @RequestMapping(value = "entityListView/selectTable/{entity}", method = RequestMethod.GET)
-    public String vehicleList(@PathVariable String entity, Model model) {
+    @RequestMapping(value = "entityListView/selectTable", method = RequestMethod.GET)
+    public String vehicleList(@RequestParam("entity") String entity, Model model) {
 
         switch (entity) {
             case "vehicle":
@@ -64,7 +65,7 @@ public class AdminController {
                 break;
         }
 
-        model.addAttribute("tableName", entity + "Table");
+        model.addAttribute("entityType", entity);
         model.addAttribute("entities", this.list);
 
         return "admin/entityListView";

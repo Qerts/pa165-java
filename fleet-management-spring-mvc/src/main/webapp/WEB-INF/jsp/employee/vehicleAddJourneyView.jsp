@@ -19,10 +19,9 @@
                                               type="date"
                                               pattern="dd-MM-yyyy"
                                               var="theFormattedDate"/>
-                              <form:input type="text" path="borrowedAt" value="${theFormattedDate}"/>
+                              <form:input path="borrowedAt" cssClass="form-control" value="${theFormattedDate}"/>
                           </div>
                       </div>
-
 
                       <div class="form-group ${returnedAt_error?'has-error':''}">
                           <form:label path="returnedAt" cssClass="col-sm-2 control-label">Returned at:</form:label>
@@ -31,7 +30,7 @@
                                                       type="date"
                                                       pattern="dd-MM-yyyy"
                                                       var="theFormattedDate"/>
-                              <form:input type="text" path="borrowedAt" value="${theFormattedDate}"/>
+                              <form:input path="returnedAt" cssClass="form-control" value="${theFormattedDate}"/>
                               <form:errors path="returnedAt" cssClass="help-block"/>
                           </div>
                       </div>
@@ -44,6 +43,9 @@
                           </div>
                       </div>
 
+    <form:input path="vehicle.id" type="hidden"/>
+    <form:input path="employee.id" type="hidden"/>
+
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <button class="btn btn-primary" type="submit">Create journey</button>
     </form:form>
@@ -51,3 +53,14 @@
 
 </jsp:attribute>
 </tag:template>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#borrowedAt").datepicker();
+        $("#returnedAt").datepicker();
+    });
+</script>

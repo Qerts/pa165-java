@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.mvc.controllers;
 
 import cz.fi.muni.pa165.dto.InspectionDTO;
+import cz.fi.muni.pa165.dto.InspectionIntervalDTO;
+import cz.fi.muni.pa165.dto.VehicleDTO;
 import cz.fi.muni.pa165.facade.InspectionFacade;
 import cz.fi.muni.pa165.facade.VehicleFacade;
 import org.slf4j.Logger;
@@ -12,12 +14,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by MBalicky on 14/12/2016.
@@ -39,15 +43,19 @@ public class TechnicianController {
         return "technician/vehicleListView";
     }
 
-    @RequestMapping(value = "/vehicleAddInspectionView/{id}", method = RequestMethod.GET)
-    public String addInspectionToVehicle(Model model) {
+    @RequestMapping(value = "/vehicleAddInspectionView/{vehicleId}", method = RequestMethod.GET)
+    public String addInspectionToVehicle(@PathVariable long vehicleId, Model model) {
         log.debug("new()");
-        model.addAttribute("inspectionCreate", new InspectionDTO());
+        InspectionIntervalDTO inspection = new InspectionIntervalDTO();
+        VehicleDTO v = vehicleFacade.findVehicleById(vehicleId);
+        inspection.setVehicle(v);
+        model.addAttribute("inspectionCreate", inspection);
         return "technician/vehicleAddInspectionView";
     }
 
+    // create InspectionInterval
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("inspectionCreate") InspectionDTO formBean, BindingResult bindingResult,
+    public String create(@Valid @ModelAttribute("inspectionCreate") InspectionIntervalDTO formBean, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         log.debug("create(inspectionCreate={})", formBean);
         //in case of validation error forward back to the the form
@@ -62,9 +70,31 @@ public class TechnicianController {
             return "technician/vehicleAddInspectionView";
         }
         //create inspection
-        inspectionFacade.performInspection(formBean);
+        inspectionFacade.addNewInspectionInterval(formBean);
         //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Inspection " + " was created and added to vehicle");
+        redirectAttributes.addFlashAttribute("alert_success", "InspectionInterval " + " was created and added to vehicle");
         return "redirect:" + uriBuilder.path("/technician/vehicleListView").buildAndExpand().encode().toUriString();
     }
+
+
+    @RequestMapping(value = "/vehicleDetailView/{vehicleId}", method = RequestMethod.GET)
+    public String vehicleDetail(@PathVariable long vehicleId, Model model) {
+        log.debug("detail()");
+        VehicleDTO v = vehicleFacade.findVehicleById(vehicleId);
+        double kilometrage = vehicleFacade.getTotalKilometrage(vehicleId);
+        List<InspectionIntervalDTO> inspections = inspectionFacade.getInspectionInterval(vehicleId);
+
+        model.addAttribute("vehicle", v);
+        model.addAttribute("kilometrage", kilometrage);
+        model.addAttribute("inspections", inspections);
+        return "technician/vehicleDetailView";
+    }
+
+    @RequestMapping(value = "/inspectionIntervalsView", method = RequestMethod.GET)
+    public String listInspections(Model model) {
+        model.addAttribute("inspections", inspectionFacade.listAllInspectionIntervals());
+        return "technician/inspectionIntervalsView";
+    }
+
+
 }

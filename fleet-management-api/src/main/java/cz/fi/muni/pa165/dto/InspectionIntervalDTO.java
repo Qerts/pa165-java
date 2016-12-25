@@ -14,7 +14,7 @@ public class InspectionIntervalDTO {
 
     private VehicleDTO vehicle;
 
-    protected InspectionIntervalDTO() {
+    public InspectionIntervalDTO() {
     }
 
     public InspectionIntervalDTO(String name, int interval) {
@@ -25,6 +25,8 @@ public class InspectionIntervalDTO {
     public Long getId() {
         return this.id;
     }
+
+    public void setId(Long id) {this.id = id;}
 
     public String getName() {
         return this.name;

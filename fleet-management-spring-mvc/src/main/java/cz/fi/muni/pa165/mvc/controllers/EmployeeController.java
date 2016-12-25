@@ -65,10 +65,13 @@ public class EmployeeController {
         return "employee/vehicleAddJourneyView";
     }
 
+    // create new journey
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("journeyCreate") JourneyDTO formBean, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         log.debug("create(journeyCreate={})", formBean);
+        Long vehicleId = formBean.getVehicle().getId();
+        Long employeeId = formBean.getEmployee().getId();
         //in case of validation error forward back to the the form
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
@@ -84,7 +87,7 @@ public class EmployeeController {
         this.journeyFacade.addJourney(formBean);
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Journey " + " was created and added to vehicle and employee");
-        return "redirect:" + uriBuilder.path("/employee/journeyListView").buildAndExpand().encode().toUriString();
+        return "redirect:" + uriBuilder.path("/employee/journeyListView/"+employeeId).buildAndExpand().encode().toUriString();
     }
 
     @InitBinder

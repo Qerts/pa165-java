@@ -8,6 +8,10 @@
 <tag:template title="Vehicles">
 <jsp:attribute name="body">
 
+    <a href="${pageContext.request.contextPath}/technician/inspectionIntervalsView/" class="btn btn-primary">
+        View all inspection intervals
+    </a>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -24,9 +28,15 @@
             <td>${vehicle.vrp}</td>
             <td>${vehicle.type}</td>
             <td><c:out value="${vehicle.productionYear}"/></td>
+
+            <td>
+                <a href="${pageContext.request.contextPath}/technician/vehicleDetailView/${vehicle.id}"
+                   class="btn btn-info">Vehicle detail</a>
+            </td>
+
             <td>
                 <a href="${pageContext.request.contextPath}/technician/vehicleAddInspectionView/${vehicle.id}"
-                   modelAttribute="vehicleCreate" class="btn btn-primary">Add inspection</a>
+                   class="btn btn-primary">Add inspection interval</a>
             </td>
         </tr>
     </c:forEach>
