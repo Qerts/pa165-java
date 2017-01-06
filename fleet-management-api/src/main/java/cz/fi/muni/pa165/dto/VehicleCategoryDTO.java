@@ -10,7 +10,7 @@ public class VehicleCategoryDTO {
 
     private String name;
 
-    protected VehicleCategoryDTO() {
+    public VehicleCategoryDTO() {
     }
 
 

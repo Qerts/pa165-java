@@ -50,7 +50,7 @@
                 <td>password</td>
             </tr>
             <tr>
-                <th>Admin</th>
+                <th>Employee</th>
                 <td>employee1@muni.cz</td>
                 <td>password</td>
             </tr>

@@ -48,6 +48,17 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
 
     public List<Vehicle> findActiveVehicles() {
         List<Vehicle> all = vehicleDao.findAll();
+        return getOnlyActive(all);
+    }
+
+
+    @Override
+    public List<Vehicle> findVehiclesAvailable(long employeeId) {
+        List<Vehicle> all = this.vehicleDao.findVehiclesAvailable(employeeId);
+        return getOnlyActive(all);
+    }
+
+    private List<Vehicle> getOnlyActive(List<Vehicle> all) {
         List<Vehicle> active = new ArrayList<>();
         for (Vehicle v : all) {
             if (Boolean.TRUE.equals(v.getActive())) {
@@ -57,11 +68,6 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
         return active;
     }
 
-
-    @Override
-    public List<Vehicle> findVehiclesAvailable(long employeeId) {
-        return this.vehicleDao.findVehiclesAvailable(employeeId);
-    }
 
     @Override
     public void disable(long vehicleId) {

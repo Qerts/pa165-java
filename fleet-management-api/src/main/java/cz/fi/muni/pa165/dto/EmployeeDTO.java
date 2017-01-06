@@ -24,7 +24,7 @@ public class EmployeeDTO {
 
     Set<VehicleCategoryDTO> vehicleCategories = new HashSet<>();
 
-    protected EmployeeDTO() {
+    public EmployeeDTO() {
     }
 
     public EmployeeDTO(String email, String name, String surname, String passwordHash, Role role) {

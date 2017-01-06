@@ -8,8 +8,8 @@
 <tag:template title="Vehicles">
 <jsp:attribute name="body">
 
-<form method="get" action="${pageContext.request.contextPath}/employee/journeyListView/1">
-    <button type="submit" class="btn btn-primary">Get all journeys</button>
+<form method="get" action="${pageContext.request.contextPath}/employee/journeyListView/${employee.id}">
+    <button type="submit" class="btn btn-primary">List of all journeys</button>
 </form>
 
 <table class="table table-striped">
@@ -19,6 +19,7 @@
         <th>vrp</th>
         <th>type</th>
         <th>year of production</th>
+        <th>category</th>
     </tr>
     </thead>
     <tbody>
@@ -28,6 +29,7 @@
             <td>${vehicle.vrp}</td>
             <td>${vehicle.type}</td>
             <td><c:out value="${vehicle.productionYear}"/></td>
+            <td>${vehicle.vehicleCategory.name}</td>
             <td>
                 <a href="${pageContext.request.contextPath}/employee/vehicleAddJourneyView/${vehicle.id}/${employee.id}"
                    modelAttribute="journeyCreate" class="btn btn-primary">Add journey</a>

@@ -24,6 +24,8 @@ public class InspectionDTO {
         return this.id;
     }
 
+    public void setId(Long id) {this.id = id;}
+
     public Date getPerformedAt() {
         return this.performedAt;
     }
