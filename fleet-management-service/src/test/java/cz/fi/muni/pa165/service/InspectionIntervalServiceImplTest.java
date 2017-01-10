@@ -47,7 +47,7 @@ public class InspectionIntervalServiceImplTest {
         // InspectionInterval 1 - needs inspection (needs to be performed on the 5th day from today)
         Inspection inspection11 = mock(Inspection.class);
         // Inspection needs to be
-        when(inspection11.getPerformedAt()).thenReturn((new GregorianCalendar(2016, 2, 6).getTime()));
+        when(inspection11.getPerformedOn()).thenReturn((new GregorianCalendar(2016, 2, 6).getTime()));
 
         InspectionInterval interval1 = mock(InspectionInterval.class);
         when(interval1.getDays()).thenReturn(30);
@@ -57,7 +57,7 @@ public class InspectionIntervalServiceImplTest {
         // InspectionInterval 2 - do not need inspection (needs to be performed on the 6th day from today)
         Inspection inspection21 = mock(Inspection.class);
         when(interval1.hasInspections()).thenReturn(true);
-        when(inspection21.getPerformedAt()).thenReturn((new GregorianCalendar(2016, 2, 7).getTime()));
+        when(inspection21.getPerformedOn()).thenReturn((new GregorianCalendar(2016, 2, 7).getTime()));
 
 
         InspectionInterval interval2 = mock(InspectionInterval.class);

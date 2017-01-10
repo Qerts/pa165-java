@@ -48,7 +48,7 @@ public class BeanMappingServiceImplTest extends AbstractTestNGSpringContextTests
         Inspection inspection = new Inspection(new Date());
         InspectionDTO inspectionDTO = beanMappingService.mapTo(inspection, InspectionDTO.class);
 
-        Assert.assertEquals(inspection.getPerformedAt(), inspectionDTO.getPerformedAt());
+        Assert.assertEquals(inspection.getPerformedOn(), inspectionDTO.getPerformedOn());
     }
 
     @Test

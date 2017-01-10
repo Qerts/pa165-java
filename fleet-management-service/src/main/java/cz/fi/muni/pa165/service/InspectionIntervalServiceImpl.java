@@ -40,7 +40,7 @@ public class InspectionIntervalServiceImpl extends JpaService<InspectionInterval
                     }
 
                     Calendar deadline = Calendar.getInstance();
-                    deadline.setTime(ii.getNewestInspection().getPerformedAt());
+                    deadline.setTime(ii.getNewestInspection().getPerformedOn());
                     deadline.add(Calendar.DATE, ii.getDays());
 
                     Calendar horizon = Calendar.getInstance();
