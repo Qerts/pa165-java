@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<tag:template title="Entities">
+<tag:template title="Entities CRUD">
 <jsp:attribute name="body">
 
 <form method="get" action="${pageContext.request.contextPath}/admin/entityListView/selectTable/">

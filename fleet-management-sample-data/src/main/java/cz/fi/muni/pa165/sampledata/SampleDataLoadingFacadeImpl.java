@@ -65,11 +65,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Vehicle vehicle3 = vehicle(categoryM, "4C82878", "BMW 3 SERIES 3.0 335i M Sport 2dr", 2007, "Petrol engine", "1G8ZE1598PZ242153", (long) 89500);
         Vehicle vehicle4 = vehicle(categoryM, "2E77010", "Volkswagen Golf 2.0 TDI GT DSG 5dr", 2012, "Diesel engine", "1JCUX7811FT114873", (long) 33000);
         Vehicle vehicle5 = vehicle(categoryM, "2H42270", "Audi TT 1.8 T Sport Quattro 3dr", 2002, "Petrol engine", "WMEEJ9AA5DK782726", (long) 170000);
-        //Vehicle vehicle6 = vehicle(categoryM, "3J57942", "Peugeot 3008 1.6 HDi Active 5dr", 2013, "Diesel engine", "JSAAK47A052170790", (long) 56900);
-        //Vehicle vehicle7 = vehicle(categoryM, "2L02404", "Nissan Leaf E Acenta 5dr", 2014, "Electric engine", "5KKHAEDE47PY01338", (long) 16700);
-        //Vehicle vehicle8 = vehicle(categoryM, "2M51384", "Nissan X-Trail 2.2 dCi SVE 5dr", 2005, "Diesel engine", "1HGCA5524KA102482", (long) 147200);
-        //Vehicle vehicle9 = vehicle(categoryM, "4P63285", "Renault Megane 1.5 dCi Expression 4dr", 2007, "Diesel engine", "1GNES13M582139763", (long) 231700);
-        //Vehicle vehicle10 = vehicle(categoryM, "7S59790", "Alfa Romeo GT 1.9 JTDM 16v 2dr", 2005, "Diesel engine", "1FTPW14525KD01647", (long) 261900);
 
         Vehicle truck1 = vehicle(categoryN, "3A24987", "Mitsubishi FUSO FE 180", 2012, "Diesel engine", "2B3KA43D89H525247", (long) 221400);
         Vehicle truck2 = vehicle(categoryN, "1A97103", "Mitsubishi FUSO FE 160", 2012, "Diesel engine", "4S3BMEH68B2260267", (long) 356200);
@@ -113,6 +108,12 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         journey(today("+1m+6d:y"), today("+1m+6d:m"), today("+1m+6d:d"), today("+1m+12d:y"), today("+1m+12d:m"), today("+1m+12d:d"), 1320, employee3, vehicle4);
         journey(today("+1m+14d:y"), today("+1m+14d:m"), today("+1m+14d:d"), today("+1m+20d:y"), today("+1m+20d:m"), today("+1m+20d:d"), 1128, employee3, vehicle5);
         journey(today("+1m+6d:y"), today("+1m+6d:m"), today("+1m+6d:d"), today("+1m+7d:y"), today("+1m+7d:m"), today("+1m+7d:d"), 1528, employee4, vehicle5);
+
+        //unfinished (active) journeys
+        journeyUnfinished(today(":y"), today(":m"), today(":d"), employee2, fiatVehicle);
+        journeyUnfinished(today("-1d:y"), today("-1d:m"), today("-1d:d"), employee3, citroenVehicle);
+        journeyUnfinished(today("-7d:y"), today("-7d:m"), today("-7d:d"), admin, vehicle3);
+        journeyUnfinished(today(":y"), today(":m"), today(":d"), admin, vehicle4);
 
         //truck journeys
         journey(today("+1m+27d:y"), today("+1m+27d:m"), today("+1m+27d:d"), today("+2m+3d:y"), today("+2m+3d:m"), today("+2m+3d:d"), 2820, employee3, truck1);
@@ -159,6 +160,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Journey j = journeyService.beginJourney(vehicle.getId(), employee.getId(), startDate);
         journeyService.finishJourney(j.getId(), distance, endDate);
         return j;
+    }
+
+    private Journey journeyUnfinished(int startYear, int startMonth, int startDay, Employee employee, Vehicle vehicle) {
+        Date startDate = new GregorianCalendar(startYear, startMonth, startDay).getTime();
+        return journeyService.beginJourney(vehicle.getId(), employee.getId(), startDate);
     }
 
     private Vehicle vehicle(VehicleCategory vehicleCategory, String vrp, String type, int year, String engineType, String vin, long initialKilometrage) {

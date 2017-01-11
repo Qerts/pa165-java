@@ -5,14 +5,17 @@ import cz.fi.muni.pa165.dao.interfaces.JourneyDao;
 import cz.fi.muni.pa165.dao.interfaces.VehicleDao;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
+import cz.fi.muni.pa165.service.interfaces.JourneyService;
 import cz.fi.muni.pa165.service.interfaces.VehicleService;
+import org.hibernate.service.spi.InjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Martin Schmidt
@@ -22,8 +25,12 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
 
     @Inject
     private VehicleDao vehicleDao;
+
     @Inject
     private JourneyDao journeyDao;
+
+    @Inject
+    private JourneyService journeyService;
 
     @Override
     protected Dao<Vehicle, Long> getDao() {
@@ -46,37 +53,43 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
         return result;
     }
 
-    public List<Vehicle> findActiveVehicles() {
-        List<Vehicle> all = vehicleDao.findAll();
-        return getOnlyActive(all);
+    @Override
+    public List<Vehicle> findAllActiveVehicles() {
+        return getOnlyActive(vehicleDao.findAll());
     }
 
+    @Override
+    public List<Vehicle> findAllVehiclesToBeBorrowed() {
+        return getOnlyAvailableToBorrow(getOnlyActive(vehicleDao.findAll()));
+    }
 
     @Override
-    public List<Vehicle> findVehiclesAvailable(long employeeId) {
-        List<Vehicle> all = this.vehicleDao.findVehiclesAvailable(employeeId);
-        return getOnlyActive(all);
+    public List<Vehicle> findVehiclesToBeBorrowedByUser(long employeeId) {
+        return getOnlyAvailableToBorrow(getOnlyActive(vehicleDao.findVehiclesAvailable(employeeId)));
+    }
+
+    @Override
+    public List<Vehicle> getAllObsoleteVehicles() {
+        return vehicleDao.findAll().stream().filter(v -> v.getActive() == false).collect(Collectors.toList());
     }
 
     private List<Vehicle> getOnlyActive(List<Vehicle> all) {
-        List<Vehicle> active = new ArrayList<>();
-        for (Vehicle v : all) {
-            if (Boolean.TRUE.equals(v.getActive())) {
-                active.add(v);
-            }
-        }
-        return active;
+        return all.stream().filter(Vehicle::getActive).collect(Collectors.toList());
     }
 
+    private List<Vehicle> getOnlyAvailableToBorrow(List<Vehicle> vehicles) {
+        return vehicles.stream().filter(v -> !journeyService.hasActiveJourney(v.getId())).collect(Collectors.toList());
+    }
 
     @Override
     public void disable(long vehicleId) {
-        List<Journey> journeys = this.journeyDao.findAllByVehicleId(vehicleId);
+        List<Journey> journeys = journeyDao.findAllByVehicleId(vehicleId);
         journeys.sort(JourneyComparator);
 
-        Vehicle v = this.vehicleDao.findById(vehicleId);
+        Vehicle v = vehicleDao.findById(vehicleId);
         v.setActive(false);
-        this.vehicleDao.merge(v);
+        vehicleDao.merge(v);
+
     }
 
     private double round(double value, int precision) {

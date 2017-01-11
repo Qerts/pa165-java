@@ -74,11 +74,11 @@ public class VehicleFacadeImplTest extends AbstractTestNGSpringContextTests {
     public void testFindVehiclesAvailable() {
         when(beanMappingService.mapTo(Collections.singletonList(vehicle), VehicleDTO.class))
                 .thenReturn(Collections.singletonList(vehicleDTO));
-        when(vehicleService.findVehiclesAvailable(id)).thenReturn(Collections.singletonList(vehicle));
+        when(vehicleService.findVehiclesToBeBorrowedByUser(id)).thenReturn(Collections.singletonList(vehicle));
 
-        Assert.assertEquals(vehicleFacade.findVehiclesAvailable(id).size(), 1);
+        Assert.assertEquals(vehicleFacade.findVehiclesToBeBorrowedByUser(id).size(), 1);
 
-        verify(vehicleService).findVehiclesAvailable(id);
+        verify(vehicleService).findVehiclesToBeBorrowedByUser(id);
     }
 
     @Test

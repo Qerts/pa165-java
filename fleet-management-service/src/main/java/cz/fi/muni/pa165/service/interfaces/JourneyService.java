@@ -47,4 +47,7 @@ public interface JourneyService extends Service<Journey, Long> {
      */
     void finishJourney(Long journeyId, Float drivenDistance, Date endDate);
 
+    List<Journey> findAllUnfinished();
+
+    boolean hasActiveJourney(Long vehicleId);
 }

@@ -23,8 +23,8 @@
                    modelAttribute="itemUpdate" class="btn btn-primary">Update</a>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/admin/disableItem/${item.id}/${entityType}"
-                   modelAttribute="itemDisable" class="btn btn-primary">Disable</a>
+                <a href="${pageContext.request.contextPath}/admin/deactivate-vehicle/${item.id}"
+                   modelAttribute="itemDisable" class="btn btn-primary">Deactivate</a>
             </td>
         </tr>
     </c:forEach>

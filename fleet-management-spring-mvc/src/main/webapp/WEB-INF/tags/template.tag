@@ -41,8 +41,16 @@
             <ul class="nav navbar-nav">
 
                 <sec:authorize access="hasRole('EMPLOYEE')">
-                    <li><a href="${pageContext.request.contextPath}/employee/vehicleListView/1"><f:message
-                                key="nav.vehicles.available"/></a></li>
+                    <li class="dropdown ">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.employee"/><b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="${pageContext.request.contextPath}/employee/vehicles-to-borrow"><f:message
+                                    key="nav.vehicles.available"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/employee/borrowed-vehicles"><f:message
+                                    key="nav.vehicles.myBorrowed"/></a></li>
+                        </ul>
+                    </li>
                 </sec:authorize>
 
                 <sec:authorize access="hasRole('SERVICEMAN')">
@@ -65,8 +73,12 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.administrator"/><b
                                 class="caret"></b></a>
                         <ul class="dropdown-menu">
+                            <li><a href="${pageContext.request.contextPath}/admin/active-journeys/"><f:message
+                                    key="nav.administrator.activeJourneys"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/admin/obsolete-vehicles"><f:message
+                                    key="nav.administrator.obsoleteVehicles"/></a></li>
                             <li><a href="${pageContext.request.contextPath}/admin/entityListView/"><f:message
-                                    key="nav.administrator.entityList"/></a></li>
+                                    key="nav.administrator.entitiesCRUD"/></a></li>
                         </ul>
                     </li>
                 </sec:authorize>

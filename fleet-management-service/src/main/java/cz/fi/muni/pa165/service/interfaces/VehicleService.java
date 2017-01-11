@@ -27,14 +27,28 @@ public interface VehicleService extends Service<Vehicle, Long> {
      *
      * @return list of vehicles
      */
-    List<Vehicle> findActiveVehicles();
+    List<Vehicle> findAllActiveVehicles();
 
     /**
-     * Finds all vehicles available to borrow for given employee
+     * get all vehicles that could be borrowed
+     *
+     * @return list of vehicles
+     */
+    List<Vehicle> findAllVehiclesToBeBorrowed();
+
+    /**
+     * Finds all vehicles available to borrow for given employee. Vehicle must be not on active journey, not borrowed
+     * and in category the user has access to.
      *
      * @param employeeId Id of given employee
      * @return Collection of all vehicles that are borrowable by the employee
      */
-    List<Vehicle> findVehiclesAvailable(long employeeId);
+    List<Vehicle> findVehiclesToBeBorrowedByUser(long employeeId);
 
+    /**
+     * obsolete vehicles
+     *
+     * @return obsolete vehicles
+     */
+    List<Vehicle> getAllObsoleteVehicles();
 }

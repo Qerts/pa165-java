@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Martin Schmidt
@@ -21,18 +22,18 @@ public class JourneyFacadeImpl implements JourneyFacade {
     private JourneyService journeyService;
 
     @Inject
-    private BeanMappingService beanMappingService;
+    private BeanMappingService bms;
 
     public List<JourneyDTO> getAllJourneys() {
-        return beanMappingService.mapTo(journeyService.findAll(), JourneyDTO.class);
+        return bms.mapTo(journeyService.findAll(), JourneyDTO.class);
     }
 
     public List<JourneyDTO> getJourneysByEmployee(Long employeeId) {
-        return beanMappingService.mapTo(journeyService.getJourneysByEmployee(employeeId), JourneyDTO.class);
+        return bms.mapTo(journeyService.getJourneysByEmployee(employeeId), JourneyDTO.class);
     }
 
     public List<JourneyDTO> getJourneys(Date from, Date to, Long employeeId) {
-        return beanMappingService.mapTo(journeyService.getAllJourneys(from, to, employeeId), JourneyDTO.class);
+        return bms.mapTo(journeyService.getAllJourneys(from, to, employeeId), JourneyDTO.class);
     }
 
 
@@ -42,10 +43,23 @@ public class JourneyFacadeImpl implements JourneyFacade {
     }
 
     public JourneyDTO beginJourney(Long vehicleId, Long employeeId, Date startDate) {
-        return beanMappingService.mapTo(journeyService.beginJourney(vehicleId, employeeId, startDate), JourneyDTO.class);
+        if (journeyService.hasActiveJourney(vehicleId)) {
+            throw new RuntimeException("Vehicle #" + vehicleId + " is already borrowed. It must be returned prior to be borrowed agian.");
+        }
+
+        return bms.mapTo(journeyService.beginJourney(vehicleId, employeeId, startDate), JourneyDTO.class);
     }
 
     public void finishJourney(Long journeyId, Float drivenDistance, Date endDate) {
         journeyService.finishJourney(journeyId, drivenDistance, endDate);
+    }
+
+    public List<JourneyDTO> getAllUnfinishedJourneys() {
+        return bms.mapTo(journeyService.findAllUnfinished(), JourneyDTO.class);
+    }
+
+    public List<JourneyDTO> getUnfinishedJourneysOfUser(long userId) {
+        return getAllUnfinishedJourneys().stream().filter(j -> j.getEmployee().getId().equals(userId))
+                .collect(Collectors.toList());
     }
 }

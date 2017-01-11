@@ -6,10 +6,13 @@ import cz.fi.muni.pa165.dto.VehicleDTO;
 import cz.fi.muni.pa165.facade.EmployeeFacade;
 import cz.fi.muni.pa165.facade.JourneyFacade;
 import cz.fi.muni.pa165.facade.VehicleFacade;
+import cz.fi.muni.pa165.service.DateTimeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,18 +44,44 @@ public class EmployeeController {
     private JourneyFacade journeyFacade;
     @Autowired
     private EmployeeFacade employeeFacade;
+    @Autowired
+    private DateTimeService dateTimeService;
 
     @RequestMapping(value = "/vehicleListView/{id}", method = RequestMethod.GET)
     public String vehicleList(@PathVariable long id, Model model) {
-        model.addAttribute("vehicles", this.vehicleFacade.findVehiclesAvailable(id));
+        model.addAttribute("vehicles", this.vehicleFacade.findVehiclesToBeBorrowedByUser(id));
         model.addAttribute("employee", this.employeeFacade.findEmployeeById(id));
         return "employee/vehicleListView";
     }
 
     @RequestMapping(value = "/journeyListView/{id}", method = RequestMethod.GET)
-    public String jorneyList(@PathVariable long id, Model model) {
+    public String journeyList(@PathVariable long id, Model model) {
         model.addAttribute("journeys", this.journeyFacade.getJourneysByEmployee(id));
         return "employee/journeyListView";
+    }
+
+    @RequestMapping(value = "/borrowed-vehicles", method = RequestMethod.GET)
+    public String myBorrowedVehicles(Model model) {
+        model.addAttribute("journeys", journeyFacade.getUnfinishedJourneysOfUser(getCurrentlyLoggedEmployee().getId()));
+        return "employee/myBorrowedVehiclesView";
+    }
+
+    @RequestMapping(value = "/vehicles-to-borrow", method = RequestMethod.GET)
+    public String vehiclesToBorrowByMe(Model model) {
+        model.addAttribute("vehicles", vehicleFacade.findVehiclesToBeBorrowedByUser(getCurrentlyLoggedEmployee().getId()));
+        return "employee/vehiclesToBorrowView";
+    }
+
+    @RequestMapping(value = "/borrow-vehicle/{vehicleId}", method = RequestMethod.GET)
+    public String borrowVehicle(
+            @PathVariable long vehicleId,
+            RedirectAttributes redirectAttributes,
+            UriComponentsBuilder uriBuilder
+    ) {
+        redirectAttributes.addFlashAttribute("alert_success", "Vehicle borrowed.");
+        journeyFacade.beginJourney(vehicleId, getCurrentlyLoggedEmployee().getId(), dateTimeService.getCurrentDate());
+        return "redirect:" + uriBuilder.path("/employee/vehicles-to-borrow").buildAndExpand().encode().toUriString();
+
     }
 
     @RequestMapping(value = "/vehicleAddJourneyView/{vehicleId}/{employeeId}", method = RequestMethod.GET)
@@ -90,10 +119,28 @@ public class EmployeeController {
         return "redirect:" + uriBuilder.path("/employee/journeyListView/"+employeeId).buildAndExpand().encode().toUriString();
     }
 
+    @RequestMapping(value = "/finish-journey/{journeyId}", method = RequestMethod.GET)
+    public String finishJourney(
+            @PathVariable("journeyId") Long journeyId,
+            @RequestParam(value = "drivenDistance") float drivenDistance,
+            UriComponentsBuilder uriBuilder,
+            RedirectAttributes redirectAttributes
+    ) {
+        journeyFacade.finishJourney(journeyId, drivenDistance, dateTimeService.getCurrentDate());
+        redirectAttributes.addFlashAttribute("alert_success", "Journey was finished and vehicle returned");
+        return "redirect:" + uriBuilder.path("/employee/borrowed-vehicles").buildAndExpand().encode().toUriString();
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setLenient(true);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+    }
+
+    private EmployeeDTO getCurrentlyLoggedEmployee()
+    {
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return employeeFacade.findEmployeeByEmail(user.getUsername());
     }
 }

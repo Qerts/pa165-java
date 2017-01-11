@@ -27,56 +27,59 @@ public class VehicleFacadeImpl implements VehicleFacade {
     private VehicleCategoryService vehicleCategoryService;
 
     @Inject
-    private BeanMappingService beanMappingService;
+    private BeanMappingService bms;
 
     @Override
     public Collection<VehicleDTO> getAllVehicles() {
-        return beanMappingService.mapTo(vehicleService.findAll(), VehicleDTO.class);
+        return bms.mapTo(vehicleService.findAll(), VehicleDTO.class);
     }
 
     @Override
     public Collection<VehicleDTO> getAllActiveVehicles() {
-        return beanMappingService.mapTo(vehicleService.findActiveVehicles(), VehicleDTO.class);
+        return bms.mapTo(vehicleService.findAllActiveVehicles(), VehicleDTO.class);
     }
 
     @Override
     public Collection<VehicleCategoryDTO> getAllVehicleCategories() {
-        return beanMappingService.mapTo(vehicleCategoryService.findAll(), VehicleCategoryDTO.class);
+        return bms.mapTo(vehicleCategoryService.findAll(), VehicleCategoryDTO.class);
     }
 
     @Override
-    public Collection<VehicleDTO> findVehiclesAvailable(Long employeeId) {
-        return this.beanMappingService.mapTo(this.vehicleService.findVehiclesAvailable(employeeId), VehicleDTO.class);
+    public Collection<VehicleDTO> getObsoleteVehicles() {
+        return bms.mapTo(vehicleService.getAllObsoleteVehicles(), VehicleDTO.class);
+    }
+
+    @Override
+    public Collection<VehicleDTO> findVehiclesToBeBorrowedByUser(Long employeeId) {
+        return bms.mapTo(vehicleService.findVehiclesToBeBorrowedByUser(employeeId), VehicleDTO.class);
     }
 
     @Override
     public double getTotalKilometrage(long vehicleId) {
-        return this.vehicleService.getTotalKilometrage(vehicleId);
+        return vehicleService.getTotalKilometrage(vehicleId);
     }
 
     @Override
     public VehicleDTO findVehicleById(Long vehicleId) {
-        return this.beanMappingService.mapTo(this.vehicleService.findById(vehicleId), VehicleDTO.class);
+        return bms.mapTo(vehicleService.findById(vehicleId), VehicleDTO.class);
     }
 
     @Override
     public Long addNewVehicle(VehicleCreateDTO vehicle) {
         vehicle.setActive(true);
-        Vehicle mappedVehicle = this.beanMappingService.mapTo(vehicle, Vehicle.class);
+        Vehicle mappedVehicle = bms.mapTo(vehicle, Vehicle.class);
         mappedVehicle.setVehicleCategory(vehicleCategoryService.findById(vehicle.getVehicleCategoryId()));
-        this.vehicleService.create(mappedVehicle);
+        vehicleService.create(mappedVehicle);
         return mappedVehicle.getId();
     }
 
     @Override
     public void updateVehicle(VehicleDTO vehicle) {
-        this.vehicleService.update(this.beanMappingService.mapTo(vehicle, Vehicle.class));
+        vehicleService.update(bms.mapTo(vehicle, Vehicle.class));
     }
 
     @Override
     public void disableVehicle(Long vehicleId) {
-        this.vehicleService.disable(vehicleId);
+        vehicleService.disable(vehicleId);
     }
-
-
 }
