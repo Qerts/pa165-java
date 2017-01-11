@@ -60,4 +60,10 @@ public interface JourneyFacade {
      */
     void finishJourney(Long journeyId, Float drivenDistance, Date endDate);
 
+    /**
+     * get list of unfinished journeys
+     *
+     * @return list of journeys
+     */
+    List<JourneyDTO> getUnfinishedJourneys();
 }

@@ -21,18 +21,18 @@ public class JourneyFacadeImpl implements JourneyFacade {
     private JourneyService journeyService;
 
     @Inject
-    private BeanMappingService beanMappingService;
+    private BeanMappingService bms;
 
     public List<JourneyDTO> getAllJourneys() {
-        return beanMappingService.mapTo(journeyService.findAll(), JourneyDTO.class);
+        return bms.mapTo(journeyService.findAll(), JourneyDTO.class);
     }
 
     public List<JourneyDTO> getJourneysByEmployee(Long employeeId) {
-        return beanMappingService.mapTo(journeyService.getJourneysByEmployee(employeeId), JourneyDTO.class);
+        return bms.mapTo(journeyService.getJourneysByEmployee(employeeId), JourneyDTO.class);
     }
 
     public List<JourneyDTO> getJourneys(Date from, Date to, Long employeeId) {
-        return beanMappingService.mapTo(journeyService.getAllJourneys(from, to, employeeId), JourneyDTO.class);
+        return bms.mapTo(journeyService.getAllJourneys(from, to, employeeId), JourneyDTO.class);
     }
 
 
@@ -42,10 +42,14 @@ public class JourneyFacadeImpl implements JourneyFacade {
     }
 
     public JourneyDTO beginJourney(Long vehicleId, Long employeeId, Date startDate) {
-        return beanMappingService.mapTo(journeyService.beginJourney(vehicleId, employeeId, startDate), JourneyDTO.class);
+        return bms.mapTo(journeyService.beginJourney(vehicleId, employeeId, startDate), JourneyDTO.class);
     }
 
     public void finishJourney(Long journeyId, Float drivenDistance, Date endDate) {
         journeyService.finishJourney(journeyId, drivenDistance, endDate);
+    }
+
+    public List<JourneyDTO> getUnfinishedJourneys() {
+        return bms.mapTo(journeyService.findAllUnfinished(), JourneyDTO.class);
     }
 }

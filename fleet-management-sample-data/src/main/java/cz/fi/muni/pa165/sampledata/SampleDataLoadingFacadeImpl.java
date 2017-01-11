@@ -114,6 +114,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         journey(today("+1m+14d:y"), today("+1m+14d:m"), today("+1m+14d:d"), today("+1m+20d:y"), today("+1m+20d:m"), today("+1m+20d:d"), 1128, employee3, vehicle5);
         journey(today("+1m+6d:y"), today("+1m+6d:m"), today("+1m+6d:d"), today("+1m+7d:y"), today("+1m+7d:m"), today("+1m+7d:d"), 1528, employee4, vehicle5);
 
+        //unfinished (active) journeys
+        journeyUnfinished(today(":y"), today(":m"), today(":d"), employee2, fiatVehicle);
+        journeyUnfinished(today("-1d:y"), today("-1d:m"), today("-1d:d"), employee3, citroenVehicle);
+        journeyUnfinished(today("-7d:y"), today("-7d:m"), today("-7d:d"), admin, vehicle3);
+
         //truck journeys
         journey(today("+1m+27d:y"), today("+1m+27d:m"), today("+1m+27d:d"), today("+2m+3d:y"), today("+2m+3d:m"), today("+2m+3d:d"), 2820, employee3, truck1);
         journey(today("+2m+3d:y"), today("+2m+3d:m"), today("+2m+3d:d"), today("+2m+6d:y"), today("+2m+6d:m"), today("+2m+6d:d"), 1729, employee3, truck1);
@@ -159,6 +164,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Journey j = journeyService.beginJourney(vehicle.getId(), employee.getId(), startDate);
         journeyService.finishJourney(j.getId(), distance, endDate);
         return j;
+    }
+
+    private Journey journeyUnfinished(int startYear, int startMonth, int startDay, Employee employee, Vehicle vehicle) {
+        Date startDate = new GregorianCalendar(startYear, startMonth, startDay).getTime();
+        return journeyService.beginJourney(vehicle.getId(), employee.getId(), startDate);
     }
 
     private Vehicle vehicle(VehicleCategory vehicleCategory, String vrp, String type, int year, String engineType, String vin, long initialKilometrage) {

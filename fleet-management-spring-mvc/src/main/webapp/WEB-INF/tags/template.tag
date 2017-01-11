@@ -65,8 +65,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.administrator"/><b
                                 class="caret"></b></a>
                         <ul class="dropdown-menu">
+                            <li><a href="${pageContext.request.contextPath}/admin/active-journeys/"><f:message
+                                    key="nav.administrator.activeJourneys"/></a></li>
                             <li><a href="${pageContext.request.contextPath}/admin/entityListView/"><f:message
-                                    key="nav.administrator.entityList"/></a></li>
+                                    key="nav.administrator.entitiesCRUD"/></a></li>
                         </ul>
                     </li>
                 </sec:authorize>

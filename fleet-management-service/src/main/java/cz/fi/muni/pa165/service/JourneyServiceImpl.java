@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Martin Schmidt
@@ -67,7 +68,6 @@ public class JourneyServiceImpl extends JpaService<Journey, Long> implements Jou
         return jouney;
     }
 
-    @Override
     public void finishJourney(Long journeyId, Float drivenDistance, Date endDate) {
         Journey journey = journeyDao.findById(journeyId);
         journey.setDistance(drivenDistance);
@@ -75,4 +75,7 @@ public class JourneyServiceImpl extends JpaService<Journey, Long> implements Jou
         journeyDao.merge(journey);
     }
 
+    public List<Journey> findAllUnfinished() {
+        return findAll().stream().filter(j -> j.getReturnedAt() == null).collect(Collectors.toList());
+    }
 }
