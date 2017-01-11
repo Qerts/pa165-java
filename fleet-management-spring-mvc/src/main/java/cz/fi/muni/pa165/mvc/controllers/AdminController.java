@@ -57,7 +57,7 @@ public class AdminController {
 
         switch (entity) {
             case "vehicle":
-                model.addAttribute("items", this.vehicleFacade.getAllVehicles());
+                model.addAttribute("items", this.vehicleFacade.getAllActiveVehicles());
                 break;
             case "employee":
                 model.addAttribute("items", this.employeeFacade.findAllEmployee());
@@ -74,6 +74,15 @@ public class AdminController {
         model.addAttribute("entities", this.list);
 
         return "admin/entityListView";
+    }
+
+
+    @RequestMapping(value = "/obsolete-vehicles", method = RequestMethod.GET)
+    public String listObsoleteVehicles(
+        Model model
+    ) {
+        model.addAttribute("vehicles", vehicleFacade.getObsoleteVehicles());
+        return "admin/obsoleteVehiclesListView";
     }
 
     @RequestMapping(value = "/active-journeys", method = RequestMethod.GET)
@@ -93,5 +102,16 @@ public class AdminController {
         journeyFacade.finishJourney(journeyId, drivenDistance, dateTimeService.getCurrentDate());
         redirectAttributes.addFlashAttribute("alert_success", "Journey was finished and vehicle returned");
         return "redirect:" + uriBuilder.path("/admin/active-journeys").buildAndExpand().encode().toUriString();
+    }
+
+    @RequestMapping(value = "/deactivate-vehicle/{vehicleId}", method = RequestMethod.GET)
+    public String deactivateVehicle(
+            @PathVariable("vehicleId") Long vehicleId,
+            UriComponentsBuilder uriBuilder,
+            RedirectAttributes redirectAttributes
+    ) {
+        vehicleFacade.disableVehicle(vehicleId);
+        redirectAttributes.addFlashAttribute("alert_success", "Vehicle was disabled");
+        return "redirect:" + uriBuilder.path("/admin/entityListView/selectTable").queryParam("entity", "vehicle").buildAndExpand().encode().toUriString();
     }
 }

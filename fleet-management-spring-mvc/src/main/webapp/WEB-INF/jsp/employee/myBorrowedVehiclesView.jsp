@@ -36,10 +36,9 @@
             </tr>
         </c:forEach>
         </tbody>
+    </table>
 </c:otherwise>
 </c:choose>
-
-</table>
 
 </jsp:attribute>
 </tag:template>

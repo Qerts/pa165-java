@@ -78,4 +78,11 @@ public interface VehicleFacade {
      * @return collection of vehicle categories dto
      */
     Collection<VehicleCategoryDTO> getAllVehicleCategories();
+
+    /**
+     * obsolete vehicles
+     *
+     * @return obsolete vehicles
+     */
+    Collection<VehicleDTO> getObsoleteVehicles();
 }

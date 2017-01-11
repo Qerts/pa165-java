@@ -36,12 +36,17 @@ public class VehicleFacadeImpl implements VehicleFacade {
 
     @Override
     public Collection<VehicleDTO> getAllActiveVehicles() {
-        return bms.mapTo(vehicleService.findAllVehiclesToBeBorrowed(), VehicleDTO.class);
+        return bms.mapTo(vehicleService.findAllActiveVehicles(), VehicleDTO.class);
     }
 
     @Override
     public Collection<VehicleCategoryDTO> getAllVehicleCategories() {
         return bms.mapTo(vehicleCategoryService.findAll(), VehicleCategoryDTO.class);
+    }
+
+    @Override
+    public Collection<VehicleDTO> getObsoleteVehicles() {
+        return bms.mapTo(vehicleService.getAllObsoleteVehicles(), VehicleDTO.class);
     }
 
     @Override
@@ -77,6 +82,4 @@ public class VehicleFacadeImpl implements VehicleFacade {
     public void disableVehicle(Long vehicleId) {
         vehicleService.disable(vehicleId);
     }
-
-
 }

@@ -54,6 +54,11 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
     }
 
     @Override
+    public List<Vehicle> findAllActiveVehicles() {
+        return getOnlyActive(vehicleDao.findAll());
+    }
+
+    @Override
     public List<Vehicle> findAllVehiclesToBeBorrowed() {
         return getOnlyAvailableToBorrow(getOnlyActive(vehicleDao.findAll()));
     }
@@ -61,6 +66,11 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
     @Override
     public List<Vehicle> findVehiclesToBeBorrowedByUser(long employeeId) {
         return getOnlyAvailableToBorrow(getOnlyActive(vehicleDao.findVehiclesAvailable(employeeId)));
+    }
+
+    @Override
+    public List<Vehicle> getAllObsoleteVehicles() {
+        return vehicleDao.findAll().stream().filter(v -> v.getActive() == false).collect(Collectors.toList());
     }
 
     private List<Vehicle> getOnlyActive(List<Vehicle> all) {
@@ -73,12 +83,13 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
 
     @Override
     public void disable(long vehicleId) {
-        List<Journey> journeys = this.journeyDao.findAllByVehicleId(vehicleId);
+        List<Journey> journeys = journeyDao.findAllByVehicleId(vehicleId);
         journeys.sort(JourneyComparator);
 
-        Vehicle v = this.vehicleDao.findById(vehicleId);
+        Vehicle v = vehicleDao.findById(vehicleId);
         v.setActive(false);
-        this.vehicleDao.merge(v);
+        vehicleDao.merge(v);
+
     }
 
     private double round(double value, int precision) {

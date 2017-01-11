@@ -65,11 +65,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Vehicle vehicle3 = vehicle(categoryM, "4C82878", "BMW 3 SERIES 3.0 335i M Sport 2dr", 2007, "Petrol engine", "1G8ZE1598PZ242153", (long) 89500);
         Vehicle vehicle4 = vehicle(categoryM, "2E77010", "Volkswagen Golf 2.0 TDI GT DSG 5dr", 2012, "Diesel engine", "1JCUX7811FT114873", (long) 33000);
         Vehicle vehicle5 = vehicle(categoryM, "2H42270", "Audi TT 1.8 T Sport Quattro 3dr", 2002, "Petrol engine", "WMEEJ9AA5DK782726", (long) 170000);
-        //Vehicle vehicle6 = vehicle(categoryM, "3J57942", "Peugeot 3008 1.6 HDi Active 5dr", 2013, "Diesel engine", "JSAAK47A052170790", (long) 56900);
-        //Vehicle vehicle7 = vehicle(categoryM, "2L02404", "Nissan Leaf E Acenta 5dr", 2014, "Electric engine", "5KKHAEDE47PY01338", (long) 16700);
-        //Vehicle vehicle8 = vehicle(categoryM, "2M51384", "Nissan X-Trail 2.2 dCi SVE 5dr", 2005, "Diesel engine", "1HGCA5524KA102482", (long) 147200);
-        //Vehicle vehicle9 = vehicle(categoryM, "4P63285", "Renault Megane 1.5 dCi Expression 4dr", 2007, "Diesel engine", "1GNES13M582139763", (long) 231700);
-        //Vehicle vehicle10 = vehicle(categoryM, "7S59790", "Alfa Romeo GT 1.9 JTDM 16v 2dr", 2005, "Diesel engine", "1FTPW14525KD01647", (long) 261900);
 
         Vehicle truck1 = vehicle(categoryN, "3A24987", "Mitsubishi FUSO FE 180", 2012, "Diesel engine", "2B3KA43D89H525247", (long) 221400);
         Vehicle truck2 = vehicle(categoryN, "1A97103", "Mitsubishi FUSO FE 160", 2012, "Diesel engine", "4S3BMEH68B2260267", (long) 356200);

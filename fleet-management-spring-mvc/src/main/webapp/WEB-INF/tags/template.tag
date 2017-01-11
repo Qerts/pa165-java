@@ -75,6 +75,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="${pageContext.request.contextPath}/admin/active-journeys/"><f:message
                                     key="nav.administrator.activeJourneys"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/admin/obsolete-vehicles"><f:message
+                                    key="nav.administrator.obsoleteVehicles"/></a></li>
                             <li><a href="${pageContext.request.contextPath}/admin/entityListView/"><f:message
                                     key="nav.administrator.entitiesCRUD"/></a></li>
                         </ul>

@@ -27,6 +27,13 @@ public interface VehicleService extends Service<Vehicle, Long> {
      *
      * @return list of vehicles
      */
+    List<Vehicle> findAllActiveVehicles();
+
+    /**
+     * get all vehicles that could be borrowed
+     *
+     * @return list of vehicles
+     */
     List<Vehicle> findAllVehiclesToBeBorrowed();
 
     /**
@@ -38,4 +45,10 @@ public interface VehicleService extends Service<Vehicle, Long> {
      */
     List<Vehicle> findVehiclesToBeBorrowedByUser(long employeeId);
 
+    /**
+     * obsolete vehicles
+     *
+     * @return obsolete vehicles
+     */
+    List<Vehicle> getAllObsoleteVehicles();
 }
