@@ -1,7 +1,9 @@
 package cz.fi.muni.pa165.facade;
 
 import cz.fi.muni.pa165.dto.JourneyDTO;
+import cz.fi.muni.pa165.dto.VehicleDTO;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -65,5 +67,7 @@ public interface JourneyFacade {
      *
      * @return list of journeys
      */
-    List<JourneyDTO> getUnfinishedJourneys();
+    List<JourneyDTO> getAllUnfinishedJourneys();
+
+    List<JourneyDTO> getUnfinishedJourneysOfUser(long userId);
 }

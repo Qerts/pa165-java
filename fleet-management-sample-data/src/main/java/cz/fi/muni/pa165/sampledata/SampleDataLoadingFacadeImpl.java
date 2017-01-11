@@ -118,6 +118,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         journeyUnfinished(today(":y"), today(":m"), today(":d"), employee2, fiatVehicle);
         journeyUnfinished(today("-1d:y"), today("-1d:m"), today("-1d:d"), employee3, citroenVehicle);
         journeyUnfinished(today("-7d:y"), today("-7d:m"), today("-7d:d"), admin, vehicle3);
+        journeyUnfinished(today(":y"), today(":m"), today(":d"), admin, vehicle4);
 
         //truck journeys
         journey(today("+1m+27d:y"), today("+1m+27d:m"), today("+1m+27d:d"), today("+2m+3d:y"), today("+2m+3d:m"), today("+2m+3d:d"), 2820, employee3, truck1);

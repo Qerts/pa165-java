@@ -79,7 +79,7 @@ public class AdminController {
     @RequestMapping(value = "/active-journeys", method = RequestMethod.GET)
     public String activeJourneys(Model model)
     {
-        model.addAttribute("journeys", journeyFacade.getUnfinishedJourneys());
+        model.addAttribute("journeys", journeyFacade.getAllUnfinishedJourneys());
         return "admin/activeJourneysView";
     }
 
@@ -93,5 +93,5 @@ public class AdminController {
         journeyFacade.finishJourney(journeyId, drivenDistance, dateTimeService.getCurrentDate());
         redirectAttributes.addFlashAttribute("alert_success", "Journey was finished and vehicle returned");
         return "redirect:" + uriBuilder.path("/admin/active-journeys").buildAndExpand().encode().toUriString();
-    };
+    }
 }

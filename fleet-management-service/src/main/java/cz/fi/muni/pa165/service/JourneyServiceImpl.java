@@ -78,4 +78,10 @@ public class JourneyServiceImpl extends JpaService<Journey, Long> implements Jou
     public List<Journey> findAllUnfinished() {
         return findAll().stream().filter(j -> j.getReturnedAt() == null).collect(Collectors.toList());
     }
+
+    public boolean hasActiveJourney(Long vehicleId) {
+        return findAllUnfinished().stream()
+                .map(j -> j.getVehicle().getId().equals(vehicleId))
+                .reduce(false, (b, carry) -> b || carry);
+    }
 }

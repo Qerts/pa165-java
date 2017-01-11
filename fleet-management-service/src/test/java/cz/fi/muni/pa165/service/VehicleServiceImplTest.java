@@ -8,6 +8,7 @@ import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.Journey;
 import cz.fi.muni.pa165.entity.Vehicle;
 import cz.fi.muni.pa165.enums.Role;
+import cz.fi.muni.pa165.service.interfaces.JourneyService;
 import org.dozer.inject.Inject;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -34,10 +35,16 @@ public class VehicleServiceImplTest {
 
     @Mock
     private VehicleDao vehicleDao;
+
     @Mock
     private EmployeeDao employeeDao;
+
     @Mock
     private JourneyDao journeyDao;
+
+    @Mock
+    private JourneyService journeyService;
+
     @Inject
     @InjectMocks
     private VehicleServiceImpl vehicleService = new VehicleServiceImpl();
@@ -78,6 +85,7 @@ public class VehicleServiceImplTest {
         when(this.vehicleDao.findById(anyLong())).thenReturn(v1);
         when(this.journeyDao.findAllByVehicleId(any(long.class))).thenReturn(list);
         when(this.vehicleDao.findVehiclesAvailable(0L)).thenReturn(vehicleList);
+        when(this.journeyService.hasActiveJourney(any())).thenReturn(false);
     }
 
     @Test
@@ -103,7 +111,7 @@ public class VehicleServiceImplTest {
 
     @Test
     public void testGetAllAvailable() {
-        List<Vehicle> list = this.vehicleService.findVehiclesAvailable(e1.getId());
+        List<Vehicle> list = this.vehicleService.findVehiclesToBeBorrowedByUser(e1.getId());
 
         Assert.assertEquals(list.size(), 1);
     }

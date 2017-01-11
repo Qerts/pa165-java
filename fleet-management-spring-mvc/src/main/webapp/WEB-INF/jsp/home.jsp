@@ -10,10 +10,15 @@
 
 <div class="starter-template">
     <h1>Fleet management</h1>
-    <p class="lead">Login accounts:<br>
-        Admin email: <b>admin@muni.cz</b> password: <b>admin</b><br>
-        Serviceman email: <b>serviceman@muni.cz</b> password: <b>password</b><br>
-        Employee email: <b>employee1@muni.cz</b> password: <b>password</b><br></p>
+
+    <h3 style="text-align: center">&raquo; Award-winning awesome ultimate enterprise solution for all your's company entire automobile management &laquo;</h3>
+
+    <img style="width: 100%" src="<c:url value='/images/car-park.jpg'/>" alt="Car park" />
+
+    <%--<p class="lead">Login accounts:<br>--%>
+        <%--Admin email: <b>admin@muni.cz</b> password: <b>admin</b><br>--%>
+        <%--Serviceman email: <b>serviceman@muni.cz</b> password: <b>password</b><br>--%>
+        <%--Employee email: <b>employee1@muni.cz</b> password: <b>password</b><br></p>--%>
 </div>
 
 </jsp:attribute>

@@ -25,7 +25,7 @@ public interface VehicleFacade {
      * @param employeeId Id of the employee
      * @return List of vehicles available to borrow for given employee.
      */
-    Collection<VehicleDTO> findVehiclesAvailable(Long employeeId);
+    Collection<VehicleDTO> findVehiclesToBeBorrowedByUser(Long employeeId);
 
     /**
      * Counts total kilometres gone with given vehicle. It sums all journey and initial kilometrage of the vehicle.
@@ -78,5 +78,4 @@ public interface VehicleFacade {
      * @return collection of vehicle categories dto
      */
     Collection<VehicleCategoryDTO> getAllVehicleCategories();
-
 }

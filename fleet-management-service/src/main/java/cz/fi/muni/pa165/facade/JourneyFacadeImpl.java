@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Martin Schmidt
@@ -42,6 +43,10 @@ public class JourneyFacadeImpl implements JourneyFacade {
     }
 
     public JourneyDTO beginJourney(Long vehicleId, Long employeeId, Date startDate) {
+        if (journeyService.hasActiveJourney(vehicleId)) {
+            throw new RuntimeException("Vehicle #" + vehicleId + " is already borrowed. It must be returned prior to be borrowed agian.");
+        }
+
         return bms.mapTo(journeyService.beginJourney(vehicleId, employeeId, startDate), JourneyDTO.class);
     }
 
@@ -49,7 +54,12 @@ public class JourneyFacadeImpl implements JourneyFacade {
         journeyService.finishJourney(journeyId, drivenDistance, endDate);
     }
 
-    public List<JourneyDTO> getUnfinishedJourneys() {
+    public List<JourneyDTO> getAllUnfinishedJourneys() {
         return bms.mapTo(journeyService.findAllUnfinished(), JourneyDTO.class);
+    }
+
+    public List<JourneyDTO> getUnfinishedJourneysOfUser(long userId) {
+        return getAllUnfinishedJourneys().stream().filter(j -> j.getEmployee().getId().equals(userId))
+                .collect(Collectors.toList());
     }
 }
