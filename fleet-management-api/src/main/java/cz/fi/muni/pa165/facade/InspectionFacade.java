@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.dto.InspectionDTO;
 import cz.fi.muni.pa165.dto.InspectionIntervalDTO;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,10 +31,8 @@ public interface InspectionFacade {
 
     /**
      * Record that inspection was performed.
-     *
-     * @param inspection Inspection DTO.
      */
-    void performInspection(InspectionDTO inspection);
+    void performInspection(long inspectionIntervalId, Date performedOn);
 
     /**
      * create new inspection interval
@@ -47,4 +46,6 @@ public interface InspectionFacade {
      * @return list of ins. intevals
      */
     List<InspectionIntervalDTO> getInspectionInterval(Long vehicleId);
+
+    List<InspectionDTO> listAllInspections();
 }

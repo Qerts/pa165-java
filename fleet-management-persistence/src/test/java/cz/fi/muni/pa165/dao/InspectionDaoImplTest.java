@@ -84,7 +84,7 @@ public class InspectionDaoImplTest extends AbstractTransactionalTestNGSpringCont
 
         // Assert
         Inspection foundAfterMergeInspection = uut.findById(inspection1.getId());
-        Assert.assertEquals(foundAfterMergeInspection.getPerformedAt(), date);
+        Assert.assertEquals(foundAfterMergeInspection.getPerformedOn(), date);
         Assert.assertEquals(foundAfterMergeInspection, foundInspection);
     }
 

@@ -1,9 +1,9 @@
 package cz.fi.muni.pa165.service.interfaces;
 
 import cz.fi.muni.pa165.entity.InspectionInterval;
-import cz.fi.muni.pa165.entity.Vehicle;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,4 +26,19 @@ public interface InspectionIntervalService extends Service<InspectionInterval, L
      * @return
      */
     List<InspectionInterval> getInspectionIntervalsForVehicle(Long vehicleId);
+
+    /**
+     * @return Date A day when inspection was performed last time; NULL if inspection was never performed.
+     */
+    Date getLastInspectionWasPerformedOn(InspectionInterval ii);
+
+    /**
+     * @return Date The first day when inspection will be overdue. If no inspection was performed, returns today's date.
+     */
+    Date getNextInspectionShouldBePerformedUntil(InspectionInterval ii);
+
+    /**
+     * @return int
+     */
+    int getNextInspectionShouldBePerformedInDays(InspectionInterval ii);
 }

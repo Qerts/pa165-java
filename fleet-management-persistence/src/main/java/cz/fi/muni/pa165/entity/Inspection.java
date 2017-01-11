@@ -40,7 +40,7 @@ public class Inspection {
         return this.id;
     }
 
-    public Date getPerformedAt() {
+    public Date getPerformedOn() {
         return this.performedAt;
     }
 
@@ -63,7 +63,7 @@ public class Inspection {
 
         Inspection that = (Inspection) o;
 
-        return performedAt != null ? performedAt.equals(that.getPerformedAt()) : that.getPerformedAt() == null;
+        return performedAt != null ? performedAt.equals(that.getPerformedOn()) : that.getPerformedOn() == null;
 
     }
 
