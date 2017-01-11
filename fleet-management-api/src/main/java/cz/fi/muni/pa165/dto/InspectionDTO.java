@@ -9,7 +9,7 @@ public class InspectionDTO {
 
     private Long id;
 
-    private Date performedAt;
+    private Date performedOn;
 
     private InspectionIntervalDTO inspectionInterval;
 
@@ -17,7 +17,7 @@ public class InspectionDTO {
     }
 
     public InspectionDTO(Date performedAt) {
-        this.performedAt = performedAt;
+        this.performedOn = performedAt;
     }
 
     public Long getId() {
@@ -26,12 +26,12 @@ public class InspectionDTO {
 
     public void setId(Long id) {this.id = id;}
 
-    public Date getPerformedAt() {
-        return this.performedAt;
+    public Date getPerformedOn() {
+        return this.performedOn;
     }
 
-    public void setPerformedAt(Date performedAt) {
-        this.performedAt = performedAt;
+    public void setPerformedOn(Date performedOn) {
+        this.performedOn = performedOn;
     }
 
     public InspectionIntervalDTO getInspectionInterval() {
@@ -49,20 +49,20 @@ public class InspectionDTO {
 
         InspectionDTO that = (InspectionDTO) o;
 
-        return performedAt != null ? performedAt.equals(that.getPerformedAt()) : that.getPerformedAt() == null;
+        return performedOn != null ? performedOn.equals(that.getPerformedOn()) : that.getPerformedOn() == null;
 
     }
 
     @Override
     public int hashCode() {
-        return performedAt != null ? performedAt.hashCode() : 0;
+        return performedOn != null ? performedOn.hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "Inspection{" +
                 "id=" + id +
-                ", performedAt=" + performedAt +
+                ", performedOn=" + performedOn +
                 '}';
     }
 

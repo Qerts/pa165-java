@@ -112,7 +112,10 @@ public class InspectionInterval {
     }
 
     public Inspection getNewestInspection() {
-        return null;
+        return getInspections().stream().reduce(
+                null,
+                (Inspection newest, Inspection current) -> newest == null || current.getPerformedOn().after(newest.getPerformedOn()) ? current : newest
+        );
     }
 
     public boolean hasInspections() {

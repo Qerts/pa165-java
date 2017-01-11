@@ -38,6 +38,11 @@
             <artifactId>javax.el</artifactId>
             <scope>test</scope><!-- conflicts with tomcat libraries, but needed for tests -->
         </dependency>
+        <dependency>
+            <groupId>cz.fi.muni.pa165</groupId>
+            <artifactId>fleet-management-persistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

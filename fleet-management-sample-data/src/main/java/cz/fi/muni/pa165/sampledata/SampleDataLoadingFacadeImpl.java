@@ -1,14 +1,8 @@
 package cz.fi.muni.pa165.sampledata;
 
-import cz.fi.muni.pa165.entity.Employee;
-import cz.fi.muni.pa165.entity.Journey;
-import cz.fi.muni.pa165.entity.Vehicle;
-import cz.fi.muni.pa165.entity.VehicleCategory;
+import cz.fi.muni.pa165.entity.*;
 import cz.fi.muni.pa165.enums.Role;
-import cz.fi.muni.pa165.service.interfaces.EmployeeService;
-import cz.fi.muni.pa165.service.interfaces.JourneyService;
-import cz.fi.muni.pa165.service.interfaces.VehicleCategoryService;
-import cz.fi.muni.pa165.service.interfaces.VehicleService;
+import cz.fi.muni.pa165.service.interfaces.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -16,8 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 /**
  * @author Jozef Krcho
@@ -40,11 +33,17 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @Inject
     private VehicleCategoryService vehicleCategoryService;
 
+    @Inject
+    private InspectionIntervalService inspectionIntervalService;
+
+    @Inject
+    private InspectionService inspectionService;
+
     public void loadData() throws IOException {
         VehicleCategory categoryL = vehicleCategory("Category L: light motor vehicles");
         VehicleCategory categoryM = vehicleCategory("Category M: used for the carriage of passengers");
         VehicleCategory categoryN = vehicleCategory("Category N: used for the carriage of goods");
-        log.info("Loaded vehicle categorys.");
+        log.info("Loaded vehicle categories.");
 
         Employee admin = employee("admin@muni.cz", "Admin", "Man", "admin", Role.ADMINISTRATOR);
         Employee serviceman = employee("serviceman@muni.cz", "Thomas", "Cooper", "password", Role.SERVICEMAN);
@@ -61,8 +60,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         addEmployeeVehicleCategory(employee4, categoryM);
         log.info("Loaded employees.");
 
-        Vehicle vehicle1 = vehicle(categoryM, "4A23000", "Citroen DS3 1.6 VTi DStyle 3dr", 2011, "Petrol engine", "1FMCU0C73AKC53597", (long) 31570);
-        Vehicle vehicle2 = vehicle(categoryM, "6B26635", "Fiat 500 1.2 Sport 3dr", 2010, "Petrol engine", "1B7GL12X52S609193", (long) 98000);
+        Vehicle citroenVehicle = vehicle(categoryM, "4A23000", "Citroen DS3 1.6 VTi DStyle 3dr", 2011, "Petrol engine", "1FMCU0C73AKC53597", (long) 31570);
+        Vehicle fiatVehicle = vehicle(categoryM, "6B26635", "Fiat 500 1.2 Sport 3dr", 2010, "Petrol engine", "1B7GL12X52S609193", (long) 98000);
         Vehicle vehicle3 = vehicle(categoryM, "4C82878", "BMW 3 SERIES 3.0 335i M Sport 2dr", 2007, "Petrol engine", "1G8ZE1598PZ242153", (long) 89500);
         Vehicle vehicle4 = vehicle(categoryM, "2E77010", "Volkswagen Golf 2.0 TDI GT DSG 5dr", 2012, "Diesel engine", "1JCUX7811FT114873", (long) 33000);
         Vehicle vehicle5 = vehicle(categoryM, "2H42270", "Audi TT 1.8 T Sport Quattro 3dr", 2002, "Petrol engine", "WMEEJ9AA5DK782726", (long) 170000);
@@ -84,46 +83,65 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Vehicle bike4 = vehicle(categoryL, "2A39700", "Pioneer XF 124cc", 1997, "Petrol engine", "WVWYK73C18E115975", (long) 14148);
         Vehicle bike5 = vehicle(categoryL, "2A91101", "Honda CB1 398cc", 1989, "Petrol engine", "1FMCU0DG0AKB22433", (long) 77500);
         log.info("Loaded vehicles.");
+
+        //inspection intervals
+        InspectionInterval citroenTiresHalfYearInspection = inspectionInterval(citroenVehicle, "Tires (Citroen)", 180); // 1/2 year
+        InspectionInterval citroenOil1YearInspection = inspectionInterval(citroenVehicle, "Oil (Citroen)", 365); // 1 year
+        // TODO: test that 1 inspection interval cannot be added to multiple vehicles
+        InspectionInterval fiatTires3monthsInspection = inspectionInterval(fiatVehicle, "Tires (Fiat)", 60); // 3 months
+        InspectionInterval fiatOil1YearInspection = inspectionInterval(fiatVehicle, "Oil (Fiat)", 365); // 1 year
+        InspectionInterval fiatSTK2YearsInspection = inspectionInterval(fiatVehicle, "STK (Fiat)", 730); // 2 years
+
+        citroenVehicle.setInspectionIntervals(new HashSet<>(Arrays.asList(citroenTiresHalfYearInspection, citroenOil1YearInspection)));
+        fiatVehicle.setInspectionIntervals(new HashSet<>(Arrays.asList(fiatTires3monthsInspection, fiatOil1YearInspection, fiatSTK2YearsInspection)));
+
+        //inspections
+        Inspection citroenTiresInspected = inspection(citroenTiresHalfYearInspection, todayBuilder("-170d").getTime()); // needs to be performed in 10 days
+        Inspection fiatTiresInspected = inspection(fiatTires3monthsInspection, todayBuilder("-1m").getTime()); // needs to be performed in 2 months
+        Inspection fiatOilInspected = inspection(fiatOil1YearInspection, todayBuilder("-9m").getTime()); // needs to be performed in 3 months
+        Inspection fiatSTKInspected = inspection(fiatSTK2YearsInspection, todayBuilder("-3y").getTime()); // overdue by 1 year
+        log.info("Loaded inspections");
+
         //vehicle journeys
-        journey(2016, 1, 1, 2016, 1, 6, 1200, admin, vehicle1);
-        journey(2016, 1, 15, 2016, 1, 23, 2304, serviceman, vehicle1);
-        journey(2016, 1, 15, 2016, 1, 21, 1900, employee2, vehicle2);
-        journey(2016, 1, 24, 2016, 1, 28, 1220, employee3, vehicle2);
-        journey(2016, 1, 22, 2016, 1, 27, 1770, employee2, vehicle3);
-        journey(2016, 1, 28, 2016, 2, 5, 3128, employee4, vehicle3);
-        journey(2016, 1, 29, 2016, 2, 4, 870, employee2, vehicle4);
-        journey(2016, 2, 7, 2016, 2, 13, 1320, employee3, vehicle4);
-        journey(2016, 2, 7, 2016, 2, 8, 1528, employee4, vehicle5);
-        journey(2016, 2, 15, 2016, 2, 21, 1128, employee3, vehicle5);
+        journey(today(":y"), today(":m"), today(":d"), today("+5d:y"), today("+5d:m"), today("+5d:d"), 1200, admin, citroenVehicle);
+        journey(today("+14d:y"), today("+14d:m"), today("+14d:d"), today("+22d:y"), today("+22d:m"), today("+22d:d"), 2304, serviceman, citroenVehicle);
+        journey(today("+14d:y"), today("+14d:m"), today("+14d:d"), today("+20d:y"), today("+20d:m"), today("+20d:d"), 1900, employee2, fiatVehicle);
+        journey(today("+23d:y"), today("+23d:m"), today("+23d:d"), today("+27d:y"), today("+27d:m"), today("+27d:d"), 1220, employee3, fiatVehicle);
+        journey(today("+21d:y"), today("+21d:m"), today("+21d:d"), today("+26d:y"), today("+26d:m"), today("+26d:d"), 1770, employee2, vehicle3);
+        journey(today("+27d:y"), today("+27d:m"), today("+27d:d"), today("+1m+4d:y"), today("+1m+4d:m"), today("+1m+4d:d"), 3128, employee4, vehicle3);
+        journey(today("+28d:y"), today("+28d:m"), today("+28d:d"), today("+1m+3d:y"), today("+1m+3d:m"), today("+1m+3d:d"), 870, employee2, vehicle4);
+        journey(today("+1m+6d:y"), today("+1m+6d:m"), today("+1m+6d:d"), today("+1m+12d:y"), today("+1m+12d:m"), today("+1m+12d:d"), 1320, employee3, vehicle4);
+        journey(today("+1m+14d:y"), today("+1m+14d:m"), today("+1m+14d:d"), today("+1m+20d:y"), today("+1m+20d:m"), today("+1m+20d:d"), 1128, employee3, vehicle5);
+        journey(today("+1m+6d:y"), today("+1m+6d:m"), today("+1m+6d:d"), today("+1m+7d:y"), today("+1m+7d:m"), today("+1m+7d:d"), 1528, employee4, vehicle5);
 
         //truck journeys
-        journey(2016, 2, 28, 2016, 3, 3, 2820, employee3, truck1);
-        journey(2016, 3, 4, 2016, 3, 7, 1729, employee3, truck1);
-        journey(2016, 3, 9, 2016, 3, 11, 720, employee3, truck2);
-        journey(2016, 3, 12, 2016, 3, 14, 1112, serviceman, truck2);
-        journey(2016, 3, 13, 2016, 3, 20, 3423, employee3, truck3);
-        journey(2016, 3, 23, 2016, 3, 27, 1128, employee3, truck3);
-        journey(2016, 2, 12, 2016, 2, 20, 2243, serviceman, truck4);
-        journey(2016, 3, 4, 2016, 3, 9, 4231, serviceman, truck4);
-        journey(2016, 4, 1, 2016, 4, 3, 451, employee3, truck5);
-        journey(2016, 4, 7, 2016, 4, 11, 1145, employee3, truck5);
+        journey(today("+1m+27d:y"), today("+1m+27d:m"), today("+1m+27d:d"), today("+2m+3d:y"), today("+2m+3d:m"), today("+2m+3d:d"), 2820, employee3, truck1);
+        journey(today("+2m+3d:y"), today("+2m+3d:m"), today("+2m+3d:d"), today("+2m+6d:y"), today("+2m+6d:m"), today("+2m+6d:d"), 1729, employee3, truck1);
+        journey(today("+2m+8d:y"), today("+2m+8d:m"), today("+2m+8d:d"), today("+2m+10d:y"), today("+2m+10d:m"), today("+2m+10d:d"), 720, employee3, truck2);
+        journey(today("+2m+11d:y"), today("+2m+11d:m"), today("+2m+11d:d"), today("+2m+11d:y"), today("+2m+11d:m"), today("+2m+11d:d"), 1112, serviceman, truck2);
+        journey(today("+2m+12d:y"), today("+2m+12d:m"), today("+2m+12d:d"), today("+2m+19d:y"), today("+2m+19d:m"), today("+2m+19d:d"), 3423, employee3, truck3);
+        journey(today("+2m+22d:y"), today("+2m+22d:m"), today("+2m+22d:d"), today("+2m+26d:y"), today("+2m+26d:m"), today("+2m+26d:d"), 1128, employee3, truck3);
+        journey(today("+1m+11d:y"), today("+1m+11d:m"), today("+1m+11d:d"), today("+1m+19d:y"), today("+1m+19d:m"), today("+1m+19d:d"), 2243, serviceman, truck4);
+        journey(today("+2m+3d:y"), today("+2m+3d:m"), today("+2m+3d:d"), today("+2m+8d:y"), today("+2m+8d:m"), today("+2m+8d:d"), 4231, serviceman, truck4);
+        journey(today("+3m:y"), today("+3m:m"), today("+3m:d"), today("+3m+2d:y"), today("+3m+2d:m"), today("+3m+2d:d"), 451, employee3, truck5);
+        journey(today("+3m+6d:y"), today("+3m+6d:m"), today("+3m+6d:d"), today("+3m+10d:y"), today("+3m+10d:m"), today("+3m+10d:d"), 1145, employee3, truck5);
 
         //bikes journeys
-        journey(2016, 1, 4, 2016, 1, 8, 723, employee1, bike1);
-        journey(2016, 1, 11, 2016, 1, 17, 1345, employee1, bike1);
-        journey(2016, 1, 21, 2016, 1, 24, 453, employee1, bike2);
-        journey(2016, 1, 27, 2016, 2, 1, 928, employee1, bike2);
-        journey(2016, 2, 1, 2016, 2, 7, 2341, admin, bike3);
-        journey(2016, 4, 6, 2016, 4, 13, 1728, admin, bike3);
-        journey(2016, 2, 13, 2016, 2, 18, 1911, employee1, bike4);
-        journey(2016, 2, 22, 2016, 2, 26, 1127, employee1, bike4);
-        journey(2016, 3, 2, 2016, 3, 7, 1400, employee1, bike5);
-        journey(2016, 3, 11, 2016, 3, 16, 1722, employee1, bike5);
+        journey(today("+4d:y"), today("+4d:m"), today("+4d:d"), today("+7d:y"), today("+7d:m"), today("+7d:d"), 723, employee1, bike1);
+        journey(today("+11d:y"), today("+11d:m"), today("+11d:d"), today("+16d:y"), today("+16d:m"), today("+16d:d"), 1345, employee1, bike1);
+        journey(today("+20d:y"), today("+20d:m"), today("+20d:d"), today("+23d:y"), today("+23d:m"), today("+23d:d"), 453, employee1, bike2);
+        journey(today("+26d:y"), today("+26d:m"), today("+26d:d"), today("+1m:y"), today("+1m:m"), today("+1m:d"), 928, employee1, bike2);
+        journey(today("+1m:y"), today("+1m:m"), today("+1m:d"), today("+1d+6d:y"), today("+1d+6d:m"), today("+1d+6d:d"), 2341, admin, bike3);
+        journey(today("+3m+5d:y"), today("+3m+5d:m"), today("+3m+5d:d"), today("+3m+12d:y"), today("+3m+12d:m"), today("+3m+12d:d"), 1728, admin, bike3);
+        journey(today("+1m+12d:y"), today("+1m+12d:m"), today("+1m+12d:d"), today("+1m+17d:y"), today("+1m+17d:m"), today("+1m+17d:d"), 1911, employee1, bike4);
+        journey(today("+1m+21d:y"), today("+1m+21d:m"), today("+1m+21d:d"), today("+1m+25d:y"), today("+1m+25d:m"), today("+1m+25d:d"), 1127, employee1, bike4);
+        journey(today("+2m+1d:y"), today("+2m+1d:m"), today("+2m+1d:d"), today("+2m+6d:y"), today("+2m+6d:m"), today("+2m+6d:d"), 1400, employee1, bike5);
+        journey(today("+2m+10d:y"), today("+2m+10d:m"), today("+2m+10d:d"), today("+2m+15d:y"), today("+2m+15d:m"), today("+2m+15d:d"), 1722, employee1, bike5);
         log.info("Loaded journeys.");
     }
 
-    private void addEmployeeVehicleCategory(Employee employee, VehicleCategory... vehicleCategorys) {
-        for (VehicleCategory vehicleCategory : vehicleCategorys) {
+    private void addEmployeeVehicleCategory(Employee employee, VehicleCategory... vehicleCategories) {
+        for (VehicleCategory vehicleCategory : vehicleCategories) {
             employee.addVehicleCategory(vehicleCategory);
         }
         employeeService.update(employee);
@@ -156,5 +174,139 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return e;
     }
 
+    private InspectionInterval inspectionInterval(Vehicle vehicle, String name, int interval) {
+        InspectionInterval ii = new InspectionInterval(name, interval);
+        ii.setVehicle(vehicle);
+        inspectionIntervalService.create(ii);
+        return ii;
+    }
 
+    private Inspection inspection(InspectionInterval ii, Date performedAt) {
+        Inspection i = new Inspection(performedAt);
+        i.setInspectionInterval(ii);
+
+        Set<Inspection> inspections = ii.getInspections();
+        inspections.add(i);
+        ii.setInspections(inspections);
+        inspectionService.create(i);
+        inspectionIntervalService.update(ii);
+        return i;
+    }
+
+
+    //
+    // Helper methods
+    //
+
+
+    /**
+     * Returns a modified current date.
+     *
+     * @param code E.g. "+1y+3m-15d" means: to current day add 1 year, add 3 months, subtract 15 days and return year.
+     * @return Calendar
+     */
+    private Calendar todayBuilder(String code) {
+        Calendar today = Calendar.getInstance();
+
+        int state = 0; // States: 0 - default, 1 - change date
+        int sign = 0;
+        int amount = 0;
+        int multiply = 1;
+        int i = 0;
+
+        for (char ch : code.toCharArray()) {
+            switch (state) {
+                // state default
+                case 0:
+                    switch (ch) {
+                        case '+':
+                            state = 1;
+                            multiply = 1;
+                            sign = 1;
+                            break;
+
+                        case '-':
+                            state = 1;
+                            multiply = 1;
+                            sign = -1;
+                            break;
+
+                        default:
+                            throw new RuntimeException("Invalid input, unexpected: '" + ch + "' at position " + i);
+                    }
+                    break;
+
+                // state change date
+                case 1:
+                    if (ch >= '0' && ch <= '9') {
+                        amount = Character.getNumericValue(ch) * multiply;
+                        multiply *= 10;
+                    } else {
+                        switch (ch) {
+                            case 'd':
+                                today.add(Calendar.DAY_OF_MONTH, sign * amount);
+                                state = 0;
+                                break;
+
+                            case 'm':
+                                today.add(Calendar.MONTH, sign * amount);
+                                state = 0;
+                                break;
+
+                            case 'y':
+                                today.add(Calendar.YEAR, sign * amount);
+                                state = 0;
+                                break;
+
+                            default:
+                                throw new RuntimeException("Invalid input, unexpected: '" + ch + "' at position " + i);
+                        }
+                    }
+                    break;
+
+                // return modified date
+                case 2:
+                    return today;
+            }
+
+            i++;
+        }
+
+        return today;
+    }
+
+
+    /**
+     * Returns year, month or date of modified current date.
+     *
+     * @param code E.g. "+1y+3m-15d:y" means: to current day add 1 year, add 3 months, subtract 15 days and return year
+     *             as integer.
+     * @return int
+     */
+    private int today(String code) {
+        String[] codeParts = code.split(":");
+        if (codeParts.length != 2) {
+            throw new RuntimeException("Invalid code: '" + code + "'");
+        }
+
+        Calendar today = todayBuilder(codeParts[0]);
+
+        for (char ch : codeParts[1].toCharArray()) {
+            switch (ch) {
+                case 'd':
+                    return today.get(Calendar.DAY_OF_MONTH);
+
+                case 'm':
+                    return today.get(Calendar.MONTH);
+
+                case 'y':
+                    return today.get(Calendar.YEAR);
+
+                default:
+                    throw new RuntimeException("Invalid input, unexpected: '" + ch + "'");
+            }
+        }
+
+        throw new RuntimeException("Invalid input, unexpected EOL.");
+    }
 }

@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.dto.InspectionIntervalDTO;
 import cz.fi.muni.pa165.dto.VehicleDTO;
 import cz.fi.muni.pa165.facade.InspectionFacade;
 import cz.fi.muni.pa165.facade.VehicleFacade;
+import cz.fi.muni.pa165.service.DateTimeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -30,17 +28,38 @@ import java.util.List;
 @RequestMapping("/technician")
 public class TechnicianController {
 
+    private static final String DEFAULT_WITHIN_DAYS = "25";
+
     final static Logger log = LoggerFactory.getLogger(VehicleController.class);
 
     @Autowired
     private VehicleFacade vehicleFacade;
     @Autowired
     private InspectionFacade inspectionFacade;
+    @Autowired
+    private DateTimeService dateTimeService;
 
-    @RequestMapping(value = "/vehicleListView", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/planned-inspections")
+    public String plannedInspections(
+            @RequestParam(value = "withinDays", required = false, defaultValue = DEFAULT_WITHIN_DAYS) int withinDays,
+            Model model
+    ) {
+        model.addAttribute("plannedInspectionIntervals", inspectionFacade.listPlannedInspectionIntervals(withinDays));
+        model.addAttribute("withinDays", withinDays);
+        return "technician/plannedInspectionsView";
+    }
+
+    @RequestMapping(value = "/inspections-history")
+    public String inspectionsHistory(Model model) {
+        model.addAttribute("inspections", inspectionFacade.listAllInspections());
+        return "technician/inspectionsHistoryView";
+    }
+
+    @RequestMapping(value = "/vehicles-list", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("vehicles", vehicleFacade.getAllActiveVehicles());
-        return "technician/vehicleListView";
+        return "technician/vehiclesListView";
     }
 
     @RequestMapping(value = "/vehicleAddInspectionView/{vehicleId}", method = RequestMethod.GET)
@@ -51,6 +70,18 @@ public class TechnicianController {
         inspection.setVehicle(v);
         model.addAttribute("inspectionCreate", inspection);
         return "technician/vehicleAddInspectionView";
+    }
+
+    @RequestMapping(value = "/perform-inspection-now/{inspectionIntervalId}", method = RequestMethod.GET)
+    public String performInspectionNow(
+        @PathVariable long inspectionIntervalId,
+        @RequestParam(value = "withinDays", required = false, defaultValue = DEFAULT_WITHIN_DAYS) int withinDays,
+        UriComponentsBuilder uriBuilder,
+        RedirectAttributes redirectAttributes
+    ) {
+        inspectionFacade.performInspection(inspectionIntervalId, dateTimeService.getCurrentDate());
+        redirectAttributes.addFlashAttribute("alert_success", "Inspection was performed");
+        return "redirect:" + uriBuilder.path("/technician/planned-inspections").queryParam("withinDays", withinDays).buildAndExpand().encode().toUriString();
     }
 
     // create InspectionInterval

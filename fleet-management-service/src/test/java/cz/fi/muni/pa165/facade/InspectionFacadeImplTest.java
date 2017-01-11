@@ -90,13 +90,4 @@ public class InspectionFacadeImplTest extends AbstractTestNGSpringContextTests {
 
         verify(inspectionIntervalService).findAllWithPlannedInspection(days);
     }
-
-    @Test
-    public void testPerformInspection() {
-        when(beanMappingService.mapTo(inspectionDTO, Inspection.class)).thenReturn(inspection);
-
-        inspectionFacade.performInspection(inspectionDTO);
-
-        verify(inspectionService).create(inspection);
-    }
 }

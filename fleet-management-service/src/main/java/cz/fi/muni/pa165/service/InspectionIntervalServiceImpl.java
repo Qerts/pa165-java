@@ -2,15 +2,16 @@ package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.dao.interfaces.Dao;
 import cz.fi.muni.pa165.dao.interfaces.InspectionIntervalDao;
+import cz.fi.muni.pa165.entity.Inspection;
 import cz.fi.muni.pa165.entity.InspectionInterval;
-import cz.fi.muni.pa165.entity.Vehicle;
 import cz.fi.muni.pa165.service.interfaces.InspectionIntervalService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -53,14 +54,37 @@ public class InspectionIntervalServiceImpl extends JpaService<InspectionInterval
     }
 
     public List<InspectionInterval> getInspectionIntervalsForVehicle(Long vehicleId) {
-        List<InspectionInterval> all = this.findAll();
-        List<InspectionInterval> list = new ArrayList<>();
-        for (InspectionInterval i : all) {
-            Vehicle v = i.getVehicle();
-            if (v != null && vehicleId.equals(v.getId())) {
-                list.add(i);
-            }
+        return findAll().stream()
+                .filter(ii -> ii.getVehicle().getId().equals(vehicleId))
+                .collect(Collectors.toList());
+    }
+
+    public Date getLastInspectionWasPerformedOn(InspectionInterval ii) {
+        Inspection lastInspection = ii.getInspections().stream().reduce(
+                null,
+                (Inspection newest, Inspection current)
+                        -> newest == null || current.getPerformedOn().after(newest.getPerformedOn()) ? current : newest
+        );
+
+        return lastInspection == null ? null : lastInspection.getPerformedOn();
+    }
+
+    public Date getNextInspectionShouldBePerformedUntil(InspectionInterval ii) {
+        if (getLastInspectionWasPerformedOn(ii) == null) {
+            return Calendar.getInstance().getTime();
         }
-        return list;
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getLastInspectionWasPerformedOn(ii));
+        cal.add(Calendar.DAY_OF_MONTH, ii.getDays());
+
+        return cal.getTime();
+    }
+
+    public int getNextInspectionShouldBePerformedInDays(InspectionInterval ii) {
+        return (int) TimeUnit.DAYS.convert(
+            getNextInspectionShouldBePerformedUntil(ii).getTime() - dateTimeService.getCurrentDate().getTime(),
+            TimeUnit.MILLISECONDS
+        );
     }
 }

@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.dto;
 
 
+import java.util.Date;
+
 /**
  * @author Martin Schmidt
  */
@@ -13,6 +15,12 @@ public class InspectionIntervalDTO {
     private int days;
 
     private VehicleDTO vehicle;
+
+    private Date lastInspectionWasPerformedOn;
+
+    private Date nextInspectionShouldBePerformedUntil;
+
+    private int nextInspectionShouldBePerformedInDays;
 
     public InspectionIntervalDTO() {
     }
@@ -43,7 +51,6 @@ public class InspectionIntervalDTO {
     public void setDays(int days) {
         this.days = days;
     }
-
 
     public VehicleDTO getVehicle() {
         return vehicle;
@@ -79,4 +86,27 @@ public class InspectionIntervalDTO {
                 '}';
     }
 
+    public void setLastInspectionWasPerformedOn(Date lastInspectionWasPerformedOn) {
+        this.lastInspectionWasPerformedOn = lastInspectionWasPerformedOn;
+    }
+
+    public Date getLastInspectionWasPerformedOn() {
+        return lastInspectionWasPerformedOn;
+    }
+
+    public Date getNextInspectionShouldBePerformedUntil() {
+        return nextInspectionShouldBePerformedUntil;
+    }
+
+    public void setNextInspectionShouldBePerformedUntil(Date nextInspectionShouldBePerformedUntil) {
+        this.nextInspectionShouldBePerformedUntil = nextInspectionShouldBePerformedUntil;
+    }
+
+    public int getNextInspectionShouldBePerformedInDays() {
+        return nextInspectionShouldBePerformedInDays;
+    }
+
+    public void setNextInspectionShouldBePerformedInDays(int nextInspectionShouldBePerformedInDays) {
+        this.nextInspectionShouldBePerformedInDays = nextInspectionShouldBePerformedInDays;
+    }
 }

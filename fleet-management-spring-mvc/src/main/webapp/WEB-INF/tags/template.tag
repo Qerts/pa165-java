@@ -50,9 +50,12 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="nav.technician"/><b
                                 class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="${pageContext.request.contextPath}/technician/vehicleListView/"><f:message
+                            <li><a href="${pageContext.request.contextPath}/technician/vehicles-list/"><f:message
                                     key="nav.technician.vehicleList"/></a></li>
-
+                            <li><a href="${pageContext.request.contextPath}/technician/planned-inspections/"><f:message
+                                    key="nav.technician.plannedInspections"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/technician/inspections-history/"><f:message
+                                    key="nav.technician.inspectionsHistory"/></a></li>
                         </ul>
                     </li>
                 </sec:authorize>
