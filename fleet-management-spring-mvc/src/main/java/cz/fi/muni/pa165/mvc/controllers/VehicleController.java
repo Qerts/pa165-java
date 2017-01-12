@@ -48,14 +48,17 @@ public class VehicleController {
         return "vehicle/list";
     }
 
-    @RequestMapping(value = "/disable/{id}", method = RequestMethod.POST)
-    public String disable(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        VehicleDTO vehicle = vehicleFacade.findVehicleById(id);
-        vehicleFacade.disableVehicle(id);
-        log.debug("disable({})", id);
-        redirectAttributes.addFlashAttribute("alert_success", "Vehicle \"" + vehicle.getType() + "\" was disabled.");
-        return "redirect:" + uriBuilder.path("/vehicle/list").toUriString();
+    @RequestMapping(value = "/deactivate-vehicle/{vehicleId}", method = RequestMethod.GET)
+    public String deactivateVehicle(
+            @PathVariable("vehicleId") Long vehicleId,
+            UriComponentsBuilder uriBuilder,
+            RedirectAttributes redirectAttributes
+    ) {
+        vehicleFacade.disableVehicle(vehicleId);
+        redirectAttributes.addFlashAttribute("alert_success", "Vehicle was disabled");
+        return "redirect:" + uriBuilder.path("/admin/entityListView/selectTable").queryParam("entity", "vehicle").buildAndExpand().encode().toUriString();
     }
+
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public String view(@PathVariable long id, Model model) {
@@ -81,7 +84,7 @@ public class VehicleController {
     public String newVehicle(Model model) {
         log.debug("new()");
         model.addAttribute("vehicleCreate", new VehicleCreateDTO());
-        return "vehicle/new";
+        return "admin/entities/newVehicleView";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -97,12 +100,48 @@ public class VehicleController {
                 model.addAttribute(fe.getField() + "_error", true);
                 log.trace("FieldError: {}", fe);
             }
-            return "vehicle/new";
+            return "admin/entities/newVehicleView";
         }
         //create vehicle
         Long id = vehicleFacade.addNewVehicle(formBean);
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Vehicle " + id + " was created");
-        return "redirect:" + uriBuilder.path("/vehicle/view/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/admin/entityListView/selectTable").queryParam("entity", "vehicle").buildAndExpand().encode().toUriString();
     }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    public String editVehicle(@PathVariable long id, Model model) {
+        log.debug("update()");
+        VehicleDTO v = vehicleFacade.findVehicleById(id);
+        model.addAttribute("vehicleEdit", v);
+        return "admin/entities/editVehicleView";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String edit(@Valid @ModelAttribute("vehicleEdit") VehicleDTO formBean, BindingResult bindingResult,
+                       Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        log.debug("edit(vehicleEdit={})", formBean);
+        //in case of validation error forward back to the the form
+        if (bindingResult.hasErrors()) {
+            log.debug("some error");
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            return "admin/entities/editVehicleView";
+
+        }
+        vehicleFacade.updateVehicle(formBean);
+
+        //report success
+        redirectAttributes.addFlashAttribute("alert_success", "Vehicle was edited");
+        return "redirect:" + uriBuilder.path("/admin/entityListView/selectTable").queryParam("entity", "vehicle").buildAndExpand().encode().toUriString();
+
+    }
+
+
 }

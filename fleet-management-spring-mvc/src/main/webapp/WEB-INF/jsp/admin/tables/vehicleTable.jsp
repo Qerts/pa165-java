@@ -1,3 +1,8 @@
+<a href="${pageContext.request.contextPath}/vehicle/new" class="btn btn-primary">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    New vehicle
+</a>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -15,15 +20,11 @@
             <td>${item.type}</td>
             <td><c:out value="${item.productionYear}"/></td>
             <td>
-                <a href="${pageContext.request.contextPath}/admin/createItem/${item.id}/${entityType}"
-                   modelAttribute="itemCreate" class="btn btn-primary">Add</a>
-            </td>
-            <td>
-                <a href="${pageContext.request.contextPath}/admin/updateItem/${item.id}/${entityType}"
+                <a href="${pageContext.request.contextPath}/vehicle/update/${item.id}"
                    modelAttribute="itemUpdate" class="btn btn-primary">Update</a>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/admin/deactivate-vehicle/${item.id}"
+                <a href="${pageContext.request.contextPath}/vehicle/deactivate-vehicle/${item.id}"
                    modelAttribute="itemDisable" class="btn btn-primary">Deactivate</a>
             </td>
         </tr>
