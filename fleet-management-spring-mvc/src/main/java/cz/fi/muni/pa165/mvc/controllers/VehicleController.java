@@ -113,12 +113,14 @@ public class VehicleController {
     public String editVehicle(@PathVariable long id, Model model) {
         log.debug("update()");
         VehicleDTO v = vehicleFacade.findVehicleById(id);
-        model.addAttribute("vehicleEdit", v);
+        VehicleCreateDTO vc = new VehicleCreateDTO(v.getVrp(), v.getType(), v.getProductionYear(),v.getEngineType(), v.getVin(), v.getInitialKilometrage(), v.getActive());
+        vc.setId(v.getId());
+        model.addAttribute("vehicleEdit", vc);
         return "admin/entities/editVehicleView";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String edit(@Valid @ModelAttribute("vehicleEdit") VehicleDTO formBean, BindingResult bindingResult,
+    public String edit(@Valid @ModelAttribute("vehicleEdit") VehicleCreateDTO formBean, BindingResult bindingResult,
                        Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         log.debug("edit(vehicleEdit={})", formBean);
         //in case of validation error forward back to the the form

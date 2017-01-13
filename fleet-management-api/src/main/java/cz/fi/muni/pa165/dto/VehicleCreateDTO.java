@@ -9,6 +9,8 @@ import javax.validation.constraints.Size;
  */
 public class VehicleCreateDTO {
 
+    private Long id;
+
     @NotNull
     @Size(min = 7, max = 7)
     private String vrp;
@@ -117,6 +119,13 @@ public class VehicleCreateDTO {
         this.active = active;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -56,7 +56,7 @@ public interface VehicleFacade {
      *
      * @param vehicle Vehicle to be updated
      */
-    void updateVehicle(VehicleDTO vehicle);
+    void updateVehicle(VehicleCreateDTO vehicle);
 
     /**
      * Disables given vehicle. Record still stays in database.
