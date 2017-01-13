@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -113,7 +114,7 @@ public class TechnicianController {
         log.debug("detail()");
         VehicleDTO v = vehicleFacade.findVehicleById(vehicleId);
         double kilometrage = vehicleFacade.getTotalKilometrage(vehicleId);
-        List<InspectionIntervalDTO> inspections = inspectionFacade.getInspectionInterval(vehicleId);
+        Collection<InspectionIntervalDTO> inspections = inspectionFacade.getInspectionInterval(vehicleId);
 
         model.addAttribute("vehicle", v);
         model.addAttribute("kilometrage", kilometrage);
