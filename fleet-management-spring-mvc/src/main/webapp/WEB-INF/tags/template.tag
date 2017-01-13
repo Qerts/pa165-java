@@ -78,7 +78,7 @@
                             <li><a href="${pageContext.request.contextPath}/admin/obsolete-vehicles"><f:message
                                     key="nav.administrator.obsoleteVehicles"/></a></li>
                             <li><a href="${pageContext.request.contextPath}/admin/entityListView/"><f:message
-                                    key="nav.administrator.entitiesCRUD"/></a></li>
+                                    key="nav.administrator.entities"/></a></li>
                         </ul>
                     </li>
                 </sec:authorize>
