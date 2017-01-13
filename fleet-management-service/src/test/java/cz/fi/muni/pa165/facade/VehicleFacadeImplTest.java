@@ -112,9 +112,9 @@ public class VehicleFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testUpdateVehicle() {
-        when(beanMappingService.mapTo(vehicleDTO, Vehicle.class)).thenReturn(vehicle);
+        when(beanMappingService.mapTo(vehicleCreateDTO, Vehicle.class)).thenReturn(vehicle);
 
-        vehicleFacade.updateVehicle(vehicleDTO);
+        vehicleFacade.updateVehicle(vehicleCreateDTO);
 
         verify(vehicleService).update(vehicle);
     }

@@ -27,14 +27,14 @@
             </div>
         </div>
         <div class="form-group">
-            <form:label path="vehicleCategory" cssClass="col-sm-2 control-label">Vehicle category</form:label>
+            <form:label path="vehicleCategoryId" cssClass="col-sm-2 control-label">Vehicle category</form:label>
             <div class="col-sm-10">
-                    <form:select path="vehicleCategory" cssClass="form-control">
+                    <form:select path="vehicleCategoryId" cssClass="form-control">
                         <c:forEach items="${vehicleCategories}" var="c">
                             <form:option value="${c.id}">${c.name}</form:option>
                         </c:forEach>
                     </form:select>
-                <p class="help-block"><form:errors path="vehicleCategory" cssClass="error"/></p>
+                <p class="help-block"><form:errors path="vehicleCategoryId" cssClass="error"/></p>
             </div>
         </div>
 

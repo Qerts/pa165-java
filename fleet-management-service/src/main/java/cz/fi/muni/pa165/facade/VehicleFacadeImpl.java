@@ -74,8 +74,11 @@ public class VehicleFacadeImpl implements VehicleFacade {
     }
 
     @Override
-    public void updateVehicle(VehicleDTO vehicle) {
-        vehicleService.update(bms.mapTo(vehicle, Vehicle.class));
+    public void updateVehicle(VehicleCreateDTO vehicle) {
+        Vehicle updatedVehicle = bms.mapTo(vehicle, Vehicle.class);
+        updatedVehicle.setActive(true);
+        updatedVehicle.setVehicleCategory(vehicleCategoryService.findById(vehicle.getVehicleCategoryId()));
+        vehicleService.update(updatedVehicle);
     }
 
     @Override
