@@ -45,7 +45,7 @@ public interface InspectionFacade {
      * @param vehicleId vehicle id
      * @return list of ins. intevals
      */
-    List<InspectionIntervalDTO> getInspectionInterval(Long vehicleId);
+    Collection<InspectionIntervalDTO> getInspectionInterval(Long vehicleId);
 
     List<InspectionDTO> listAllInspections();
 }

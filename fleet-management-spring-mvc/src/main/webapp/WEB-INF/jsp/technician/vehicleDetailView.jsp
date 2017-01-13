@@ -61,13 +61,12 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${inspections}" var="inspection">
-        <tr>
-            <td>${inpection.name}</td>
-            <td>${inpection.days}</td>
-
-        </tr>
-    </c:forEach>
+            <c:forEach items="${inspections}" var="inspection">
+            <tr>
+                <td><c:out value="${inspection.name}"/></td>
+                <td><c:out value="${inspection.days}"/></td>
+            </tr>
+            </c:forEach>
         </tbody>
     </table>
 

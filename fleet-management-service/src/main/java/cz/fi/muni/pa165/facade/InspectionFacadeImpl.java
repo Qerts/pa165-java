@@ -67,7 +67,7 @@ public class InspectionFacadeImpl implements InspectionFacade {
     }
 
     @Override
-    public List<InspectionIntervalDTO> getInspectionInterval(Long vehicleId) {
+    public Collection<InspectionIntervalDTO> getInspectionInterval(Long vehicleId) {
         return bms.mapTo(inspectionIntervalService.getInspectionIntervalsForVehicle(vehicleId), InspectionIntervalDTO.class);
     }
 
