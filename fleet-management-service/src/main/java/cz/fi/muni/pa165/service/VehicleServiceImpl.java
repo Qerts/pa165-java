@@ -47,7 +47,10 @@ public class VehicleServiceImpl extends JpaService<Vehicle, Long> implements Veh
         List<Journey> journeys = this.journeyDao.findAllByVehicleId(vehicleId);
 
         for (Iterator<Journey> iterator = journeys.iterator(); iterator.hasNext(); ) {
-            result = result + this.round(iterator.next().getDistance(), 1);
+            Float distance = iterator.next().getDistance();
+            if (distance != null) {
+                result = result + this.round(distance, 1);
+            }
         }
 
         return result;

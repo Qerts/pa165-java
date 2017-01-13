@@ -104,7 +104,7 @@ public class TechnicianController {
         inspectionFacade.addNewInspectionInterval(formBean);
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "InspectionInterval " + " was created and added to vehicle");
-        return "redirect:" + uriBuilder.path("/technician/vehicleListView").buildAndExpand().encode().toUriString();
+        return "redirect:" + uriBuilder.path("/technician/vehicles-list").buildAndExpand().encode().toUriString();
     }
 
 
